@@ -7,7 +7,7 @@ https://github.com/MinusPL/DB_Project/wiki/Jak-pracowa%C4%87-na-repozytorium
 
 ### Informacja o danych osobowych
 Pod poniższym adresem znajdują się informacje o przetwarzaniu danych osobowych.
-Wszyscy członkowie przed dołączeniem proszeni są o zapoznanie się i zgoszenie potencjalnych uwag lub zmian.
+Wszyscy członkowie przed dołączeniem proszeni są o zapoznanie się i zgłoszenie potencjalnych uwag lub zmian.
 https://github.com/MinusPL/DB_Project/wiki/Dane-osobowe
 
 ### Lista członków
