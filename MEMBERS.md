@@ -3,3 +3,4 @@
 * Kamil Wlazło
 * Piotr Materna
 * Mateusz Laska
+* Alicja Markowska
