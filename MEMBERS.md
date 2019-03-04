@@ -4,3 +4,4 @@
 * Piotr Materna
 * Mateusz Laska
 * Alicja Markowska
+* Radosław Kulig
