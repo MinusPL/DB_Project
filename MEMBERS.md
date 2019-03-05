@@ -5,3 +5,4 @@
 * Mateusz Laska
 * Alicja Markowska
 * Radosław Kulig
+* Agata Król
