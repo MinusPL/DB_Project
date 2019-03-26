@@ -1,0 +1,139 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="76B533D6-A61B-017E-ABE0-C6A29D16D28B" name="classes">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:39:12 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="64CE8556-235F-7918-360B-60920CA5C985">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:39:48 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="name" id="BFEA9585-2DE9-441B-BA1A-5B5C015AC2AA">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:47:52 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>64</dataTypeSize>
+<ownDataTypeParameters>64,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="course" id="CE45CDBB-B502-B292-65A4-79D1CB6F9B66">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:18:16 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="description" id="52F1A66C-F9F6-E38B-ECE9-84538E901115">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:29:55 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="comments" id="7BE1774A-2672-4142-F194-F6523DCA030F">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:44:00 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tests" id="89574C7E-68E8-7A9A-745F-3944F388589F">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:44:18 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="media" id="7B6A3B3E-7076-E395-DF65-E8CCFE846233">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:44:35 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="D0C83B9D-CC38-1AD0-CD83-218795C2A24C">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:46:06 UTC</createdTime>
+<generatorID>05B70D4C-A2CA-B3AA-05BA-118871FD3F55</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<referedAttribute>BAC21A86-5FFE-5ABE-E42F-DFD3C1190AF8</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="0B74B77B-197B-433E-9E91-27EE96D86F1B" name="classes PK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:39:55 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>64CE8556-235F-7918-360B-60920CA5C985</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,136 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="8BF89EAC-AEEA-4264-26F9-9EF77084F30F" name="classes">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:59:57 UTC</createdTime>
+<generatorID>76B533D6-A61B-017E-ABE0-C6A29D16D28B</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="FA8D31D8-E2A3-DBCF-D98C-B581010209E1">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:59:57 UTC</createdTime>
+<generatorID>64CE8556-235F-7918-360B-60920CA5C985</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="name" id="DFCB7B32-8B6B-175C-40C6-7088288D87DF">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:59:57 UTC</createdTime>
+<generatorID>BFEA9585-2DE9-441B-BA1A-5B5C015AC2AA</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>64</dataTypeSize>
+<ownDataTypeParameters>64,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id1" id="A49819DE-A892-5A1C-9518-F6A4EB1FF64E">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:50:08 UTC</createdTime>
+<generatorID>CE45CDBB-B502-B292-65A4-79D1CB6F9B66</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="37F9430C-BF19-D42B-A433-13F2F726C1E4" referredColumn="7A587864-C58D-C8B7-F39E-E2A347939170"/>
+<colAssociation fkAssociation="1964E12A-E8CD-F809-571F-BCC62B98E2F6" referredColumn="7A587864-C58D-C8B7-F39E-E2A347939170"/>
+</associations>
+</Column>
+<Column name="description" id="FACF2983-4896-8C8B-AA00-D870AFEB85C2">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:50:08 UTC</createdTime>
+<generatorID>52F1A66C-F9F6-E38B-ECE9-84538E901115</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="comments" id="49DB45F2-2048-1BF5-2506-71509C66124D">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:50:08 UTC</createdTime>
+<generatorID>7BE1774A-2672-4142-F194-F6523DCA030F</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tests" id="C8984B0A-442B-797D-1B46-A6E2EBE69822">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:50:08 UTC</createdTime>
+<generatorID>89574C7E-68E8-7A9A-745F-3944F388589F</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="media" id="BE433A24-8273-2A68-8984-E802F1A5901B">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:50:08 UTC</createdTime>
+<generatorID>7B6A3B3E-7076-E395-DF65-E8CCFE846233</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="385192FF-A7AF-7C37-2441-B508E167F4A4" name="classes_PK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:59:57 UTC</createdTime>
+<generatorID>0B74B77B-197B-433E-9E91-27EE96D86F1B</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FA8D31D8-E2A3-DBCF-D98C-B581010209E1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="72B1BF3F-A3C2-3354-B966-82C52ABAD840" name="classes_course_FK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-26 11:56:26 UTC</createdTime>
+<generatorID>1DC48B92-2C45-BE1A-D198-2992A69CB2E6</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A49819DE-A892-5A1C-9518-F6A4EB1FF64E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D9FB8249-AF77-5AF5-3C3D-842FB8CF5A99" name="classes_course_FKv2">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-26 12:16:44 UTC</createdTime>
+<generatorID>05B70D4C-A2CA-B3AA-05BA-118871FD3F55</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A49819DE-A892-5A1C-9518-F6A4EB1FF64E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

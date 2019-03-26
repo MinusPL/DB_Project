@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6F183DF6-5E2E-B508-86B1-FD8A63A9103B" name="participants">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-26 12:18:24 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="user_id1" id="AFA12593-89BB-0D68-4D8D-39013168B65C">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-26 12:18:24 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3700F7B7-B4BA-DE52-FBD9-BFC40ED90509" referredColumn="DD080648-F022-940A-B831-55F8FFF51F80"/>
+</associations>
+</Column>
+<Column name="course_id1" id="F09A89F9-4E09-13B5-7DF1-B549A4D8F07F">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-26 12:18:24 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="42D817ED-07B5-6FC6-B810-FBBF8843EE06" referredColumn="7A587864-C58D-C8B7-F39E-E2A347939170"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="BDD999F2-08F3-8EC6-7B83-3BC3176DEF27" name="participants_PK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-26 12:18:24 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AFA12593-89BB-0D68-4D8D-39013168B65C"/>
+<colUsage columnID="F09A89F9-4E09-13B5-7DF1-B549A4D8F07F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3EAFCBFC-397D-7B83-7ACA-3EE475AC6441" name="participants_user_FK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-26 12:18:24 UTC</createdTime>
+<generatorID>699793CB-3BC8-3A16-EE52-55E531B6CB20</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AFA12593-89BB-0D68-4D8D-39013168B65C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4400E0CC-DE43-5C0F-56DB-751FA0A723FF" name="participants_course_FK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-26 12:18:24 UTC</createdTime>
+<generatorID>699793CB-3BC8-3A16-EE52-55E531B6CB20</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F09A89F9-4E09-13B5-7DF1-B549A4D8F07F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

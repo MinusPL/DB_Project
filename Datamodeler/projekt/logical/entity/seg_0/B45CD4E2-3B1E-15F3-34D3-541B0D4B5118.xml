@@ -1,0 +1,99 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="B45CD4E2-3B1E-15F3-34D3-541B0D4B5118" name="comments">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:42:50 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="61B3E9E5-DDDC-34BD-33F1-F64112BE0E62">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:42:55 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="author" id="0BCC4AD5-979A-22A0-73CF-FE68891D03D6">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:43:06 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="contents" id="06D1E7EA-275A-9C06-A28E-05F74A69FBE7">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:43:30 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="class_id" id="FA408E51-CDCB-187F-745C-9703D710FB06">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:20:21 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="6175AD76-1B30-CF19-6B1E-339CC8CB4378">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:47:35 UTC</createdTime>
+<generatorID>B7589CD6-0648-8374-B956-AEAAB93A99E3</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<referedAttribute>64CE8556-235F-7918-360B-60920CA5C985</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="CF5F8284-98A6-DCEA-D77F-E402AD588D6B" name="comments PK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:43:04 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>61B3E9E5-DDDC-34BD-33F1-F64112BE0E62</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

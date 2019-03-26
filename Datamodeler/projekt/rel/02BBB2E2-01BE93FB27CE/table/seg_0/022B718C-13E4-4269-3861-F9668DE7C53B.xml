@@ -1,0 +1,87 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="022B718C-13E4-4269-3861-F9668DE7C53B" name="user">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:59:57 UTC</createdTime>
+<generatorID>B1B0F4AD-CD35-C4C5-4C0D-69D068128E38</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="DD080648-F022-940A-B831-55F8FFF51F80">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:59:57 UTC</createdTime>
+<generatorID>D64150A8-AFE1-DA55-268C-4A69053AF7BC</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="account_type" id="E142A1BF-F94A-CCF9-2818-987A1936D525">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:59:57 UTC</createdTime>
+<generatorID>87D219B8-20A9-F247-B607-50D6369D4435</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="imie" id="E2EF1BA5-3420-67DF-9F61-015CC62BC56D">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:50:08 UTC</createdTime>
+<generatorID>9C6C4D5A-C3C4-9E5B-A17D-27BDF5B2171B</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>16</dataTypeSize>
+<ownDataTypeParameters>16,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nazwisko" id="3F211142-9A8B-DFCE-CA09-EEC3C2FC8256">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:50:08 UTC</createdTime>
+<generatorID>5CF4F3CD-8801-65EB-1E71-2A19574B9158</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="mail" id="BC886767-1C32-01E3-6B89-0E1650CFAEE8">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:50:08 UTC</createdTime>
+<generatorID>5C0FA0FA-624F-34C6-FE37-4F44F995E87F</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>32</dataTypeSize>
+<ownDataTypeParameters>32,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7975C7B5-62FF-E574-8003-EC5C74C21A15" name="user_PK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:59:57 UTC</createdTime>
+<generatorID>5CEC6D53-A3BE-4614-7E3E-DD2469CB2EC5</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DD080648-F022-940A-B831-55F8FFF51F80"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

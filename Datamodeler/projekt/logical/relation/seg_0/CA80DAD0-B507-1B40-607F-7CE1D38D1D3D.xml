@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="instructors" directorySegmentName="seg_0" id="CA80DAD0-B507-1B40-607F-7CE1D38D1D3D">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:48:43 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<nameOnSource>może być prowadzącym</nameOnSource>
+<nameOnTarget>posiada prowadzącego</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>*</sourceCardinality>
+<sourceEntity>B1B0F4AD-CD35-C4C5-4C0D-69D068128E38</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>64B79A08-8D78-89D8-4705-6793E33127C7</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
