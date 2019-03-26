@@ -1,0 +1,87 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="4E847088-16FA-4D91-941F-870291A541EE" name="comments">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:59:57 UTC</createdTime>
+<generatorID>B45CD4E2-3B1E-15F3-34D3-541B0D4B5118</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="03F76862-561A-9107-BF89-08DAC9D042F7">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:59:57 UTC</createdTime>
+<generatorID>61B3E9E5-DDDC-34BD-33F1-F64112BE0E62</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="author" id="BEBFA574-8A00-7922-993F-64C96FA44A7E">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:59:57 UTC</createdTime>
+<generatorID>0BCC4AD5-979A-22A0-73CF-FE68891D03D6</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="contents" id="FEC3C3C3-548E-CFFF-0165-AB574F7873CE">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:59:57 UTC</createdTime>
+<generatorID>06D1E7EA-275A-9C06-A28E-05F74A69FBE7</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="classes_id" id="257DACEE-D9BF-1FE3-8E6B-8CF007045EB4">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:50:08 UTC</createdTime>
+<generatorID>FA408E51-CDCB-187F-745C-9703D710FB06</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4887F3E9-BDCD-9308-96AD-6A6027C13812" referredColumn="FA8D31D8-E2A3-DBCF-D98C-B581010209E1"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="DE6E38D5-5338-D33F-C103-233C7B836A65" name="comments_PK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 18:59:57 UTC</createdTime>
+<generatorID>CF5F8284-98A6-DCEA-D77F-E402AD588D6B</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="03F76862-561A-9107-BF89-08DAC9D042F7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A59C96E7-15BC-878C-FE35-442F838021DB" name="comments_classes_FK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-03-25 19:50:08 UTC</createdTime>
+<generatorID>B7589CD6-0648-8374-B956-AEAAB93A99E3</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="257DACEE-D9BF-1FE3-8E6B-8CF007045EB4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
