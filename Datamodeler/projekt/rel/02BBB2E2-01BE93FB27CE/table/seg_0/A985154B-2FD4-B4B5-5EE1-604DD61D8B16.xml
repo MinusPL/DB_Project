@@ -1,0 +1,107 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A985154B-2FD4-B4B5-5EE1-604DD61D8B16" name="test_results">
+<createdBy>Minus</createdBy>
+<createdTime>2019-04-16 14:57:57 UTC</createdTime>
+<generatorID>CE460665-9852-60F0-D08A-FE705F0C64E9</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="1D02BBFA-352E-A4A6-2D9C-7C311970B456">
+<createdBy>Minus</createdBy>
+<createdTime>2019-04-16 14:57:57 UTC</createdTime>
+<generatorID>B3387D2F-66EF-288E-D217-FBAA8FA12DED</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="test_id" id="2155A6E9-FD23-2779-8DC1-E6F60223CC02">
+<createdBy>Minus</createdBy>
+<createdTime>2019-04-16 14:57:57 UTC</createdTime>
+<generatorID>76ABF87F-6736-AC7A-06EC-4A60B43BCAB0</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A7644E27-0DB8-D96A-7BF1-1A8AD758C83F" referredColumn="A0A5EAD1-6271-422C-6844-F3BF13FDD585"/>
+</associations>
+</Column>
+<Column name="user_id" id="CE582FF9-5C5C-C092-D5B4-6917B0C96ED9">
+<createdBy>Minus</createdBy>
+<createdTime>2019-04-16 14:57:57 UTC</createdTime>
+<generatorID>41B4F748-DF02-78BC-18B8-2C2B90FAAAE5</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="80C38473-3F64-5D09-A869-692877C87C2E" referredColumn="DD080648-F022-940A-B831-55F8FFF51F80"/>
+</associations>
+</Column>
+<Column name="result" id="0E7907DB-2DB4-627E-3158-F8C902222B0F">
+<createdBy>Minus</createdBy>
+<createdTime>2019-04-16 14:57:57 UTC</createdTime>
+<generatorID>2E011702-ED66-8BEF-9B4E-BA68104C5398</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4668DE57-6A80-F0C3-48A3-186B50211D40" name="test_results_PK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-04-16 14:57:57 UTC</createdTime>
+<generatorID>DCC31E94-260D-D100-A192-474AFA816FC0</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1D02BBFA-352E-A4A6-2D9C-7C311970B456"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C4247FFF-4BBF-748C-E9DD-3154762CDCA9" name="test_results__IDX">
+<createdBy>Minus</createdBy>
+<createdTime>2019-04-16 14:57:57 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>52325736-9B1F-08C8-0434-CBE0CB332FA3</relationGeneratorID>
+</ind_PK_UK>
+<ind_PK_UK id="1D37C2AE-2197-7865-F01F-323B8B6F3338" name="test_results_user_FK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-04-16 14:57:57 UTC</createdTime>
+<generatorID>52325736-9B1F-08C8-0434-CBE0CB332FA3</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CE582FF9-5C5C-C092-D5B4-6917B0C96ED9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A7532014-004F-91AC-5627-AE22F09AB561" name="test_results_test_FK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-04-16 14:57:57 UTC</createdTime>
+<generatorID>1B24474D-9327-1895-5B55-A5545C75D550</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2155A6E9-FD23-2779-8DC1-E6F60223CC02"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

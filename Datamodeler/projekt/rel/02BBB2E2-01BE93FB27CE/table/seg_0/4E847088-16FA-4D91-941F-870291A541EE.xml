@@ -24,12 +24,14 @@
 <createdTime>2019-03-25 18:59:57 UTC</createdTime>
 <generatorID>0BCC4AD5-979A-22A0-73CF-FE68891D03D6</generatorID>
 <ownerDesignName>projekt</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="70A3C4DA-92BA-141D-40B6-3225DA827BF1" referredColumn="DD080648-F022-940A-B831-55F8FFF51F80"/>
+</associations>
 </Column>
 <Column name="contents" id="FEC3C3C3-548E-CFFF-0165-AB574F7873CE">
 <createdBy>Minus</createdBy>
@@ -43,12 +45,11 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="classes_id" id="257DACEE-D9BF-1FE3-8E6B-8CF007045EB4">
+<Column name="class" id="257DACEE-D9BF-1FE3-8E6B-8CF007045EB4">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:50:08 UTC</createdTime>
 <generatorID>FA408E51-CDCB-187F-745C-9703D710FB06</generatorID>
 <ownerDesignName>projekt</ownerDesignName>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
@@ -81,6 +82,17 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="257DACEE-D9BF-1FE3-8E6B-8CF007045EB4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A1F3C87C-D957-70C5-2FF9-A4B2E74C4369" name="comments_user_FK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-04-16 14:57:57 UTC</createdTime>
+<generatorID>CD34E1DC-6905-EE77-D848-FADE8A620A4C</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BEBFA574-8A00-7922-993F-64C96FA44A7E"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

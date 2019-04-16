@@ -31,7 +31,7 @@
 <ownDataTypeParameters>64,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="course_type_id" id="58863260-7E79-4A6E-430C-6835E131B3B0">
+<Column name="type" id="58863260-7E79-4A6E-430C-6835E131B3B0">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 18:59:57 UTC</createdTime>
 <generatorID>7A267A42-A5B3-DF5D-048A-9FC2776782BA</generatorID>

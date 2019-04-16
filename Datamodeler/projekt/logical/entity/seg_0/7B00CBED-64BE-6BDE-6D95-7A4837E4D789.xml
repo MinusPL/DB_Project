@@ -1,7 +1,8 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="EE790ABD-F1F9-56D6-2A82-003655D89097" name="content">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="7B00CBED-64BE-6BDE-6D95-7A4837E4D789" name="instructor_data">
 <createdBy>Minus</createdBy>
-<createdTime>2019-03-25 19:23:45 UTC</createdTime>
+<createdTime>2019-04-16 14:21:47 UTC</createdTime>
+<comment>Może dodać więcej pól&lt;br/&gt;</comment>
 <ownerDesignName>projekt</ownerDesignName>
 <engineerTo>
 <item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
@@ -15,9 +16,9 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id" id="42ADBDBF-1F42-9558-A2B6-26C742D0FBDE">
+<Attribute name="id" id="8723C089-20AE-3A90-AF11-2A9734B52259">
 <createdBy>Minus</createdBy>
-<createdTime>2019-03-25 19:23:56 UTC</createdTime>
+<createdTime>2019-04-16 14:23:37 UTC</createdTime>
 <ownerDesignName>projekt</ownerDesignName>
 <engineerTo>
 <item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
@@ -27,41 +28,28 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="text" id="44E44DA5-A5BE-CABF-1AF9-CD46A26B2868">
+<Attribute name="home_page" id="E8658252-4862-D5FA-5AB6-A5099182EBD1">
 <createdBy>Minus</createdBy>
-<createdTime>2019-03-25 19:24:16 UTC</createdTime>
+<createdTime>2019-04-16 14:22:45 UTC</createdTime>
 <ownerDesignName>projekt</ownerDesignName>
 <engineerTo>
 <item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT040</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40</dataTypeSize>
+<ownDataTypeParameters>40,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="valid_until" id="93EDA8AF-12DF-AFAD-B697-D863F780F17D">
+<Attribute name="id1" id="D0BCD6D2-481F-8730-A9C4-9A775D9A756E">
 <createdBy>Minus</createdBy>
-<createdTime>2019-04-16 14:26:16 UTC</createdTime>
+<createdTime>2019-04-16 14:24:34 UTC</createdTime>
+<generatorID>78C310B5-0947-887F-B992-08FC78E5A662</generatorID>
 <ownerDesignName>projekt</ownerDesignName>
 <engineerTo>
 <item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
 </engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT008</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="id1" id="DA4A47DA-EF23-5264-B922-512BF07314A9">
-<createdBy>Minus</createdBy>
-<createdTime>2019-03-25 19:47:27 UTC</createdTime>
-<generatorID>2E3D7AF7-E6F0-D647-FF43-7438D4BD4D73</generatorID>
-<ownerDesignName>projekt</ownerDesignName>
-<engineerTo>
-<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
-</engineerTo>
-<referedAttribute>64CE8556-235F-7918-360B-60920CA5C985</referedAttribute>
+<referedAttribute>D64150A8-AFE1-DA55-268C-4A69053AF7BC</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
@@ -69,17 +57,16 @@
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
-<identifier id="35A561CA-02DC-6F32-B7F7-7BB889A05B3E" name="media PK">
+<identifier id="1C716F34-3E93-DF48-C3C9-9B6C2A3FC16B" name="instructor_data PK">
 <createdBy>Minus</createdBy>
-<createdTime>2019-03-25 19:24:14 UTC</createdTime>
+<createdTime>2019-04-16 14:22:46 UTC</createdTime>
 <ownerDesignName>projekt</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="false"/>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>42ADBDBF-1F42-9558-A2B6-26C742D0FBDE</attributeRef>
+<attributeRef>8723C089-20AE-3A90-AF11-2A9734B52259</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>
