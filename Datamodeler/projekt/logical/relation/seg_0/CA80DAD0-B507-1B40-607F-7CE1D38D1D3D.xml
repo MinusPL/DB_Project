@@ -8,7 +8,7 @@
 </engineerTo>
 <identifying>false</identifying>
 <nameOnSource>może być prowadzącym</nameOnSource>
-<nameOnTarget>posiada prowadzącego</nameOnTarget>
+<nameOnTarget>posiada prowadzących</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>*</sourceCardinality>

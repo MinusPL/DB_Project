@@ -43,7 +43,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="classes_id" id="E48E5187-A51C-A9E1-F184-AB89E8535E94">
+<Column name="class_id" id="E48E5187-A51C-A9E1-F184-AB89E8535E94">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:50:08 UTC</createdTime>
 <generatorID>E1AD43D8-BDB4-CA95-A5D3-2C7655868218</generatorID>

@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E0A8347A-B9DD-EB41-D78C-11DE9FE3FF37" name="media">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E0A8347A-B9DD-EB41-D78C-11DE9FE3FF37" name="content">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:50:08 UTC</createdTime>
 <generatorID>EE790ABD-F1F9-56D6-2A82-003655D89097</generatorID>
@@ -19,7 +19,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="content" id="81BB2962-2156-5838-E8B3-32BC56FB5112">
+<Column name="text" id="81BB2962-2156-5838-E8B3-32BC56FB5112">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:50:08 UTC</createdTime>
 <generatorID>44E44DA5-A5BE-CABF-1AF9-CD46A26B2868</generatorID>
@@ -31,7 +31,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="classes_id" id="15237FBF-61D6-95BA-8A85-49DF0929BECF">
+<Column name="class_id" id="15237FBF-61D6-95BA-8A85-49DF0929BECF">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:50:08 UTC</createdTime>
 <generatorID>DA4A47DA-EF23-5264-B922-512BF07314A9</generatorID>
@@ -45,6 +45,18 @@
 <associations>
 <colAssociation fkAssociation="516E259C-4F3F-D766-538F-859FFB0C620A" referredColumn="FA8D31D8-E2A3-DBCF-D98C-B581010209E1"/>
 </associations>
+</Column>
+<Column name="valid_until" id="C6492383-42AA-625A-64AC-22E22D876BB8">
+<createdBy>Minus</createdBy>
+<createdTime>2019-04-16 14:57:57 UTC</createdTime>
+<generatorID>93EDA8AF-12DF-AFAD-B697-D863F780F17D</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
