@@ -1,0 +1,18 @@
+1. Pobierz Anaconde ze stronki z neta
+
+2. W Anaconda Prompt:
+
+conda create --name uczelnia django
+
+3. Po stworzeniu enva aktywujesz enva:
+
+conda activate uczelnia
+
+4. Przydatne komendy:
+
+python manage.py runserver
+python manage.py makemigrations  -  po stworzeniu modelu w db tworzymy migracje
+python manage.py migrate  -  migruje wszystko do bazy
+python manage.py collectstatic  -  wyrzuca statyczne pliki do folderu podanego w settings
+python manage.py instectdb  -  tworzy z SQL modele w Django
+python manage.py createsuperuser  -  tworzy konto admina w DB ¿eby logowaæ sie na /admin
