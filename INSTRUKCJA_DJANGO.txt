@@ -1,14 +1,23 @@
 1. Pobierz Anaconde ze stronki z neta
+https://www.anaconda.com/distribution/
 
 2. W Anaconda Prompt:
 
 conda create --name uczelnia django
+(Conda mo¿e zapytaæ o potwierdzenie instalacji, wciœnij Y)
 
 3. Po stworzeniu enva aktywujesz enva:
 
 conda activate uczelnia
 
-4. Przydatne komendy:
+4. Po aktywacji doinstaluj bibliotekê sqlparser
+pip install sqlparser
+
+5. Pierwsze uruchomienie django wymaga najpierw wykonania tych dwóch komend:
+python manage.py migrate
+python manage.py runserver
+
+6. Przydatne komendy:
 
 python manage.py runserver
 python manage.py makemigrations  -  po stworzeniu modelu w db tworzymy migracje
