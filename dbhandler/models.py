@@ -24,7 +24,9 @@ class Course(models.Model):
     module_id = models.ForeignKey('Module', on_delete=models.DO_NOTHING)
     description = models.TextField()
     password = models.CharField(max_length = 16)
-
+    def __str__(self):
+        return self.name
+        
 class Instructor(models.Model):
     user_id = models.ForeignKey('User', on_delete=models.CASCADE)
     course_id = models.ForeignKey('Course', on_delete=models.CASCADE)

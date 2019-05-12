@@ -1,25 +1,16 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from django.views.generic import ListView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from dbhandler.models import Course
 
 # Create your views here.
 
-def index(request):
-    
-    context = {
+class CoursesView(ListView):
+    model = Course
+    template_name = 'courses.html'
+    #login_url = "/elearning/login/"
+    #redirect_field_name = "redirect_to"
 
-    }
-
-    return render(request, 'index.html', context=context)
-
-from dbhandler.models import Course, CourseType, Module
-
-def courses(request):
-    
-    num_courses = Course.objects.all().count()
-    num_modules = Module.objects.all().count()
-
-    context = {
-        'num_courses': num_courses,
-        'num_modules': num_modules,
-    }
-
-    return render(request, 'courses.html', context=context)
+class HomeView(TemplateView):
+    template_name = 'index.html'

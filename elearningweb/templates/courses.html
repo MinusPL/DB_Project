@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-  {% block title %}<title>Local Library</title>{% endblock %}
-</head>
-<body>
-  {% block sidebar %}<!-- insert default navigation text for every page -->{% endblock %}
-  {% block content %}
-  <h1>Zawartość</h1>
-  <p>Witaj [DANE_UŻYTKOWNIKA_PO_LOGOWANIU]!</p>
-  <h2>Kursy oraz przedmioty</h2>
-  <p>Aktualnie platforma posiada:</p>
-  <ul>
-    <li><strong>Ilość kursów:</strong> {{ num_courses }}</li>
-    <li><strong>Ilość przedmiotów:</strong> {{ num_modules }}</li>
-  </ul>
-  {% endblock %}
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Lista dostępnych kursów</h2>
+    <ul>
+        {% for course in object_list %}
+            <li>{{ course.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
