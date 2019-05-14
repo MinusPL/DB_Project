@@ -1,27 +1,42 @@
 1. Pobierz Anaconde ze stronki z neta
 https://www.anaconda.com/distribution/
 
+Po instalacji uruchom Anaconda Prompt
+
 2. W Anaconda Prompt:
 
-conda create --name uczelnia django
-(Conda mo�e zapyta� o potwierdzenie instalacji, wci�nij Y)
+Wejdź do katalogu, w którym masz sklonowane repozytorium.
+
+Wpisz:
+conda create -n uczelnia django
+(Conda może zapytać o potwierdzenie instalacji, wciśnij Y)
 
 3. Po stworzeniu enva aktywujesz enva:
 
 conda activate uczelnia
 
-4. Po aktywacji doinstaluj bibliotek� sqlparser
-pip install sqlparser
+4. Po aktywacji doinstaluj wymagane biblioteki
+pip install -r requirements.txt
 
-5. Pierwsze uruchomienie django wymaga najpierw wykonania tych dw�ch komend:
-python manage.py migrate
-python manage.py runserver
+5. Wypakuj do tego samego katalogu, w którym znajduje się plik manage.py plik .env zawarty w archiwum WYPAKUJ_TUTAJ.zip.
 
-6. Przydatne komendy:
+6. Pierwsze uruchomienie django wymaga najpierw wykonania tych komend:
+
+py manage.py makemigrations 
+py manage.py migrate
+py manage.py runserver
+py manage.py createsuperuser
+
+(W trakcie doawania superusera tworzycie swojego lokalnego "Super Admina", gdy zrobicie commita wasz user nie zostanie wysłany na repozytorium)
+
+7. Przydatne komendy:
 
 python manage.py runserver
 python manage.py makemigrations  -  po stworzeniu modelu w db tworzymy migracje
 python manage.py migrate  -  migruje wszystko do bazy
 python manage.py collectstatic  -  wyrzuca statyczne pliki do folderu podanego w settings
 python manage.py instectdb  -  tworzy z SQL modele w Django
-python manage.py createsuperuser  -  tworzy konto admina w DB �eby logowa� sie na /admin
+python manage.py createsuperuser  -  tworzy konto admina w DB żeby logować sie na /admin
+
+8. Jeśli chcesz korzystać z Visual Studio Code do repozytorium dołączony jest plik code-workspace zawierający ustawienia środowiska oraz zalecane rozszerzenia.
+Wystarczy go otworzyć w VS Code.
