@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block banner %}
+    <h1 class = "banner" >Panel logowania</h1>
+{% endblock %}
+
+{% block content %}
+    <section id="login" class="bg-light py-5">
+        <div id="login_panel">
+            <form method="POST">
+                <input type="text" name="username" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" required>
+                <input type="text" name="password" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'" required>
+                <input type="submit" value="Zaloguj">
+            </form>
+        </div>
+        <a href="{% url 'register' %}">Zarejestruj</a>
+    </section>
+{% endblock %}
