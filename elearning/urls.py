@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('elearning/', include('elearningweb.urls')),
     path('', RedirectView.as_view(url='/elearning/')),
+    path('account/', include('accounts.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
