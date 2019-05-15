@@ -10,6 +10,7 @@
 </head>
 <body>
   <div class="contaier-fluid">
+    <div>{%block login %}<a class = "login" href="#">Zaloguj sie/Zarejestruj</a>{% endblock %}</div>
     <div>{% block content %}{% endblock %}</div>
       {% block topnav %}
         <nav id="topnav">
@@ -20,6 +21,8 @@
           </ul>
         </nav>
      {% endblock %}
+     <div>{% block login_panel %}{% endblock %}</div>
+     <div>{% block register_panel %}{% endblock %}</div>
   </div>
 </body>
 </html>
