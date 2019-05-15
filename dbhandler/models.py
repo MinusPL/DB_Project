@@ -36,6 +36,7 @@ class Participant(models.Model):
 class Class(models.Model):
     name = models.CharField(max_length = 64)
     description = models.TextField()
+    course_id = models.ForeignKey('Course', on_delete=models.CASCADE)
 
 class Content(models.Model):
     valid_until = models.DateTimeField()
