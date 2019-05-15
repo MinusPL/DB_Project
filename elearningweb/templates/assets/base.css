@@ -11,7 +11,7 @@ h1.banner{
     color: rgb(9, 81, 153);
     text-align: center;
     letter-spacing: 1px;
-    margin-top: 15  px;
+    margin-top: 15px;
     margin-bottom: 15px;
 }
 #topnav{
@@ -44,10 +44,4 @@ h1.banner{
 .menu li:hover{
     color: rgb(2, 42, 92);
     background-color: rgb(11, 88, 165);
-}
-a.login{
-    font-size: 12px;
-    float: right;
-    text-decoration: none;
-    color: rgb(2, 42, 92);
 }

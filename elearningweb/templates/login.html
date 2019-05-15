@@ -12,8 +12,8 @@
                 <input type="text" name="username" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" required>
                 <input type="password" name="password" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'" required>
                 <input type="submit" value="Zaloguj">
+                <a class="register_link" href="{% url 'register' %}">Zarejestruj nowe konto</a>
             </form>
         </div>
-        <a href="{% url 'register' %}">Zarejestruj</a>
     </section>
 {% endblock %}

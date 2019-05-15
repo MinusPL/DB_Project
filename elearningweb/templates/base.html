@@ -6,11 +6,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext">
 </head>
 <body>
   <div class="contaier-fluid">
-    <div>{%block login %}<a class = "login" href="{% url 'login' %}">Zaloguj sie/Zarejestruj</a>{% endblock %}</div>
+    <div class="logindiv">{%block login %}<a class = "login" href="{% url 'login' %}">Logowanie do platformy</a>{% endblock %}</div>
     <div>{% block banner %}{% endblock %}</div>
       {% block topnav %}
         <nav id="topnav">
