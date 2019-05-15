@@ -9,13 +9,13 @@
 <sourcePk>DCC31E94-260D-D100-A192-474AFA816FC0</sourcePk>
 <targetPk>5CEC6D53-A3BE-4614-7E3E-DD2469CB2EC5</targetPk>
 <identifying>false</identifying>
-<nameOnSource>jest przypisany do użytkownika</nameOnSource>
-<nameOnTarget>może mieć wyniki testu</nameOnTarget>
+<nameOnSource>jest przypisany do uzytkownika</nameOnSource>
+<nameOnTarget>moze miec wyniki testu</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>true</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
 <sourceEntity>CE460665-9852-60F0-D08A-FE705F0C64E9</sourceEntity>
-<targetCardinalityString>1</targetCardinalityString>
+<targetCardinalityString>*</targetCardinalityString>
 <targetEntity>B1B0F4AD-CD35-C4C5-4C0D-69D068128E38</targetEntity>
 <transferable>true</transferable>
 <deleteRule>NO ACTION</deleteRule>

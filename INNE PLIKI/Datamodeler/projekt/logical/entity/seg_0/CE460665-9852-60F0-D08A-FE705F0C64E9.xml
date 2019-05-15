@@ -64,29 +64,13 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id1" id="4635740A-BA4E-1632-5377-3F6FDB16A2F2">
-<createdBy>Minus</createdBy>
-<createdTime>2019-04-16 14:37:44 UTC</createdTime>
-<generatorID>52325736-9B1F-08C8-0434-CBE0CB332FA3</generatorID>
-<ownerDesignName>projekt</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
-<engineerTo>
-<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="false"/>
-</engineerTo>
-<referedAttribute>D64150A8-AFE1-DA55-268C-4A69053AF7BC</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="id2" id="0C3B0E25-5172-B4A1-67DC-913CA2AE2BB2">
 <createdBy>Minus</createdBy>
 <createdTime>2019-04-16 14:39:08 UTC</createdTime>
 <generatorID>1B24474D-9327-1895-5B55-A5545C75D550</generatorID>
 <ownerDesignName>projekt</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="false"/>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
 </engineerTo>
 <referedAttribute>021219C8-5216-221A-D37F-9D6DE9E59C31</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>

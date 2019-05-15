@@ -43,9 +43,6 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
-<associations>
-<colAssociation fkAssociation="80C38473-3F64-5D09-A869-692877C87C2E" referredColumn="DD080648-F022-940A-B831-55F8FFF51F80"/>
-</associations>
 </Column>
 <Column name="result" id="0E7907DB-2DB4-627E-3158-F8C902222B0F">
 <createdBy>Minus</createdBy>
@@ -71,25 +68,7 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="1D02BBFA-352E-A4A6-2D9C-7C311970B456"/>
-</indexColumnUsage>
-</ind_PK_UK>
-<ind_PK_UK id="C4247FFF-4BBF-748C-E9DD-3154762CDCA9" name="test_results__IDX">
-<createdBy>Minus</createdBy>
-<createdTime>2019-04-16 14:57:57 UTC</createdTime>
-<ownerDesignName>projekt</ownerDesignName>
-<indexState>Unique Plain Index</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<relationGeneratorID>52325736-9B1F-08C8-0434-CBE0CB332FA3</relationGeneratorID>
-</ind_PK_UK>
-<ind_PK_UK id="1D37C2AE-2197-7865-F01F-323B8B6F3338" name="test_results_user_FK">
-<createdBy>Minus</createdBy>
-<createdTime>2019-04-16 14:57:57 UTC</createdTime>
-<generatorID>52325736-9B1F-08C8-0434-CBE0CB332FA3</generatorID>
-<ownerDesignName>projekt</ownerDesignName>
-<indexState>Foreign Key</indexState>
-<isSurrogateKey>false</isSurrogateKey>
-<indexColumnUsage>
-<colUsage columnID="CE582FF9-5C5C-C092-D5B4-6917B0C96ED9"/>
+<colUsage columnID="2155A6E9-FD23-2779-8DC1-E6F60223CC02"/>
 </indexColumnUsage>
 </ind_PK_UK>
 <ind_PK_UK id="A7532014-004F-91AC-5627-AE22F09AB561" name="test_results_test_FK">

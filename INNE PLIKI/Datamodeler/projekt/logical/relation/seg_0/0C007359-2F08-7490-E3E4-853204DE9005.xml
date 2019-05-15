@@ -8,8 +8,8 @@
 </engineerTo>
 <sourcePk>8057A87B-B415-D03E-969D-1B21EED77DC4</sourcePk>
 <identifying>false</identifying>
-<nameOnSource>może posiadać kursy</nameOnSource>
-<nameOnTarget>należy do modułu</nameOnTarget>
+<nameOnSource>moze posiadac kursy</nameOnSource>
+<nameOnTarget>nalezy do modulu</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>

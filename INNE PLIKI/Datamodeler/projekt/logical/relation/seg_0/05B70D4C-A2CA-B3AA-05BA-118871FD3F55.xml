@@ -8,8 +8,8 @@
 </engineerTo>
 <sourcePk>1DC48B92-2C45-BE1A-D198-2992A69CB2E6</sourcePk>
 <identifying>false</identifying>
-<nameOnSource>może posiadać zajęcia</nameOnSource>
-<nameOnTarget>należy do kursu</nameOnTarget>
+<nameOnSource>moze posiadac zajecia</nameOnSource>
+<nameOnTarget>nalezy do kursu</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>

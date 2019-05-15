@@ -30,7 +30,7 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="imie" id="E2EF1BA5-3420-67DF-9F61-015CC62BC56D">
+<Column name="first_name" id="E2EF1BA5-3420-67DF-9F61-015CC62BC56D">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:50:08 UTC</createdTime>
 <generatorID>9C6C4D5A-C3C4-9E5B-A17D-27BDF5B2171B</generatorID>
@@ -43,7 +43,7 @@
 <ownDataTypeParameters>16,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="nazwisko" id="3F211142-9A8B-DFCE-CA09-EEC3C2FC8256">
+<Column name="last_name" id="3F211142-9A8B-DFCE-CA09-EEC3C2FC8256">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:50:08 UTC</createdTime>
 <generatorID>5CF4F3CD-8801-65EB-1E71-2A19574B9158</generatorID>
@@ -56,7 +56,7 @@
 <ownDataTypeParameters>32,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="mail" id="BC886767-1C32-01E3-6B89-0E1650CFAEE8">
+<Column name="email" id="BC886767-1C32-01E3-6B89-0E1650CFAEE8">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:50:08 UTC</createdTime>
 <generatorID>5C0FA0FA-624F-34C6-FE37-4F44F995E87F</generatorID>
@@ -68,6 +68,149 @@
 <dataTypeSize>32</dataTypeSize>
 <ownDataTypeParameters>32,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="username" id="FBF87F42-723D-2B3B-AB3D-EE9024BBC223">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>59F89291-4562-3B25-F44D-7EFB47195758</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="password" id="3AF10D6C-241E-72E0-8565-7B6FDD3FC783">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>C54721FF-38D4-6FFC-0FF6-5478F1195A3D</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>128</dataTypeSize>
+<ownDataTypeParameters>128,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="last_login" id="B288CB9C-5149-00BD-F03E-E27985E66C42">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>E1166B9B-E664-9E80-719B-5B0B8BBE4758</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="is_superuser" id="4D168EAD-9996-A3DE-C218-D23056AE5852">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>54CD651F-06EC-CFC8-A480-0429FDC57554</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="groups" id="161A28E0-8DCC-2ED4-A928-CB1B9DE3BC37">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>481BA5DC-2468-2204-D86D-9F71680BA346</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="user_permissions" id="B268ECD2-E8EE-237B-D053-6FC8E2734D48">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>B72E2BE5-68CE-A9FD-9D33-7FC31E58E63E</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="is_staff" id="FBF59CA3-3FD4-43B8-5CDE-156015EA1AF2">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>7C7A8A93-D452-3AE5-D872-F563A3ED1299</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="is_active" id="F56510F5-ED8B-BE2C-6CAA-D2A8D4D8998B">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>3BC76FF4-631C-1266-90B5-51ADE4B501A9</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="date_joined" id="92AE7F15-C1BD-9017-4B4D-F4AB7EBBB364">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>A1F3AFA8-CF59-9F3B-0E47-8A4890106EA5</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="test_results_id" id="68FCE06B-9077-0A8E-54A9-BA9878BFCE1A">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>35CE9185-3E72-A530-C485-6AF8187C7714</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F3530DCF-A55C-7640-EF2D-6D14DA98B03A" referredColumn="1D02BBFA-352E-A4A6-2D9C-7C311970B456"/>
+</associations>
+</Column>
+<Column name="test_results_test_id" id="F523296D-6C99-1ACA-2747-0B7FF370FEDB">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>3610B6C8-652F-B987-EA8C-BF0759534421</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F3530DCF-A55C-7640-EF2D-6D14DA98B03A" referredColumn="2155A6E9-FD23-2779-8DC1-E6F60223CC02"/>
+</associations>
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
@@ -81,6 +224,18 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="DD080648-F022-940A-B831-55F8FFF51F80"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8EC06E54-4F79-AB04-0C10-0C5E8ABDEBBE" name="user_test_results_FK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>52325736-9B1F-08C8-0434-CBE0CB332FA3</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="68FCE06B-9077-0A8E-54A9-BA9878BFCE1A"/>
+<colUsage columnID="F523296D-6C99-1ACA-2747-0B7FF370FEDB"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

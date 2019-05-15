@@ -8,7 +8,7 @@
 </engineerTo>
 <sourcePk>5CEC6D53-A3BE-4614-7E3E-DD2469CB2EC5</sourcePk>
 <identifying>true</identifying>
-<nameOnSource>może być autorem komentarza</nameOnSource>
+<nameOnSource>moze byc autorem komentarza</nameOnSource>
 <nameOnTarget>posiada autora</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>

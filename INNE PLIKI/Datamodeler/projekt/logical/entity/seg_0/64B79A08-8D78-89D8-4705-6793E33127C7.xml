@@ -52,32 +52,6 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="instructors" id="3664F6D3-134D-5201-01B1-CF06AA4D183A">
-<createdBy>Minus</createdBy>
-<createdTime>2019-03-25 18:37:36 UTC</createdTime>
-<ownerDesignName>projekt</ownerDesignName>
-<engineerTo>
-<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<structuredType>47E390DE-0671-C4B1-8428-0F45CBEE18F8</structuredType>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="participants" id="727A8D66-8FB4-D144-BCC6-A3A0258A1C70">
-<createdBy>Minus</createdBy>
-<createdTime>2019-03-25 18:38:23 UTC</createdTime>
-<ownerDesignName>projekt</ownerDesignName>
-<engineerTo>
-<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
-</engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="description" id="E59E5A73-BB1E-A7C0-520D-6362BF585CC9">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:29:15 UTC</createdTime>

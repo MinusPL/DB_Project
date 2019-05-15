@@ -9,7 +9,7 @@
 <sourcePk>C27AAC78-CD69-1615-F5E4-E49B10386809</sourcePk>
 <identifying>false</identifying>
 <nameOnSource>posiada pytania</nameOnSource>
-<nameOnTarget>należy do testu</nameOnTarget>
+<nameOnTarget>nalezy do testu</nameOnTarget>
 <optionalSource>false</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
