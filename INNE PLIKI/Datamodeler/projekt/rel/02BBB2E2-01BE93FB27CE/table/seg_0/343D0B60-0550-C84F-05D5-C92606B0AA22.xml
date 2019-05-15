@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="343D0B60-0550-C84F-05D5-C92606B0AA22" name="Relation_25">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Group_id" id="11B75992-FB5E-B045-A1AA-31C607AB232F">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FBFD382D-39CC-E491-B5FE-947EEF7BD9BF" referredColumn="78C04BFE-EB13-2A8C-382B-0B626DA89F60"/>
+</associations>
+</Column>
+<Column name="user_id" id="3325ABE9-0699-7973-1F3A-48E6285D380C">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="ADC73718-926A-2D5D-F1FD-DCA13A2A9437" referredColumn="DD080648-F022-940A-B831-55F8FFF51F80"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4AD21D74-92AD-9744-6B58-9F76F039778F" name="Relation_25_PK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="11B75992-FB5E-B045-A1AA-31C607AB232F"/>
+<colUsage columnID="3325ABE9-0699-7973-1F3A-48E6285D380C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A3D78672-F7AB-CB0F-1C37-3FF6B3664EA7" name="Relation_25_Group_FK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>DCAD7394-92BF-13B1-29BC-475CD4D7F48C</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="11B75992-FB5E-B045-A1AA-31C607AB232F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="E71B5FD0-1F79-894D-8C17-6334A0DFBD28" name="Relation_25_user_FK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>DCAD7394-92BF-13B1-29BC-475CD4D7F48C</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3325ABE9-0699-7973-1F3A-48E6285D380C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

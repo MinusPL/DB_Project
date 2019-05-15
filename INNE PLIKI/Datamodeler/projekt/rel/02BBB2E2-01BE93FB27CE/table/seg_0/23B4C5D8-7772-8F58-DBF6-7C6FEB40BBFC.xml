@@ -58,6 +58,19 @@
 <colAssociation fkAssociation="9D0A254C-E1CF-97E0-93D6-B5177A657905" referredColumn="FA8D31D8-E2A3-DBCF-D98C-B581010209E1"/>
 </associations>
 </Column>
+<Column name="name" id="37F53276-CF6E-47FF-8063-545A8749EBA5">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>969F22AE-2EAF-1566-F1AD-B3C786CF4A23</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>64</dataTypeSize>
+<ownDataTypeParameters>64,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
 <ind_PK_UK id="ABE0972B-621D-A6EF-6B2A-81BC7C4CB712" name="test_PK">
@@ -72,7 +85,7 @@
 <colUsage columnID="A0A5EAD1-6271-422C-6844-F3BF13FDD585"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="45F526F3-508E-E791-29BD-C9491D075A01" name="test_classes_FK">
+<ind_PK_UK id="45F526F3-508E-E791-29BD-C9491D075A01" name="test_class_FK">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:50:08 UTC</createdTime>
 <generatorID>BF119DEB-C8FB-6ED9-DC97-DC2C127CB0E6</generatorID>

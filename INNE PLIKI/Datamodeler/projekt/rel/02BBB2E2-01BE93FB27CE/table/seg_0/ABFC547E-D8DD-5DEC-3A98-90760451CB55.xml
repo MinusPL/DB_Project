@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="ABFC547E-D8DD-5DEC-3A98-90760451CB55" name="Relation_24">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Group_id" id="1569FCF4-2756-AABA-57EF-B476D44F88EC">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="58ECE325-EBD9-1FA7-10E5-B46A0BB18CF1" referredColumn="78C04BFE-EB13-2A8C-382B-0B626DA89F60"/>
+</associations>
+</Column>
+<Column name="Permision_id" id="EC67BCC6-BC09-B0DB-63D8-A80C079E8A7E">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3AEE8ADF-55BE-F3EA-CD91-0704F64EA0F9" referredColumn="CCE8E91A-AF22-BDA1-C455-1B47E72B8227"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3E895269-79CC-38FB-CBFF-BBF8D1B7F566" name="Relation_24_PK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1569FCF4-2756-AABA-57EF-B476D44F88EC"/>
+<colUsage columnID="EC67BCC6-BC09-B0DB-63D8-A80C079E8A7E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A389604E-6E1C-B782-42B9-2BA516980CE7" name="Relation_24_Group_FK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>E407ADE9-EF9D-B8E7-A357-6DA2CA7E645D</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1569FCF4-2756-AABA-57EF-B476D44F88EC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="ADF73D03-4696-17D7-94C4-0FE2177772FC" name="Relation_24_Permision_FK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>E407ADE9-EF9D-B8E7-A357-6DA2CA7E645D</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EC67BCC6-BC09-B0DB-63D8-A80C079E8A7E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

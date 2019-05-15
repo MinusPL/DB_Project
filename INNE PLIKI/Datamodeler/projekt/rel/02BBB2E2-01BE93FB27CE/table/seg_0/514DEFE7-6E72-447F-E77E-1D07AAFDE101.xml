@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="514DEFE7-6E72-447F-E77E-1D07AAFDE101" name="Group">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>E25BB0F6-73E1-E346-F9AD-8D5B744B9BEF</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="78C04BFE-EB13-2A8C-382B-0B626DA89F60">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>B4ADAA8B-C166-B54C-BDD8-80F0E865C7D3</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="name" id="70D0AC3F-01D5-046C-0FBD-551372391A78">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>8C1B59A4-0971-69F6-5D00-25DB4C8AB375</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>80</dataTypeSize>
+<ownDataTypeParameters>80,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="permissions" id="7F29C9FF-4012-9450-8E3C-0BE911A13BB9">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>8F43B67E-7256-41BA-DB79-6795FEFBD1E6</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="CA104383-4A7F-DECA-4338-88CF683D3E2C" name="Group_PK">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:11:44 UTC</createdTime>
+<generatorID>15B90874-18DA-2A92-B39C-34B917A4D622</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="78C04BFE-EB13-2A8C-382B-0B626DA89F60"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
