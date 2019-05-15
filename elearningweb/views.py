@@ -14,3 +14,9 @@ class CoursesView(ListView):
 
 class HomeView(TemplateView):
     template_name = 'index.html'
+
+class LoginView(TemplateView):
+    template_name = 'login.html'
+
+class RegisterView(TemplateView):
+    template_name = 'register.html'
