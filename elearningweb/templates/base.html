@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="contaier-fluid">
-    <div>{%block login %}<a class = "login" href="#">Zaloguj sie/Zarejestruj</a>{% endblock %}</div>
+    <div>{%block login %}<a class = "login" href="{% url 'login' %}">Zaloguj sie/Zarejestruj</a>{% endblock %}</div>
     <div>{% block banner %}{% endblock %}</div>
       {% block topnav %}
         <nav id="topnav">
