@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import include
 from django.urls import path
 from django.views.generic import RedirectView
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('elearning/', include('elearningweb.urls')),
     path('', RedirectView.as_view(url='/elearning/')),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
