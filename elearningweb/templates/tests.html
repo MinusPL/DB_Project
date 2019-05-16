@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Lista dostępnych testów</h2>
+    <h2>testy</h2>
     <ul>
         {% for test in object_list %}
-            <li>{{ test.name }}</li>
+            {% if test.class_id == "Class object (1)" %}
+                <li>{{ test.class_id }}</li>
+            {% endif %}
         {% endfor %}
     </ul>
 {% endblock %}
