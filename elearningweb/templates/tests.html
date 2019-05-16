@@ -2,11 +2,20 @@
 
 {% block content %}
     <h2>testy</h2>
-    <ul>
-        {% for test in object_list %}
-            {% if test.class_id == "Class object (1)" %}
-                <li>{{ test.class_id }}</li>
-            {% endif %}
-        {% endfor %}
-    </ul>
+    <form method="POST">
+        {% csrf_token %}   
+        <ul>
+            {% for question in questions %}
+                <li>{{ question.question_text }}</li>
+                <ul>
+                    {% for answer in answers %}
+                        {% if answer.question_id_id == question.id %}
+                            <li><input type="radio" name="question{{ question.id }}" value="answer{{ answer.id }}"/>{{ answer.answer_text }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </ul>
+        <input type="submit" value="Zakończ test">
+    </form>
 {% endblock %}
