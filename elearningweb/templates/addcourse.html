@@ -1,20 +1,18 @@
 {% extends "base.html" %}
 
 {% block banner %}
-    <h1 class = "banner" >Dodawanie Kursów</h1>
+<h1 class = "banner" >Dodawanie Kursów</h1>
 {% endblock %}
 
 {% block content %}
-    <h2>Dodawanie Kursów</h2>
-    <form method="post">
-        {% csrf_token %}
-        {% for field in form %}
-    <div class="fieldWrapper">
-
+<h2>Dodawanie Kursów</h2>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="fieldWrapper">
         {{ field.label_tag }} {{ field }}
-    </div>
-{% endfor %}
-        <input type="submit" value="Sumbmit">
-
-    </form>
+        </div>
+    {% endfor %}
+    <input type="submit" value="Sumbmit">
+</form>
 {% endblock %}
