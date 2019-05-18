@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block banner %}
+	<h1 class="banner">{{ course.name }}</h1>
+{% endblock %}
+
+{% block content %}
+	<div class="details">
+		<div class="instructors">Prowadzący:
+		{% for instructor in course.instructor_set.all %}
+			{{ instructor.user_id.instructor_data }}
+			<!-- dodać resztę danych -->
+		{% endfor %}
+		</div>
+
+		<div class="desc">{{ course.description }}</div>
+	</div>
+
+	<div class="classes">
+		{% if course.class_set.all %}
+			<ul>
+				{% for class in course.class_set.all %}
+					<li>{{ class.name }} {{ class.description }}</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<h5>Brak zajęć</h5>
+		{% endif %}
+	</div>
+{% endblock %}
