@@ -58,3 +58,8 @@ class AddCourseForm(forms.ModelForm):
     class Meta:
         model=Course
         fields = ('name','course_type','module_id','description','password')
+
+class CourseListForm(forms.ModelForm):
+    model=Course
+    join = forms.CharField()
+    quit = forms.CharField()
