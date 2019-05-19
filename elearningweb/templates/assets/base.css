@@ -51,3 +51,45 @@ a.login{
     text-decoration: none;
     color: rgb(2, 42, 92);
 }
+
+
+/* COURSE DETAIL */
+
+.course-container {
+    width: 60%;
+    margin: 100px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+#link-courses {         /* odnośnik do listy kursów */
+    font-size: 16px;
+    color: black;
+}
+
+.details {
+    padding-top: 20px;
+    font-size: 17px;
+    border-top: 1px solid #ccc;
+}
+
+.classes ul {
+    list-style-type: none;
+    font-size: 22px;
+    margin-top: 50px;
+    padding: 0;
+}
+
+.classes li {
+    border-bottom: 1px solid #ccc;
+    padding: 3px;
+}
+
+.desc {
+    font-size: 15px;
+}
