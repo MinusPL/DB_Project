@@ -11,6 +11,17 @@ class CoursesView(ListView):
     model = Course
     template_name = 'courses.html'
 
+#class UserCoursesView(ListView):
+#    model = Course
+#    template_name = 'user_courses.html'
+#    for course in Course.objects.all():
+#        if Participant.filter(course=course, user=self.reques.user)
+#    def get_context_data(self, **kwargs):
+#        context = super(UserCoursesView, self).get_context_data(**kwargs)
+#        context['courses']=Course.objects.all()
+#        Participants
+#        return context
+
 class CourseDetailView(DetailView):
     model = Course
     template_name = 'course_detail.html'
@@ -80,3 +91,17 @@ def QuitCourse(request,kurs):
         Participant.objects.filter(course_id=k, user_id=u).delete()
         #return HttpResponse("Nie bierzesz juz udzialu w tym kursie")
     return redirect('courses')
+
+def UserCourses(request):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    i=0
+    k=Course.objects.none()
+    id_course_list=[]
+    for p in Participant.objects.filter(user_id=request.user):
+        id_course_list.append(p.course_id.id)
+    k=Course.objects.filter(id__in=id_course_list)
+    return render(request, 'user_courses.html', {'courses': k})
+
+
+
