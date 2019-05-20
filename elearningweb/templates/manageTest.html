@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Zarządzanie testem</h2>
+    <form>
+        <table>
+        {% for q in questions %}
+                <tr><td>{{ q.question_text }}</td><td><a href="{% url 'editquestion' q.id %}">edytuj</a></td></tr>    
+        {% endfor %}
+        </table>
+    </form>
+{% endblock %}

@@ -1,21 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>testy</h2>
+    <h2>{{ test.name }}</h2>
     <form method="POST">
         {% csrf_token %}   
-        <ul>
-            {% for question in questions %}
-                <li>{{ question.question_text }}</li>
-                <ul>
-                    {% for answer in answers %}
-                        {% if answer.question_id_id == question.id %}
-                            <li><input type="radio" name="question{{ question.id }}" value="answer{{ answer.id }}"/>{{ answer.answer_text }}</li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            {% endfor %}
-        </ul>
-        <input type="submit" value="Zakończ test">
+        <table>
+            {% for q in questions %}
+                <tr><td>{{ q.question_text }}</td></tr>
+                {% for a in answers %}
+                    {% if a.question_id_id == q.id %}
+                    <tr><td>{{ a.answer_text }}</td><td><input type="radio" name="isCorrect{{ forloop.parentloop.counter }}" {% if a.is_good == 1 %}value='correct' {% else %} value='wrong' {% endif %}/></td></tr>
+                    <tr><td>{{ forloop.parentloop.counter }}</td></tr>
+                    <tr><td>{{ forloop.counter }}</td></tr>
+                    {% endif %}
+                {% endfor %}
+                <input type="hidden" name="qid" value='{{ question.id }}' />
+            {% endfor%}
+            <tr><td><input type="submit" value="Zapisz"></td></tr>
+        </table>
     </form>
 {% endblock %}
