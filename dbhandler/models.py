@@ -62,3 +62,7 @@ class Answer(models.Model):
     is_good = models.SmallIntegerField()
     question_id = models.ForeignKey('Question', on_delete=models.CASCADE)
 
+class TestResult(models.Model):
+    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+    test = models.ForeignKey('Test', on_delete=models.CASCADE)
+    result = models.IntegerField()
