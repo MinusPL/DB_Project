@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{{ test.name }}</h2>
+        <table>
+            {% for q in questions %}
+                <tr><td>{{ q.question_text }}</td></tr>
+                {% for a in answers %}
+                    {% if a.question_id == q %}
+                    <tr>
+                        <td {% if a.is_good == 1 %}style="background-color:green"{% else %} {% if a.id in checked %}style="background-color:red"{% endif %}{% endif %}>{{ a.answer_text }}</td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor%}
+        </table>
+{% endblock %}

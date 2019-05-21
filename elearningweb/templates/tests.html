@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{{ test.name }}</h2>
+    <form action="{% url 'finished' test.id %}" method="POST">
+        {% csrf_token %}   
+        <table>
+            {% for q in questions %}
+                <tr><td>{{ q.question_text }}</td></tr>
+                {% for a in answers %}
+                    {% if a.question_id == q %}
+                    <tr><td>{{ a.answer_text }}</td><td><input type="radio" name="Question{{ forloop.parentloop.counter }}" value="{{ a.id }}" required/></td></tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor%}
+            <input type="hidden" name="qc" value="{{ qCount }}" />
+            <tr><td><input type="submit" value="Zakończ"></td></tr>
+        </table>
+    </form>
+{% endblock %}

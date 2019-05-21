@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Zarządzanie testem</h2>
+    
+        {% csrf_token %} 
+        <table>
+        {% for q in questions %}
+                <form method="POST"> 
+                {% csrf_token %}
+                <tr>
+                    <input type="hidden" name="tID" value="{{ test.id }}"/><input type="hidden" name="qID" value="{{q.id}}"/>
+                    <td><input type="submit" value="Usuń"/></td>
+                    <td>{{ q.question_text }}</td>
+                </tr>
+            </form>    
+        {% endfor %}
+        <input type="hidden" name="tID" value="{{ test.id }}"/>
+        <tr><td></td><td><a href="{% url 'addquestions' test.id %}"><input type="button" value="Dodaj pytanie" ></a></td></tr>
+        </table>
+{% endblock %}
