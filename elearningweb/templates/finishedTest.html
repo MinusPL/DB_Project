@@ -2,19 +2,16 @@
 
 {% block content %}
     <h2>{{ test.name }}</h2>
-    <form action="score" method="POST">
-        {% csrf_token %}   
         <table>
             {% for q in questions %}
                 <tr><td>{{ q.question_text }}</td></tr>
                 {% for a in answers %}
                     {% if a.question_id == q %}
                     <tr>
-                        <td {% if a.is_good == 1 %}style={background-color:green}{% endif %}{% for ans in checked %}{% if a.is_good==0 and a.id==ans %}style={background-color:red}{% endfor %}>{{ a.answer_text }}</td>
+                        <td {% if a.is_good == 1 %}style="background-color:green"{% else %} {% if a.id in checked %}style="background-color:red"{% endif %}{% endif %}>{{ a.answer_text }}</td>
                     </tr>
                     {% endif %}
                 {% endfor %}
             {% endfor%}
         </table>
-    </form>
 {% endblock %}

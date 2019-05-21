@@ -32,33 +32,39 @@ class TestsView(TemplateView):
     template_name = 'tests.html'
 
 def FinishView(request,**kwargs):
-    qCount=request.POST['qc']
-    ansList=[]
-    questionsList=Question.objects.filter(test_id=kwargs['testID'])
-    allAnsList=[]
-    for q in questionsList:
-        allAnsList.extend(Answer.objects.filter(question_id_id=q.id))
-    for i in range(1,qCount+1):
-        ansList.extend(request.POST['Question%d' % i])
-    c=Context({
-        'checked':ansList,
-        'test':Test.objects.get(id=kwargs['testID']),
-        'questions':questionsList,
-        'answers':allAnsList
-    })
+    if request.method == 'POST':
+        qCount=int(request.POST['qc'])
+        ansList=[]
+        questionsList=Question.objects.filter(test_id=kwargs['testID'])
+        allAnsList=[]
+        for q in questionsList:
+            allAnsList.extend(Answer.objects.filter(question_id_id=q.id))
+        for i in range(1,qCount+1):
+            ch=int(request.POST['Question%d' % i])
+            ansList.append(ch)
+        c={
+            'checked':ansList,
+            'test':Test.objects.get(id=kwargs['testID']),
+            'questions':questionsList,
+            'answers':allAnsList
+        }
     return render(request,"finishedTest.html",c)
              
 
         
 class CreateTestView(TemplateView):
     template_name = 'createTest.html'
+    def get_context_data(self, **kwargs):
+        context = super(CreateTestView, self).get_context_data(**kwargs)
+        context['classid'] = Class.objects.get(id=kwargs['classID'])
+        return context
     def post(self, request, *args, **kwargs):
         testName = request.POST['testname']
         testDesc = request.POST['testdesc']
-        #ClassId = request.POST['classid']
-        t=Test(name=testName,description=testDesc,class_id_id=2)
+        ClassId = int(request.POST['cid'])
+        t=Test(name=testName,description=testDesc,class_id_id=ClassId)
         t.save()
-        return redirect('addquestions')
+        return redirect('../addquestions/%d' % t.id)
 
 class AddQuestionsView(TemplateView):
     template_name = 'addQuestions.html'
@@ -88,12 +94,11 @@ class ManageTestView(TemplateView):
     template_name = 'manageTest.html'
     def get_context_data(self, **kwargs):
         context = super(ManageTestView, self).get_context_data(**kwargs)
+        context['test'] = Test.objects.get(id=kwargs['testID'])
         context['questions'] = Question.objects.filter(test_id=kwargs['testID'])
         return context
-
-def EditQuestionView(request,QuestionID):
-    forms_classes=[
-        QuestionForm,
-        AnswerForm
-    ]
-    return render(request, 'editQuestion.html', {'form': forms_classes})
+    def post(self, request, *args, **kwargs):
+        tID = int(request.POST['tID'])
+        toDelete = int(request.POST['qID'])
+        Question.objects.filter(id=toDelete).delete()
+        return redirect('../managetest/%d' % tID)
