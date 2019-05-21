@@ -34,7 +34,7 @@ SECRET_KEY = 'f=b36dx0(satyx%7^-nuedq5%=7kfcl=y4(@o+q6pj$7bi0qep'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'proj-dbio.herokuapp.com'
+    'proj-dbio.herokuapp.com',
 ]
 
 
@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'dbhandler',
-    'elearningweb'
+    'elearningweb',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -67,7 +68,7 @@ ROOT_URLCONF = 'elearning.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'elearningweb/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,7 +133,7 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'elearningweb/templates/assets'),
 )
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

@@ -8,8 +8,8 @@
 </engineerTo>
 <sourcePk>0B74B77B-197B-433E-9E91-27EE96D86F1B</sourcePk>
 <identifying>false</identifying>
-<nameOnSource>może posiadać komentarze</nameOnSource>
-<nameOnTarget>należy do zajęć</nameOnTarget>
+<nameOnSource>moze posiadac komentarze</nameOnSource>
+<nameOnTarget>nalezy do zajec</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>

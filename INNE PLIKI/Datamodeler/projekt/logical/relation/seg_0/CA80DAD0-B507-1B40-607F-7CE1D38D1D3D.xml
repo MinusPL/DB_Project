@@ -7,8 +7,8 @@
 <item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
 </engineerTo>
 <identifying>false</identifying>
-<nameOnSource>może być prowadzącym</nameOnSource>
-<nameOnTarget>posiada prowadzących</nameOnTarget>
+<nameOnSource>moze byc prowadzacym</nameOnSource>
+<nameOnTarget>posiada prowadzacych</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>*</sourceCardinality>

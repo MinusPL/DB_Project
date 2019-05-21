@@ -60,7 +60,7 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="64AD845E-7996-1E06-6BD8-31456BDC3AAE" name="media_PK">
+<ind_PK_UK id="64AD845E-7996-1E06-6BD8-31456BDC3AAE" name="content_PK">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:50:08 UTC</createdTime>
 <generatorID>35A561CA-02DC-6F32-B7F7-7BB889A05B3E</generatorID>
@@ -72,7 +72,7 @@
 <colUsage columnID="89084D31-F23C-B968-4772-526891FAA83D"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="9A8A42A3-C6DA-41D6-2B28-54EDA924BECA" name="media_classes_FK">
+<ind_PK_UK id="9A8A42A3-C6DA-41D6-2B28-54EDA924BECA" name="content_class_FK">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:50:08 UTC</createdTime>
 <generatorID>2E3D7AF7-E6F0-D647-FF43-7438D4BD4D73</generatorID>

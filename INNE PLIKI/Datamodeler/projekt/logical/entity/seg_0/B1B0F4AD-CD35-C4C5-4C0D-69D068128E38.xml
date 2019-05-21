@@ -27,19 +27,35 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="account_type" id="87D219B8-20A9-F247-B607-50D6369D4435">
+<Attribute name="username" id="59F89291-4562-3B25-F44D-7EFB47195758">
 <createdBy>Minus</createdBy>
-<createdTime>2019-03-25 18:35:16 UTC</createdTime>
+<createdTime>2019-05-15 20:30:19 UTC</createdTime>
 <ownerDesignName>projekt</ownerDesignName>
 <engineerTo>
 <item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
 </engineerTo>
+<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="imie" id="9C6C4D5A-C3C4-9E5B-A17D-27BDF5B2171B">
+<Attribute name="password" id="C54721FF-38D4-6FFC-0FF6-5478F1195A3D">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 20:27:43 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>128</dataTypeSize>
+<ownDataTypeParameters>128,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="first_name" id="9C6C4D5A-C3C4-9E5B-A17D-27BDF5B2171B">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:10:46 UTC</createdTime>
 <ownerDesignName>projekt</ownerDesignName>
@@ -53,7 +69,7 @@
 <dataTypeSize>16</dataTypeSize>
 <ownDataTypeParameters>16,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="nazwisko" id="5CF4F3CD-8801-65EB-1E71-2A19574B9158">
+<Attribute name="last_name" id="5CF4F3CD-8801-65EB-1E71-2A19574B9158">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:12:30 UTC</createdTime>
 <ownerDesignName>projekt</ownerDesignName>
@@ -67,7 +83,7 @@
 <dataTypeSize>32</dataTypeSize>
 <ownDataTypeParameters>32,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="mail" id="5C0FA0FA-624F-34C6-FE37-4F44F995E87F">
+<Attribute name="email" id="5C0FA0FA-624F-34C6-FE37-4F44F995E87F">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:12:55 UTC</createdTime>
 <ownerDesignName>projekt</ownerDesignName>
@@ -80,6 +96,128 @@
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>32</dataTypeSize>
 <ownDataTypeParameters>32,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="last_login" id="E1166B9B-E664-9E80-719B-5B0B8BBE4758">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 20:31:40 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="is_superuser" id="54CD651F-06EC-CFC8-A480-0429FDC57554">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 20:33:53 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="groups" id="481BA5DC-2468-2204-D86D-9F71680BA346">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 20:34:26 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="user_permissions" id="B72E2BE5-68CE-A9FD-9D33-7FC31E58E63E">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 20:35:28 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="is_staff" id="7C7A8A93-D452-3AE5-D872-F563A3ED1299">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 20:37:26 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="is_active" id="3BC76FF4-631C-1266-90B5-51ADE4B501A9">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 20:37:43 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="date_joined" id="A1F3AFA8-CF59-9F3B-0E47-8A4890106EA5">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 20:38:53 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="35CE9185-3E72-A530-C485-6AF8187C7714">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:04:04 UTC</createdTime>
+<generatorID>52325736-9B1F-08C8-0434-CBE0CB332FA3</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>B3387D2F-66EF-288E-D217-FBAA8FA12DED</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id2" id="3610B6C8-652F-B987-EA8C-BF0759534421">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 22:04:04 UTC</createdTime>
+<generatorID>52325736-9B1F-08C8-0434-CBE0CB332FA3</generatorID>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>0C3B0E25-5172-B4A1-67DC-913CA2AE2BB2</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">

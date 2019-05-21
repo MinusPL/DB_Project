@@ -27,6 +27,20 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="name" id="969F22AE-2EAF-1566-F1AD-B3C786CF4A23">
+<createdBy>Minus</createdBy>
+<createdTime>2019-05-15 20:26:55 UTC</createdTime>
+<ownerDesignName>projekt</ownerDesignName>
+<engineerTo>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>64</dataTypeSize>
+<ownDataTypeParameters>64,,</ownDataTypeParameters>
+</Attribute>
 <Attribute name="description" id="02E7C923-8BD2-359D-F96A-B8689A4948D9">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:43:13 UTC</createdTime>

@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.template import Context, Template
 from django.http import HttpResponse
-from django.views.generic import ListView, TemplateView, FormView, UpdateView
+
+from django.views.generic import ListView, TemplateView, DetailView, FormView, UpdateView
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from dbhandler.models import Course, Test, Answer, Question, Class
 from .forms import QuestionForm, AnswerForm
@@ -13,6 +15,10 @@ class CoursesView(ListView):
     template_name = 'courses.html'
     #login_url = "/elearning/login/"
     #redirect_field_name = "redirect_to"
+
+class CourseDetailView(DetailView):
+	model = Course
+	template_name = 'course_detail.html'
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -102,3 +108,9 @@ class ManageTestView(TemplateView):
         toDelete = int(request.POST['qID'])
         Question.objects.filter(id=toDelete).delete()
         return redirect('../managetest/%d' % tID)
+
+class LoginView(TemplateView):
+    template_name = 'login.html'
+
+class RegisterView(TemplateView):
+    template_name = 'register.html'

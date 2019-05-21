@@ -7,8 +7,8 @@
 <item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
 </engineerTo>
 <identifying>false</identifying>
-<nameOnSource>może być uczestnikiem</nameOnSource>
-<nameOnTarget>może posiadać uczestników</nameOnTarget>
+<nameOnSource>moze byc uczestnikiem</nameOnSource>
+<nameOnTarget>moze posiadac uczestnikow</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>true</optionalTarget>
 <sourceCardinality>*</sourceCardinality>

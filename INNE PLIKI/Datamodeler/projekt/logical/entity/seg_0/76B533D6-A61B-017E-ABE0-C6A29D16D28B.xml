@@ -67,32 +67,6 @@
 <logicalDatatype>LOGDT040</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="comments" id="7BE1774A-2672-4142-F194-F6523DCA030F">
-<createdBy>Minus</createdBy>
-<createdTime>2019-03-25 19:44:00 UTC</createdTime>
-<ownerDesignName>projekt</ownerDesignName>
-<engineerTo>
-<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
-</engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="tests" id="89574C7E-68E8-7A9A-745F-3944F388589F">
-<createdBy>Minus</createdBy>
-<createdTime>2019-03-25 19:44:18 UTC</createdTime>
-<ownerDesignName>projekt</ownerDesignName>
-<engineerTo>
-<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
-</engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="media" id="7B6A3B3E-7076-E395-DF65-E8CCFE846233">
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 19:44:35 UTC</createdTime>
@@ -126,9 +100,8 @@
 <createdBy>Minus</createdBy>
 <createdTime>2019-03-25 18:39:55 UTC</createdTime>
 <ownerDesignName>projekt</ownerDesignName>
-<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="false"/>
+<item key="02BBB2E2-E310-7F4B-C0B3-01BE93FB27CE" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
