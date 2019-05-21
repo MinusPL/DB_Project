@@ -5,9 +5,9 @@
     <form method="POST">
         {% csrf_token %}  
         <table>
-            <tr><td>Nazwa</td><td><input type="text" name="testname"/></td></tr>
+            <tr><td>Nazwa</td><td><input type="text" name="testname"required/></td></tr>
             <tr><td>Opis</td><td><input type="text" name="testdesc"/></td></tr>
-            <input type="hidden" name="classid" value="Class Object">
+            <input type="hidden" name="classid" value="Class Object"/>
             <tr><td><input type="submit" value="Utwórz test"></td></tr>
         </table>
     </form>

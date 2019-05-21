@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.template import Context, Template
 from django.http import HttpResponse
 from django.views.generic import ListView, TemplateView, FormView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -22,10 +23,31 @@ class TestsView(TemplateView):
         context = super(TestsView, self).get_context_data(**kwargs)
         context['test'] = Test.objects.get(id=kwargs['testID'])
         context['questions'] = Question.objects.filter(test_id=kwargs['testID'])
-        context['answers'] = Answer.objects.all()
+        answerList = []
+        for q in Question.objects.filter(test_id=kwargs['testID']):
+            answerList.extend(Answer.objects.filter(question_id_id=q.id))
+        context['answers'] = answerList
+        context['qCount'] = Question.objects.filter(test_id=kwargs['testID']).count()
         return context
     template_name = 'tests.html'
-    #def post(self, request, *args, **kwargs):
+
+def FinishView(request,**kwargs):
+    qCount=request.POST['qc']
+    ansList=[]
+    questionsList=Question.objects.filter(test_id=kwargs['testID'])
+    allAnsList=[]
+    for q in questionsList:
+        allAnsList.extend(Answer.objects.filter(question_id_id=q.id))
+    for i in range(1,qCount+1):
+        ansList.extend(request.POST['Question%d' % i])
+    c=Context({
+        'checked':ansList,
+        'test':Test.objects.get(id=kwargs['testID']),
+        'questions':questionsList,
+        'answers':allAnsList
+    })
+    return render(request,"finishedTest.html",c)
+             
 
         
 class CreateTestView(TemplateView):
@@ -68,44 +90,6 @@ class ManageTestView(TemplateView):
         context = super(ManageTestView, self).get_context_data(**kwargs)
         context['questions'] = Question.objects.filter(test_id=kwargs['testID'])
         return context
-    #def post(self, request, *args, **kwargs):
-
-# class EditQuestionView(TemplateView):
-#     template_name = 'editQuestion.html'
-#     form_class = EditQuestionForm
-#     # forms_classes = [
-#     #     QuestionForm,
-#     #     AnswerForm
-#     # ] 
-#     def get_context_data(self, **kwargs):
-#         context = super(EditQuestionView, self).get_context_data(**kwargs)
-#         context['question'] = Question.objects.get(id=kwargs['questionID'])
-#         context['answers'] = Answer.objects.filter(question_id=kwargs['questionID'])
-#         fields = [context['answer'].]
-#         return context
-#     # def post(self, request, *args, **kwargs):
-#     #     qText = request.POST['content']
-#     #     ans = [
-#     #         request.POST['answer1'],
-#     #         request.POST['answer2'],
-#     #         request.POST['answer3'],
-#     #         request.POST['answer4']
-#     #     ]
-#     #     corAns = request.POST['isCorrect']
-#     #     qID = request.POST['qid']
-#     #     varQ = Question.objects.get(id=qID)
-#     #     varA = Answer.objects.filter(question_id=qID)
-#     #     varQ.question_text=qText
-#     #     varQ.save()
-#     #     i = 0
-#     #     for a in varA:
-#     #         a.answer_text=ans[i]
-#     #         if i+1 == int(corAns):
-#     #             a.is_good=1
-#     #         else:
-#     #             a.is_good=0
-#     #         a.save()
-#     #     return redirect('managetest')
 
 def EditQuestionView(request,QuestionID):
     forms_classes=[
