@@ -7,9 +7,8 @@
     <ul>
         {% for course in object_list %}
 
-            <li><a href="{% url 'course_detail' course.id %}">{{ course.name }}</a></li>
-            <a href="{% url 'join_course' course.id %}"> Dolacz do kursu</a>
-            <a href="{% url 'quit_course' course.id %}"> Zrezygnuj z kursu</a>
+            <li><a href="{% url 'join_course' course.id %}">{{ course.name }}</a></li>
+
         {% endfor %}
         <li><a href="{% url 'addcourse' %}">Dodaj Kurs</a></li>
     </ul>

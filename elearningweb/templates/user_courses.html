@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+    <h2>Lista twoich kursów</h2>
+{% block banner %}
+    <h1 class = "banner" >Lista twoich kursów</h1>
+{% endblock %}
+{% block content %}
+    <ul>
+        {% for course in courses %}
+
+            <li><a href="{% url 'course_detail' course.id %}">{{ course.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}rs</a></li>ss
