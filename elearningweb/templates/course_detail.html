@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block banner %}
+	<h1 class="banner">{{ course.name }}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="course-container">
+	<a href="{% url 'courses' %}" id="link-courses"><< Lista kursów</a>
+
+	<h2>{{ course.name }}</h2>
+
+	<div class="details">
+		<div class="bold">Prowadzący:
+		{% for instructor in course.instructor_set.all %}
+			{{ instructor.user_id.username }}
+			<!-- dodać resztę danych -->
+		{% endfor %}
+		</div>
+		{{ course.description }}
+	</div>
+
+	<div class="classes">
+		{% if course.class_set.all %}
+			<ul>
+				{% for class in course.class_set.all %}
+					<li>{{ class.name }} 
+						<div class="desc">{{ class.description }}</div>
+					</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<h5>Brak zajęć</h5>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}
