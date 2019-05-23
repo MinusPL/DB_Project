@@ -52,16 +52,3 @@ class GroupAdminForm(forms.ModelForm):
         # Save many-to-many data
         self.save_m2m()
         return instance
-
-class AddCourseForm(forms.ModelForm):
-
-    class Meta:
-        model=Course
-        fields = ('name','course_type','module_id','description','password')
-        labels = {
-            'name': ('Nazwa Kursu'),
-            'course_type' : ('Typ Kursu'),
-            'module_id' : ('Moduł Kursu'),
-            'description': ('Opis Kursu'),
-            'password' : ('Hasło do Kursu')
-        }
