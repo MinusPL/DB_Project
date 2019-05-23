@@ -28,7 +28,7 @@ class GroupAdminForm(forms.ModelForm):
 
     # Add the users field.
     users = forms.ModelMultipleChoiceField(
-         queryset=User.objects.all(), 
+         queryset=User.objects.all(),
          required=False,
          # Use the pretty 'filter_horizontal widget'.
          widget=FilteredSelectMultiple('users', False)
@@ -58,3 +58,10 @@ class AddCourseForm(forms.ModelForm):
     class Meta:
         model=Course
         fields = ('name','course_type','module_id','description','password')
+        labels = {
+            'name': ('Nazwa Kursu'),
+            'course_type' : ('Typ Kursu'),
+            'module_id' : ('Moduł Kursu'),
+            'description': ('Opis Kursu'),
+            'password' : ('Hasło do Kursu')
+        }

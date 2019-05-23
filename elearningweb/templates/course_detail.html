@@ -9,7 +9,7 @@
 	<a href="{% url 'courses' %}" id="link-courses"><< Lista kursów</a>
 
 	<h2>{{ course.name }}</h2>
-
+	<a href="{% url 'quit_course' course.id %}"> Zrezygnuj z kursu</a>
 	<div class="details">
 		<div class="bold">Prowadzący:
 		{% for instructor in course.instructor_set.all %}
