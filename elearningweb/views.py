@@ -44,6 +44,10 @@ class CourseDetailView(DetailView):
 	model = Course
 	template_name = 'course_detail.html'
 
+class ClassesView(DetailView):
+    model = Class
+    template_name = 'class.html'
+
 class HomeView(TemplateView):
     template_name = 'index.html'
 
