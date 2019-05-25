@@ -36,17 +36,20 @@
             <ul>
                 {% for comment in class.comment_set.all %}
 
-                    {{comment.author}}
+                    {{comment.author_id}}
                     {{comment.text}}
 
                 {% endfor %}  
             </ul>
 
          <h5>Dodaj komentarz</h5>
-            <form action= "add-comment">
-                <input type="text" name="komentarz">
+            {% csrf_token %}
+            <form method= "POST">
+                <input type="text" name="comment">
+                <input type="hidden" name="author" value="{{ comment.author_id }}"/>
+                <input type="hidden" name="id" value="{{ comment.course_id_id }}"/>
+                <input type="submit" value="Dodaj komentarz">
             </form>
-            <button type="add">Dodaj komentarz</button>
 
     </div>
 </div>
