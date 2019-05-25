@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class= "lesson-container">
-    <a href="{% url 'courses/<int:pk>' %}" id="link-courses-details"> Lista zajęć</a>
+    <a href="{% url 'course_detail' class.course_id_id %}" id="link-courses-details"> Lista zajęć</a>
 
     <h2>{{ class.name }}</h2>
 
@@ -15,7 +15,7 @@
 
             {{content.text}}
 
-        {% endfor }
+        {% endfor %}
     </div>
 
     <div class= "tests">
@@ -26,7 +26,7 @@
                     {{test.name}}
                     <!-- link --> 
                 </li>
-            {% endfor}
+            {% endfor %}
         </ul>
     </div>
 
@@ -39,7 +39,7 @@
                     {{comment.author}}
                     {{comment.text}}
 
-                {% endfor}  
+                {% endfor %}  
             </ul>
 
          <h5>Dodaj komentarz</h5>
