@@ -10,6 +10,7 @@ urlpatterns = [
     path('addquestions/<int:testID>', views.AddQuestionsView.as_view(),name='addquestions'),
     path('managetest/<int:testID>', views.ManageTestView.as_view(),name='managetest'),
     path('courses/<int:pk>', views.CourseDetailView.as_view(), name='course_detail'),
+    path('class/<int:pk>', views.TemplateView.as_view(), name='class'),
     path('login/', views.LoginView.as_view(), name='login'),
     path('courses/<int:pk>', views.CourseDetailView.as_view(), name='course_detail'),
     path('register/', views.RegisterView.as_view(), name='register'),
@@ -17,5 +18,4 @@ urlpatterns = [
     path('courses/join/<int:kurs>',views.JoinCourse,name='join_course'),
     path('courses/quit/<int:kurs>',views.QuitCourse,name='quit_course'),
     path('user_courses', views.UserCourses, name ='user_courses')
-
 ]
