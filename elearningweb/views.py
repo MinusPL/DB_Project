@@ -213,7 +213,8 @@ def UserCourses(request):
 def AddClass(request):
     if not request.user.is_authenticated:
         return render(request, 'login_error.html')
-
+    if not request.user.has_perm('dbhandler.add_class'):
+        return render(request, 'class_error.html')
     f=AddClassForm(request.POST)
     if request.method == 'POST':
         classData=Class()
@@ -223,3 +224,14 @@ def AddClass(request):
         classData.save()
         return redirect('addclass')
     return render(request,'addclass.html',{'form': f})
+
+def DeleteClass(request,classId):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if not request.user.has_perm('dbhandler.delete_class'):
+        return render(request, 'class_error.html')
+    k = Class.objects.filter(id=classId)
+    if k.exists():
+        k.delete()
+        return HttpResponse("Usunieto pomyslnie")
+    return redirect('index')
