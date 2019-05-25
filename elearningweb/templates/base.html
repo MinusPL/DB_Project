@@ -10,14 +10,30 @@
 </head>
 <body>
   <div class="contaier-fluid">
-    <div>{%block login %}<a class = "login" href="{% url 'login' %}">Zaloguj sie/Zarejestruj</a>{% endblock %}</div>
+    <div>
+      {% block login %}
+      {% if user.is_authenticated %}
+        User: {{ user.get_username }}
+          <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
+          <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+            <form action="{% url 'logout' %}" method="POST" id="logout">
+              {% csrf_token %}
+            <input type="hidden">
+            </form> 
+        {% else %}
+          <a class = "login" href="{% url 'login' %}">Zaloguj sie/Zarejestruj</a>
+        {% endif %} 
+         
+      {% endblock %}
+    </div>
     <div>{% block banner %}{% endblock %}</div>
       {% block topnav %}
         <nav id="topnav">
           <ul class="menu">
             <li><a href="{% url 'index' %}">Strona Główna</a></li>
             <li><a href="{% url 'courses' %}">Lista Kursów</a></li>
-            <li><a href="#">Twoje Kursy</a></li>
+            <li><a href="{% url 'user_courses' %}">Twoje Kursy</a></li>
           </ul>
         </nav>
      {% endblock %}
