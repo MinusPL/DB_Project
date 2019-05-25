@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block banner %}
+	<h1 class="banner">{{ class.name }}</h1>
+{% endblock %}
+
+{% block content %}
+<div class= "lesson-container">
+    <a href="{% url 'courses/<int:pk>' %}" id="link-courses-details"> Lista zajęć</a>
+
+    <h2>{{ class.name }}</h2>
+
+    <div class= "content">
+        {% for content in class.content_set.all %}
+
+            {{content.text}}
+
+        {% endfor }
+    </div>
+
+    <div class= "tests">
+        <h4>Testy do zajęć</h4>
+        <ul>
+            {% for test in class.test_set.all %}
+                <li>
+                    {{test.name}}
+                    <!-- link --> 
+                </li>
+            {% endfor}
+        </ul>
+    </div>
+
+    <div class= "comments">
+        <h4>Komentarze </h4> 
+            
+            <ul>
+                {% for comment in class.comment_set.all %}
+
+                    {{comment.author}}
+                    {{comment.text}}
+
+                {% endfor}  
+            </ul>
+
+         <h5>Dodaj komentarz</h5>
+            <form action= "add-comment">
+                <input type="text" name="komentarz">
+            </form>
+            <button type="add">Dodaj komentarz</button>
+
+    </div>
+</div>
+{% endblock %}
