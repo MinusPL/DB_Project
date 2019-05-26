@@ -23,3 +23,13 @@ class AddCourseForm(forms.ModelForm):
             'description': ('Opis Kursu'),
             'password' : ('Hasło do Kursu')
         }
+
+class AddClassForm(ModelForm):
+    class Meta:
+        model=Class
+        fields = ('name','description','course_id')
+        labels = {
+            'name': ('Nazwa Zajęć'),
+            'description' : ('Opis'),
+            'course_id' : ('Kurs')
+        }

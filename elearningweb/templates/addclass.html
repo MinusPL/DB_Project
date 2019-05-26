@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block banner %}
+<h1 class = "banner" >Dodawanie Zajęć</h1>
+{% endblock %}
+
+{% block content %}
+<h2>Dodawanie Zajęć</h2>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="fieldWrapper">
+        {{ field.label_tag }} {{ field }}
+        </div>
+    {% endfor %}
+    <input type="submit" value="Sumbmit">
+</form>
+{% endblock %}
