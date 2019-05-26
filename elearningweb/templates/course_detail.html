@@ -1,37 +1,34 @@
 {% extends "base.html" %}
 
 {% block banner %}
-	<h1 class="banner">{{ course.name }}</h1>
 {% endblock %}
 
 {% block content %}
-<div class="course-container">
-	<a href="{% url 'courses' %}" id="link-courses"><< Lista kursów</a>
-
-	<h2>{{ course.name }}</h2>
-	<a href="{% url 'quit_course' course.id %}"> Zrezygnuj z kursu</a>
-	<div class="details">
-		<div class="bold">Prowadzący:
-		{% for instructor in course.instructor_set.all %}
-			{{ instructor.user_id.username }}
-			<!-- dodać resztę danych -->
-		{% endfor %}
+	<a href="{% url 'courses' %}" class="left"><< Lista kursów</a><br>
+	<div class="left-align">
+		<h4>{{ course.name }}</h4>
+		<a href="{% url 'quit_course' course.id %}" class="btn right">Zrezygnuj z kursu</a>
+		<div class="details">
+			Prowadzący: {% for instructor in course.instructor_set.all %}
+				{{ instructor.user_id.username }}
+				<!-- dodać resztę danych -->
+			{% endfor %}<br>
+			{{ course.description }}
 		</div>
-		{{ course.description }}
-	</div>
 
-	<div class="classes">
+		<div class="break"></div>
+
 		{% if course.class_set.all %}
-			<ul>
-				{% for class in course.class_set.all %}
-					<li>{{ class.name }} 
-						<div class="desc">{{ class.description }}</div>
-					</li>
-				{% endfor %}
+			<ul class="collection">
+			{% for class in course.class_set.all %}
+				<li class="collection-item truncate">
+					{{ course.name }}
+					<span class="grey-text text-lighten-1">&#8195{{ class.description }} </span>
+				</li>
+			{% endfor %}
 			</ul>
 		{% else %}
-			<h5>Brak zajęć</h5>
+			Brak zajęć.
 		{% endif %}
 	</div>
-</div>
 {% endblock %}
