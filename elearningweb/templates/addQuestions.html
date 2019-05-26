@@ -12,7 +12,7 @@
                 <tr><td><input type="text" name="answer3" /></td><td><input type="radio" name="isCorrect" value=3 required/></td></tr>
                 <tr><td><input type="text" name="answer4" /></td><td><input type="radio" name="isCorrect" value=4 required/></td></tr>
                 <input type="hidden" name="testid" value="{{ testID }}" />
-                <tr><td><input type="submit" value="Dodaj pytanie"></td><td><a href="{% url 'managetest' testID %}"><input type="button" value="Wróć do testu"/></a></td></tr>
+                <tr><td><input type="submit" value="Dodaj pytanie"></td><td><a href="{% url 'managetest' testID%}"><input type="button" value="Wróć do testu"/></a></td></tr>
             </table>
         </form>
 {% endblock %}

@@ -4,11 +4,11 @@ from . import views
 urlpatterns = [
     path('', views.HomeView.as_view(), name='index'),
     path('courses/', views.CoursesView.as_view(), name='courses'),
-    path('tests/<int:testID>', views.TestsView.as_view(), name='tests'),
-    path('tests/<int:testID>/finished', views.FinishView, name='finished'),
-    path('createtest/<int:classID>', views.CreateTestView.as_view(),name='createtest'),
-    path('addquestions/<int:testID>', views.AddQuestionsView.as_view(),name='addquestions'),
-    path('managetest/<int:testID>', views.ManageTestView.as_view(),name='managetest'),
+    path('class/completetest/<int:testID>', views.completeTest, name='completetest'),
+    path('class/completetest/<int:testID>/finished', views.finishView, name='finished'),
+    path('class/<int:classID>/createtest', views.createTest, name='createtest'),
+    path('managetest/<int:testID>/', views.manageTest,name='managetest'),
+    path('managetest/<int:testID>/addquestions', views.addQuestions, name='addquestions'),
     path('courses/<int:pk>', views.CourseDetailView.as_view(), name='course_detail'),
     path('class/<int:pk>', views.TemplateView.as_view(), name='class'),
     path('login/', views.LoginView.as_view(), name='login'),
@@ -17,5 +17,6 @@ urlpatterns = [
     path('courses/add/', views.AddCourse, name='addcourse'),
     path('courses/join/<int:kurs>',views.JoinCourse,name='join_course'),
     path('courses/quit/<int:kurs>',views.QuitCourse,name='quit_course'),
-    path('user_courses', views.UserCourses, name ='user_courses')
+    path('user_courses', views.UserCourses, name ='user_courses'),
+    path('courses/testscores/<int:testID>',views.testScores,name='testscores')
 ]
