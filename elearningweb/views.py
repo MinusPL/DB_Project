@@ -11,7 +11,7 @@ from django.views.generic import ListView, TemplateView, DetailView, FormView, U
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from dbhandler.models import Course, CourseType, Module, Test, Answer, Question, Class, Instructor, Participant, CustomUser, TestResult
+from dbhandler.models import Course, CourseType, Module, Test, Answer, Question, Class, Instructor, Participant, CustomUser
 from .forms import QuestionForm, AnswerForm, AddCourseForm
 
 # Create your views here.
@@ -47,28 +47,21 @@ class CourseDetailView(DetailView):
 class HomeView(TemplateView):
     template_name = 'index.html'
 
-def completeTest(request,**kwargs):
-    if not request.user.is_authenticated:
-        return render(request, 'login_error.html')
-    if not request.user.has_perm('dbhandler.edit_test'):
-        return render(request, 'permission_error.html')
-    questionList = Question.objects.filter(test_id=kwargs['testID'])
-    answerList = []
-    for q in questionList:
-        answerList.extend(Answer.objects.filter(question_id_id=q.id))
-    c={
-        'test':Test.objects.get(id=kwargs['testID']),
-        'questions':questionList,
-        'answers':answerList,
-        'qCount':questionList.count()
-        }
-    return render(request,"completeTest.html",c)
+class TestsView(TemplateView):
+    model = Test
+    def get_context_data(self, **kwargs):
+        context = super(TestsView, self).get_context_data(**kwargs)
+        context['test'] = Test.objects.get(id=kwargs['testID'])
+        context['questions'] = Question.objects.filter(test_id=kwargs['testID'])
+        answerList = []
+        for q in Question.objects.filter(test_id=kwargs['testID']):
+            answerList.extend(Answer.objects.filter(question_id_id=q.id))
+        context['answers'] = answerList
+        context['qCount'] = Question.objects.filter(test_id=kwargs['testID']).count()
+        return context
+    template_name = 'tests.html'
 
-def finishView(request,**kwargs):
-    if not request.user.is_authenticated:
-        return render(request, 'login_error.html')
-    if not request.user.has_perm('dbhandler.edit_test'):
-        return render(request, 'permission_error.html')
+def FinishView(request,**kwargs):
     if request.method == 'POST':
         qCount=int(request.POST['qc'])
         ansList=[]
@@ -86,83 +79,59 @@ def finishView(request,**kwargs):
             'answers':allAnsList
         }
     return render(request,"finishedTest.html",c)
+             
 
-def testScores(request,**kwargs):
-    if not request.user.is_authenticated:
-        return render(request, 'login_error.html')
-    if not request.user.has_perm('dbhandler.edit_course'):
-        return render(request, 'permission_error.html')
-    c={
-        'test':Test.objects.get(id=kwargs['testID']),
-        'users':CustomUser.objects.all(),
-        'results':TestResult.objects.filter(test_id_id=kwargs['testID'])
-        }
-    return render(request,"testScores.html",c)
-
-def createTest(request,**kwargs):
-    if not request.user.is_authenticated:
-        return render(request, 'login_error.html')
-    if not request.user.has_perm('dbhandler.edit_course'):
-        return render(request, 'permission_error.html')
-    c={
-        'classid':kwargs['classID']
-        }
-    if request.method == 'POST':
+        
+class CreateTestView(TemplateView):
+    template_name = 'createTest.html'
+    def get_context_data(self, **kwargs):
+        context = super(CreateTestView, self).get_context_data(**kwargs)
+        context['classid'] = Class.objects.get(id=kwargs['classID'])
+        return context
+    def post(self, request, *args, **kwargs):
         testName = request.POST['testname']
         testDesc = request.POST['testdesc']
         ClassId = int(request.POST['cid'])
         t=Test(name=testName,description=testDesc,class_id_id=ClassId)
         t.save()
-        return redirect('../managetest/%d/addquestions' % t.id)
-    return render(request,"createTest.html",c)
+        return redirect('../addquestions/%d' % t.id)
 
-def addQuestions(request,**kwargs):
-    if not request.user.is_authenticated:
-        return render(request, 'login_error.html')
-    if not request.user.has_perm('dbhandler.edit_course'):
-        return render(request, 'permission_error.html')
-    if request.method == 'POST':
-            qText = request.POST['content']
-            ans = [
-                request.POST['answer1'],
-                request.POST['answer2'],
-                request.POST['answer3'],
-                request.POST['answer4']
-            ]
-            corAns = request.POST['isCorrect']
-            testID = request.POST['testid']
-            q=Question(question_text=qText,test_id_id=testID)
-            q.save()
-            i = 1
-            for a in ans:
-                if i == int(corAns):
-                    a=Answer(answer_text=a,is_good=1,question_id_id=q.id)
-                else:
-                    a=Answer(answer_text=a,is_good=0,question_id_id=q.id)
-                a.save()
-                i = i+1
-            return redirect('addquestions',testID=testID)
-    c = {
-        'testID':kwargs['testID']
-    }
-    return render(request,"addQuestions.html",c)
+class AddQuestionsView(TemplateView):
+    template_name = 'addQuestions.html'
+    def post(self, request, *args, **kwargs):
+        qText = request.POST['content']
+        ans = [
+            request.POST['answer1'],
+            request.POST['answer2'],
+            request.POST['answer3'],
+            request.POST['answer4']
+        ]
+        corAns = request.POST['isCorrect']
+        testID = request.POST['testid']
+        q=Question(question_text=qText,test_id_id=testID)
+        q.save()
+        i = 1
+        for a in ans:
+            if i == int(corAns):
+                a=Answer(answer_text=a,is_good=1,question_id_id=q.id)
+            else:
+                a=Answer(answer_text=a,is_good=0,question_id_id=q.id)
+            a.save()
+            i = i+1
+        return redirect('addquestions',testID=testID)
 
-def manageTest(request,**kwargs):
-    if not request.user.is_authenticated:
-        return render(request, 'login_error.html')
-    if not request.user.has_perm('dbhandler.edit_course'):
-        return render(request, 'permission_error.html')
-    c={
-        'test':Test.objects.get(id=kwargs['testID']),
-        'questions':Question.objects.filter(test_id=kwargs['testID'])
-        }
-    if request.method == 'POST':
+class ManageTestView(TemplateView):
+    template_name = 'manageTest.html'
+    def get_context_data(self, **kwargs):
+        context = super(ManageTestView, self).get_context_data(**kwargs)
+        context['test'] = Test.objects.get(id=kwargs['testID'])
+        context['questions'] = Question.objects.filter(test_id=kwargs['testID'])
+        return context
+    def post(self, request, *args, **kwargs):
         tID = int(request.POST['tID'])
         toDelete = int(request.POST['qID'])
         Question.objects.filter(id=toDelete).delete()
         return redirect('../managetest/%d' % tID)
-    return render(request,"manageTest.html",c)
-
 
 class LoginView(TemplateView):
     template_name = 'login.html'
@@ -239,4 +208,3 @@ def UserCourses(request):
         id_course_list.append(p.course_id.id)
     k=Course.objects.filter(id__in=id_course_list)
     return render(request, 'user_courses.html', {'courses': k})
-
