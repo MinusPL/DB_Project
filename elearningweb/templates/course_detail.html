@@ -24,7 +24,7 @@
 		{% if course.class_set.all %}
 			<ul>
 				{% for class in course.class_set.all %}
-					<li>{{ class.name }} 
+					<li><a href="{% url 'class' class.id %}">{{ class.name }}</a>
 						<div class="desc">{{ class.description }}</div>
 					</li>
 				{% endfor %}
