@@ -1,14 +1,21 @@
 {% extends "base.html" %}
 
+{% block banner %}
+Tworzenie testu
+{% endblock %}
+
 {% block content %}
-    <h2>Tworzenie testu</h2>
-    <form method="POST">
-        {% csrf_token %}  
-        <table>
-            <tr><td>Nazwa</td><td><input type="text" name="testname"required/></td></tr>
-            <tr><td>Opis</td><td><input type="text" name="testdesc"/></td></tr>
-            <input type="hidden" name="cid" value="{{ classid.id }}"/>
-            <tr><td><input type="submit" value="Utwórz test"></td></tr>
-        </table>
+    <form method="POST" class="small-form">
+        {% csrf_token %}
+        <div class="input-field">
+            <input name="testname" type="text" required>
+            <label for="testname">Nazwa</label>
+        </div>
+        <div class="input-field">
+            <input name="testdesc" type="text">
+            <label for="testdesc">Opis</label>
+        </div>
+        <input type="hidden" name="cid" value="{{ classid.id }}"/>
+        <button class="btn-large z-depth-0" type="submit" name="action">Utwórz test</button>
     </form>
 {% endblock %}
