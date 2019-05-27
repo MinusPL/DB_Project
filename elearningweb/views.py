@@ -44,6 +44,17 @@ class CourseDetailView(DetailView):
 	model = Course
 	template_name = 'course_detail.html' '''
 
+class ClassesView(DetailView):
+    model = Class
+    def post(self, request, *args, **kwargs):
+        comment = request.POST['comment'],
+        author = request.POST['author'],
+        id = request.POST['id']
+        c=Comment(text=comment, author_id=author, class_id=id )
+        c.save()
+        return redirect('../class/%d' % c.id)            
+    template_name = 'class.html'
+
 class HomeView(TemplateView):
     template_name = 'index.html'
 

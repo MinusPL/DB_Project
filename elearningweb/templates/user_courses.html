@@ -1,13 +1,19 @@
 {% extends "base.html" %}
-    <h2>Lista twoich kursów</h2>
+
 {% block banner %}
-    <h1 class = "banner" >Lista twoich kursów</h1>
+Twoje kursy
 {% endblock %}
 {% block content %}
-    <ul>
-        {% for course in courses %}
-
-            <li><a href="{% url 'course_detail' course.id %}">{{ course.name }}</a></li>
-        {% endfor %}
-    </ul>
-{% endblock %}rs</a></li>ss
+	{% if courses %}
+	    <ul class="collection left-align">
+			{% for course in courses %}
+				<li class="collection-item">
+					<a href="{% url 'course_detail' course.id %}">{{ course.name }}</a>
+					<span class="grey-text text-lighten-1">&#8195{{ course.module_id.name }} [{{  course.course_type.name }}]</span>
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		Brak kursów.
+	{% endif %}
+{% endblock %}
