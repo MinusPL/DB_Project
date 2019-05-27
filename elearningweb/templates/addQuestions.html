@@ -3,16 +3,16 @@
 {% block content %}
     <h2>Dodawanie pytania</h2>
     <form method="POST">
-            {% csrf_token %}  
-            <table>
-                <tr><td>Treść pytania</td><td><input type="text" name="content" /></td></tr>
-                <tr><td>Odpowiedzi</td><td>Poprawna</td></tr>
-                <tr><td><input type="text" name="answer1" /></td><td><input type="radio" name="isCorrect" value=1 checked required/></td></tr>
-                <tr><td><input type="text" name="answer2" /></td><td><input type="radio" name="isCorrect" value=2 required/></td></tr>
-                <tr><td><input type="text" name="answer3" /></td><td><input type="radio" name="isCorrect" value=3 required/></td></tr>
-                <tr><td><input type="text" name="answer4" /></td><td><input type="radio" name="isCorrect" value=4 required/></td></tr>
-                <input type="hidden" name="testid" value="{{ testID }}" />
-                <tr><td><input type="submit" value="Dodaj pytanie"></td><td><a href="{% url 'managetest' testID %}"><input type="button" value="Wróć do testu"/></a></td></tr>
-            </table>
-        </form>
+        {% csrf_token %}  
+        <table>
+            <tr><td>Treść pytania</td><td><input type="text" name="content" required/></td></tr>
+            <tr><td>Odpowiedzi</td><td>Poprawna</td></tr>
+            <tr><td><input type="text" name="answer1" required/></td><td><input type="radio" name="isCorrect" value=1 checked required/></td></tr>
+            <tr><td><input type="text" name="answer2" required/></td><td><input type="radio" name="isCorrect" value=2 required/></td></tr>
+            <tr><td><input type="text" name="answer3" required/></td><td><input type="radio" name="isCorrect" value=3 required/></td></tr>
+            <tr><td><input type="text" name="answer4" required/></td><td><input type="radio" name="isCorrect" value=4 required/></td></tr>
+            <input type="hidden" name="testid" value="{{ testID }}" />
+            <tr><td><input type="submit" value="Dodaj pytanie"></td><td><a href="{% url 'managetest' testID%}"><input type="button" value="Wróć do testu"/></a></td></tr>
+        </table>
+    </form>
 {% endblock %}
