@@ -12,7 +12,7 @@ from django.views.generic import ListView, TemplateView, DetailView, FormView, U
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from dbhandler.models import Course, CourseType, Module, Test, Answer, Question, Class, Instructor, Participant, CustomUser, TestResult
-from .forms import QuestionForm, AnswerForm, AddCourseForm
+from .forms import QuestionForm, AnswerForm, AddCourseForm, AddClassForm
 
 # Create your views here.
 
@@ -40,9 +40,20 @@ class CourseDetailView(DetailView):
     #else:
     #    redirect("{% url 'course_detail' course.id %}")
 
-class CourseDetailView(DetailView):
+''' class CourseDetailView(DetailView):
 	model = Course
-	template_name = 'course_detail.html'
+	template_name = 'course_detail.html' '''
+
+class ClassesView(DetailView):
+    model = Class
+    def post(self, request, *args, **kwargs):
+        comment = request.POST['comment'],
+        author = request.POST['author'],
+        id = request.POST['id']
+        c=Comment(text=comment, author_id=author, class_id=id )
+        c.save()
+        return redirect('../class/%d' % c.id)            
+    template_name = 'class.html'
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -267,4 +278,30 @@ def UserCourses(request):
         id_course_list.append(p.course_id.id)
     k=Course.objects.filter(id__in=id_course_list)
     return render(request, 'user_courses.html', {'courses': k})
+  
+#Class
+def AddClass(request):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if not request.user.has_perm('dbhandler.add_class'):
+        return render(request, 'class_error.html')
+    f=AddClassForm(request.POST)
+    if request.method == 'POST':
+        classData=Class()
+        classData.name = request.POST.get('name')
+        classData.description = request.POST.get('description')
+        classData.course_id = Course.objects.get(id=request.POST['course_id'])
+        classData.save()
+        return redirect('addclass')
+    return render(request,'addclass.html',{'form': f})
 
+def DeleteClass(request,classId):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if not request.user.has_perm('dbhandler.delete_class'):
+        return render(request, 'class_error.html')
+    k = Class.objects.filter(id=classId)
+    if k.exists():
+        k.delete()
+        return HttpResponse("Usunieto pomyslnie")
+    return redirect('index')
