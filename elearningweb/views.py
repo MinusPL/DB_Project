@@ -55,7 +55,8 @@ def completeTest(request,**kwargs):
     try:
         Participant.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Participant.DoesNotExist:
-        return render(request, 'permission_error.html')
+        if not request.user.has_perm('dbhandler.edit_course'):
+            return render(request, 'permission_error.html')
     questionList = Question.objects.filter(test_id=kwargs['testID'])
     answerList = []
     for q in questionList:
@@ -76,7 +77,8 @@ def finishView(request,**kwargs):
     try:
         Participant.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Participant.DoesNotExist:
-        return render(request, 'permission_error.html')
+        if not request.user.has_perm('dbhandler.edit_course'):
+            return render(request, 'permission_error.html')
     if request.method == 'POST':
         qCount=int(request.POST['qc'])
         ansList=[]
