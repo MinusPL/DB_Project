@@ -34,7 +34,11 @@
 
     {% if messages %}
       {% for message in messages %}
-        <body onload="M.toast({html: '{{message}}' {% if message.tags %}, classes: '{{ message.tags }}'{% endif %}})">
+        {% if message.tags == 'success' %}
+          <body onload="M.toast({html: '{{message}}', classes: 'success', displayLength: 2000})">
+        {% else %}
+          <p class="error">{{message}}</p>
+        {% endif %}
       {% endfor %}
     {% endif %}
   </main>
