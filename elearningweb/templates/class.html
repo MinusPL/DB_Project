@@ -1,25 +1,27 @@
 {% extends "base.html" %}
 
 {% block banner %}
-	<h1 class="banner">{{ class.name }}</h1>
 {% endblock %}
 
 {% block content %}
-<div class= "lesson-container">
-    <a href="{% url 'course_detail' class.course_id_id %}" id="link-courses-details"> Lista zajęć</a>
-
-    <h2>{{ class.name }}</h2>
-
-    <div class= "content">
-        {% for content in class.content_set.all %}
-
-            {{content.text}}
-
-        {% endfor %}
+<div class= "left-align">
+    <a href="{% url 'course_detail' class.course_id_id %}" id="link-courses-details"> << Powrót do kursu</a>
+    
+    <div>
+        <h4>{{ class.name }}</h4>
+        <p> {{class.description}}</p>
     </div>
 
+    <div class= "content">
+            {% for content in class.content_set.all %}
+                <p>{{content.text}}</p>
+            {% endfor %}
+    </div>
+
+    <br></br>
+
     <div class= "tests">
-        <h4>Testy do zajęć</h4>
+        <h5>Testy do zajęć</h5>
         <ul>
             {% for test in class.test_set.all %}
                 <li>
@@ -30,25 +32,29 @@
         </ul>
     </div>
 
+    <br></br>
+    
     <div class= "comments">
-        <h4>Komentarze </h4> 
+        <h5>Komentarze </h5> 
             
-            <ul>
                 {% for comment in class.comment_set.all %}
-
-                    {{comment.author_id}}
-                    {{comment.text}}
+                    <thread style="color:grey"> {{comment.author_id}} </thread>
+                        <div class="nav-wrapper blue lighten-5">
+                            {{comment.text}} 
+                        </div>
+                        <br></br>
 
                 {% endfor %}  
-            </ul>
+                
 
-         <h5>Dodaj komentarz</h5>
-            {% csrf_token %}
+         <h6>Dodaj komentarz</h6>
+            
             <form method= "POST">
-                <input type="text" name="comment">
-                <input type="hidden" name="author" value="{{ comment.author_id }}"/>
-                <input type="hidden" name="id" value="{{ comment.course_id_id }}"/>
-                <input type="submit" value="Dodaj komentarz">
+                    {% csrf_token %}
+                <input name="comment" type="text" required>
+                <input name="author" type="hidden"  value="{{ comment.author_id }}"/>
+                <input name="id" type="hidden"  value="{{ comment.course_id_id }}"/>
+                <button class="btn" type="submit" name="action">Dodaj komentarz</button>
             </form>
 
     </div>
