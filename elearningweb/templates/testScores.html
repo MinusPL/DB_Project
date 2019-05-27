@@ -6,7 +6,7 @@
             {% for r in results%}
             <tr>
                 {% for u in users%}
-                    {% if u.id == r.user_id_id %}
+                    {% if u == r.user %}
                     <td>{{ u.first_name }}</td>
                     <td>{{ u.last_name }}</td>
                     {% endif %}

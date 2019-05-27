@@ -50,14 +50,18 @@ class HomeView(TemplateView):
 def completeTest(request,**kwargs):
     if not request.user.is_authenticated:
         return render(request, 'login_error.html')
-    if not request.user.has_perm('dbhandler.edit_test'):
+    test=Test.objects.get(id=kwargs['testID'])
+    classobj=Class.objects.get(id=test.class_id_id)
+    try:
+        Participant.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
+    except Participant.DoesNotExist:
         return render(request, 'permission_error.html')
     questionList = Question.objects.filter(test_id=kwargs['testID'])
     answerList = []
     for q in questionList:
         answerList.extend(Answer.objects.filter(question_id_id=q.id))
     c={
-        'test':Test.objects.get(id=kwargs['testID']),
+        'test':test,
         'questions':questionList,
         'answers':answerList,
         'qCount':questionList.count()
@@ -67,7 +71,11 @@ def completeTest(request,**kwargs):
 def finishView(request,**kwargs):
     if not request.user.is_authenticated:
         return render(request, 'login_error.html')
-    if not request.user.has_perm('dbhandler.edit_test'):
+    test=Test.objects.get(id=kwargs['testID'])
+    classobj=Class.objects.get(id=test.class_id_id)
+    try:
+        Participant.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
+    except Participant.DoesNotExist:
         return render(request, 'permission_error.html')
     if request.method == 'POST':
         qCount=int(request.POST['qc'])
@@ -79,12 +87,29 @@ def finishView(request,**kwargs):
         for i in range(1,qCount+1):
             ch=int(request.POST['Question%d' % i])
             ansList.append(ch)
+        score = 0
+        for a in allAnsList:
+            if a.id in ansList:
+                if a.is_good == 1:
+                    score = score + 1
         c={
             'checked':ansList,
-            'test':Test.objects.get(id=kwargs['testID']),
+            'test':test,
             'questions':questionsList,
-            'answers':allAnsList
+            'answers':allAnsList,
+            'score':score,
+            'qCount':qCount
         }
+        try:
+            result = TestResult.objects.get(user=request.user.id,test=test.id)
+            if result.result < score:
+                result.result = score
+            if result.maxScore < qCount:
+                result.maxScore = qCount
+            result.save()
+        except TestResult.DoesNotExist:
+            result = TestResult(user=request.user,test=test,result=score,maxScore=qCount)
+            result.save()
     return render(request,"finishedTest.html",c)
 
 def testScores(request,**kwargs):
@@ -92,10 +117,11 @@ def testScores(request,**kwargs):
         return render(request, 'login_error.html')
     if not request.user.has_perm('dbhandler.edit_course'):
         return render(request, 'permission_error.html')
+    test=Test.objects.get(id=kwargs['testID'])
     c={
-        'test':Test.objects.get(id=kwargs['testID']),
+        'test':test,
         'users':CustomUser.objects.all(),
-        'results':TestResult.objects.filter(test_id_id=kwargs['testID'])
+        'results':TestResult.objects.filter(test=test)
         }
     return render(request,"testScores.html",c)
 
@@ -113,7 +139,7 @@ def createTest(request,**kwargs):
         ClassId = int(request.POST['cid'])
         t=Test(name=testName,description=testDesc,class_id_id=ClassId)
         t.save()
-        return redirect('../managetest/%d/addquestions' % t.id)
+        return redirect('../../managetest/%d/addquestions' % t.id)
     return render(request,"createTest.html",c)
 
 def addQuestions(request,**kwargs):
@@ -160,7 +186,7 @@ def manageTest(request,**kwargs):
         tID = int(request.POST['tID'])
         toDelete = int(request.POST['qID'])
         Question.objects.filter(id=toDelete).delete()
-        return redirect('../managetest/%d' % tID)
+        return redirect('../../managetest/%d' % tID)
     return render(request,"manageTest.html",c)
 
 
