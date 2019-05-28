@@ -20,26 +20,6 @@ class CoursesView(ListView):
     model = Course
     template_name = 'courses.html'
 
-#class UserCoursesView(ListView):
-#    model = Course
-#    template_name = 'user_courses.html'
-#    for course in Course.objects.all():
-#        if Participant.filter(course=course, user=self.reques.user)
-#    def get_context_data(self, **kwargs):
-#        context = super(UserCoursesView, self).get_context_data(**kwargs)
-#        context['courses']=Course.objects.all()
-#        Participants
-#        return context
-
-class CourseDetailView(DetailView):
-    model = Course
-    template_name='course_detail.html'
-    #CustomUser=get_user()
-    #if Participant.objects.filter(course_id=Course,user_id=).exists():
-    #    template_name = 'course_detail.html'
-    #else:
-    #    redirect("{% url 'course_detail' course.id %}")
-
 class CourseDetailView(DetailView):
 	model = Course
 	template_name = 'course_detail.html'
@@ -159,7 +139,7 @@ def AddCourse(request):
         course=Course()
         course.name=request.POST['name']
         if Course.objects.filter(name=course.name).exists():
-            #TUTAJ JAKIS KOMUNIKAT ZE ZAJETE
+            messages.error(request, 'Istnieje już kurs o tej nazwie')
             return redirect('addcourse')
         course.course_type = CourseType.objects.get(id=request.POST['course_type'])
         course.module_id = Module.objects.get(id=request.POST['module_id'])
@@ -178,19 +158,19 @@ def JoinCourse(request,kurs):
         return render(request, 'login_error.html')
     if not request.user.has_perm('dbhandler.add_participant'):
         return render(request, 'permission_error.html')
-    k=Course.objects.filter(id=kurs).first()
-    u=request.user
-    if Participant.objects.filter(course_id=k,user_id=u).exists():
-        return redirect('course_detail', k.pk)
+    course=Course.objects.get(id=kurs)
+    user=request.user
+    if Participant.objects.filter(course_id=course,user_id=user).exists() or Instructor.objects.filter(course_id=course,user_id=user).exists() :
+        return redirect('course_detail', course.pk)
     else:
         if request.method=='POST':
-            pa=request.POST['coursepass']
-            if pa==k.password:
-                p=Participant()
-                p.course_id=k
-                p.user_id=u
-                p.save()
-                return redirect('course_detail',k.pk)
+            password=request.POST['coursepass']
+            if password==course.password:
+                participant=Participant()
+                participant.course_id=course
+                participant.user_id=user
+                participant.save()
+                return redirect('course_detail',course.pk)
     return render(request,'course_login.html')
 
 
@@ -213,7 +193,9 @@ def UserCourses(request):
     id_course_list=[]
     for p in Participant.objects.filter(user_id=request.user):
         id_course_list.append(p.course_id.id)
+    for i in Instructor.objects.filter(user_id=request.user):
+        if not i.course_id.id in id_course_list:
+            id_course_list.append(i.course_id.id)
     k=Course.objects.filter(id__in=id_course_list)
     return render(request, 'user_courses.html', {'courses': k})
-
 

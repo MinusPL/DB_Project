@@ -17,6 +17,7 @@ urlpatterns = [
     path('courses/join/<int:kurs>',views.JoinCourse,name='join_course'),
     path('courses/quit/<int:kurs>',views.QuitCourse,name='quit_course'),
     path('user_courses', views.UserCourses, name ='user_courses'),
+    #path('instructor_courses',views.InstructorCourses, name='instructor_courses'),
     path('userdetailview', views.UserDetailView, name ='userdetailview')
 
 
