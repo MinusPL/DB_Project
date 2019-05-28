@@ -206,7 +206,7 @@ def AddCourse(request):
         course=Course()
         course.name=request.POST['name']
         if Course.objects.filter(name=course.name).exists():
-            #TUTAJ JAKIS KOMUNIKAT ZE ZAJETE
+            messages.error(request, 'Istnieje już kurs o tej nazwie')
             return redirect('addcourse')
         course.course_type = CourseType.objects.get(id=request.POST['course_type'])
         course.module_id = Module.objects.get(id=request.POST['module_id'])
@@ -225,19 +225,21 @@ def JoinCourse(request,kurs):
         return render(request, 'login_error.html')
     if not request.user.has_perm('dbhandler.add_participant'):
         return render(request, 'permission_error.html')
-    k=Course.objects.filter(id=kurs).first()
-    u=request.user
-    if Participant.objects.filter(course_id=k,user_id=u).exists():
-        return redirect('course_detail', k.pk)
+    course=Course.objects.get(id=kurs)
+    user=request.user
+    if Participant.objects.filter(course_id=course,user_id=user).exists() or Instructor.objects.filter(course_id=course,user_id=user).exists() :
+        return redirect('course_detail', course.pk)
     else:
         if request.method=='POST':
-            pa=request.POST['coursepass']
-            if pa==k.password:
-                p=Participant()
-                p.course_id=k
-                p.user_id=u
-                p.save()
-                return redirect('course_detail',k.pk)
+            password=request.POST['coursepass']
+            if password==course.password:
+                participant=Participant()
+                participant.course_id=course
+                participant.user_id=user
+                participant.save()
+                return redirect('course_detail',course.pk)
+            else:
+                messages.error(request, 'Nieprawidłowe hasło do kursu')
     return render(request,'course_login.html')
 
 
@@ -248,9 +250,11 @@ def QuitCourse(request,kurs):
         return render(request, 'permission_error.html')
     k = Course.objects.filter(id=kurs).first()
     u=request.user
+    if Instructor.objects.filter(course_id=k, user_id=u).exists():
+        messages.error(request, 'Nie możesz zrezygnować z kursu którego jesteś prowadzącym')
     if Participant.objects.filter(course_id=k,user_id=u).exists():
         Participant.objects.filter(course_id=k, user_id=u).delete()
-        #return HttpResponse("Nie bierzesz juz udzialu w tym kursie")
+        messages.success(request, 'Nie należysz juz do kursu')
     return redirect('courses')
 
 def UserCourses(request):
