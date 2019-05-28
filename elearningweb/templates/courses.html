@@ -8,8 +8,10 @@ Dostępne kursy
 			{% for course in object_list %}
 				<li class="collection-item">
 					{{ course.name }}
-					<span class="grey-text text-lighten-1">&#8195{{ course.module_id.name }} [{{  course.course_type.name }}]</span>
-					<a href="{% url 'join_course' course.id %}" class="secondary-content">Zapisz się</a>
+					<span class="grey-text text-lighten-1">{{ course.module_id.name }} [{{  course.course_type.name }}]</span>
+					{% if perms.dbhandler.add_participant %}
+						<a href="{% url 'join_course' course.id %}" class="secondary-content">Zapisz się</a>
+					{% endif %}
 				</li>
 			{% endfor %}
 		</ul>
@@ -18,7 +20,7 @@ Dostępne kursy
 	{% endif %}
 
 	<div class="break"></div>
-	{% if perms.dbhandler.addcourse %}
+	{% if perms.dbhandler.add_course %}
 		<a href="{% url 'addcourse' %}" class="btn">Dodaj kurs</a>
 	{% endif %}
 {% endblock %}
