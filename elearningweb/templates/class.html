@@ -52,9 +52,9 @@
             <form method= "POST">
                     {% csrf_token %}
                 <input name="comment" type="text" required>
-                <input name="author" type="hidden"  value="{{ comment.author_id }}"/>
-                <input name="id" type="hidden"  value="{{ comment.course_id_id }}"/>
-                <button class="btn" type="submit" name="action">Dodaj komentarz</button>
+                <input name="author" type="hidden"  value="{{ user.id}}"/>
+                <input name="id" type="hidden"  value="{{ class.id }}"/>
+                <button class="btn" type="submit">Dodaj komentarz</button>
             </form>
 
     </div>

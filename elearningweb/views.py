@@ -11,7 +11,7 @@ from django.views.generic import ListView, TemplateView, DetailView, FormView, U
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from dbhandler.models import Course, CourseType, Module, Test, Answer, Question, Class, Instructor, Participant, CustomUser
+from dbhandler.models import Course, CourseType, Module, Test, Answer, Question, Class, Instructor, Participant, CustomUser, Comment
 from .forms import QuestionForm, AnswerForm, AddCourseForm, AddClassForm
 
 # Create your views here.
@@ -46,14 +46,19 @@ class CourseDetailView(DetailView):
 
 class ClassesView(DetailView):
     model = Class
-    def post(self, request, *args, **kwargs):
-        comment = request.POST['comment'],
-        author = request.POST['author'],
-        id = request.POST['id']
-        c=Comment(text=comment, author_id=author, class_id=id )
-        c.save()
-        return redirect('../class/%d' % c.id)            
     template_name = 'class.html'
+
+    def post(self, request, *args, **kwargs):
+        comment = request.POST['comment']
+        author = int(request.POST['author'])
+        id = int(request.POST['id'])
+        c=Comment(text=comment, author_id_id=author, class_id_id=id )
+        c.save()
+        return redirect('../class/%d' % id)
+    
+      
+                
+    
 
 class HomeView(TemplateView):
     template_name = 'index.html'
