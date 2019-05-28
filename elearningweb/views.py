@@ -6,13 +6,15 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.template import Context, Template
 from django.http import HttpResponse
+from datetime import datetime
 
 from django.views.generic import ListView, TemplateView, DetailView, FormView, UpdateView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from dbhandler.models import Course, CourseType, Module, Test, Answer, Question, Class, Instructor, Participant, CustomUser, TestResult
-from .forms import QuestionForm, AnswerForm, AddCourseForm
+from dbhandler.models import *
+
+from .forms import QuestionForm, AnswerForm, AddCourseForm, AddClassForm
 
 # Create your views here.
 
@@ -40,12 +42,33 @@ class CourseDetailView(DetailView):
     #else:
     #    redirect("{% url 'course_detail' course.id %}")
 
-class CourseDetailView(DetailView):
+''' class CourseDetailView(DetailView):
 	model = Course
-	template_name = 'course_detail.html'
+	template_name = 'course_detail.html' '''
+
+class ClassesView(DetailView):
+    model = Class
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        k = Class.objects.get(pk=self.kwargs['pk'])
+        context['content'] = Content.objects.get(class_id=k, valid_until__isnull=True)
+        return context
+    def post(self, request, *args, **kwargs):
+        comment = request.POST['comment']
+        author = int(request.POST['author']) 
+        cid = int(request.POST['id'])
+        c=Comment(text=comment, author_id=request.user, class_id=Class.objects.get(id=cid))
+        c.save()
+        return redirect('class', kwargs['pk'])            
+    template_name = 'class.html'
+
 
 class HomeView(TemplateView):
-    template_name = 'index.html'
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('user_courses')
+        else:
+            return render(request, 'index.html')
 
 def completeTest(request,**kwargs):
     if not request.user.is_authenticated:
@@ -267,4 +290,77 @@ def UserCourses(request):
         id_course_list.append(p.course_id.id)
     k=Course.objects.filter(id__in=id_course_list)
     return render(request, 'user_courses.html', {'courses': k})
+  
+#Class
+def AddClass(request):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if not request.user.has_perm('dbhandler.add_class'):
+        return render(request, 'class_error.html')
+    f=AddClassForm(request.POST)
+    if request.method == 'POST':
+        classData=Class()
+        classData.name = request.POST.get('name')
+        classData.description = request.POST.get('description')
+        classData.course_id = Course.objects.get(id=request.POST['course_id'])
+        classData.save()
+        contentData = Content()
+        contentData.text = request.POST.get('content')
+        contentData.class_id = classData
+        contentData.save()
+        return redirect('class', classData.id)
+    return render(request,'addclass.html',{'form': f})
+
+def DeleteClass(request,classId):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if not request.user.has_perm('dbhandler.delete_class'):
+        return render(request, 'class_error.html')
+    k = Class.objects.filter(id=classId)
+    if k.exists():
+        k.delete()
+        return HttpResponse("Usunieto pomyslnie")
+    return redirect('index')
+
+def EditClass(request,classId):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if not request.user.has_perm('dbhandler.edit_class'):
+        return render(request, 'class_error.html')
+    
+    if request.method == 'POST':
+        k = Class.objects.get(pk=classId)
+        if not k:
+            #Change to django messages system
+            return HttpResponse("Wystąpił błąd!")
+
+        k.name=request.POST.get('name')
+        k.description = request.POST.get('description')
+        k.course_id = Course.objects.get(id=request.POST['course_id'])
+        k.save()
+        cont = Content.objects.get(class_id=k, valid_until__isnull=True)
+        cont.valid_until=datetime.now()
+        cont.save()
+        new_cont = Content()
+        new_cont.class_id = k
+        new_cont.text=request.POST.get('content')
+        new_cont.save()
+        return redirect('class', k.id)
+
+    k = Class.objects.get(pk=classId)
+    cont = Content.objects.get(class_id=k, valid_until__isnull=True)
+    if not k:
+        #Change to django messages system
+        return HttpResponse("Wystąpił błąd!") 
+
+    f=AddClassForm(initial = {
+        'content':cont.text
+    },
+    instance=k)
+
+    c = {
+        'form': f
+    }
+
+    return render(request, "class_edit.html", c)
 

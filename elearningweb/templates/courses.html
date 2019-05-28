@@ -1,15 +1,26 @@
 {% extends "base.html" %}
-    <h2>Lista dostępnych kursów</h2>
 {% block banner %}
-    <h1 class = "banner" >Lista dostępnych kursów</h1>
+Dostępne kursy
 {% endblock %}
 {% block content %}
-    <ul>
-        {% for course in object_list %}
+	{% if object_list.all %}
+	    <ul class="collection left-align">
+			{% for course in object_list %}
+				<li class="collection-item">
+					{{ course.name }}
+					<span class="grey-text text-lighten-1">{{ course.module_id.name }} [{{  course.course_type.name }}]</span>
+					{% if perms.dbhandler.add_participant %}
+						<a href="{% url 'join_course' course.id %}" class="secondary-content">Zapisz się</a>
+					{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		Brak kursów.
+	{% endif %}
 
-            <li><a href="{% url 'join_course' course.id %}">{{ course.name }}</a></li>
-
-        {% endfor %}
-        <li><a href="{% url 'addcourse' %}">Dodaj Kurs</a></li>
-    </ul>
-{% endblock %}rs</a></li>
+	<div class="break"></div>
+	{% if perms.dbhandler.add_course %}
+		<a href="{% url 'addcourse' %}" class="btn">Dodaj kurs</a>
+	{% endif %}
+{% endblock %}
