@@ -18,3 +18,28 @@ main {
 .bold {
 	font-weight: bold;
 }
+
+.error {
+	color:red;
+}
+
+.success {
+	background-color: #4EB375;
+	color: white;
+}
+
+.fieldWrapper > select {
+	display: block;
+}
+
+.fieldWrapper > label[for="id_course_type"],
+.fieldWrapper > label[for="id_module_id"],
+.fieldWrapper > label[for="id_description"]
+{
+	position: relative;
+}
+
+.fieldWrapper > textarea {
+	height: 200px;
+	margin-top: 20px;
+}
