@@ -1,22 +1,36 @@
 {% extends "base.html" %}
 
 {% block banner %}
-    <h1 class = "banner" >Panel rejestracji</h1>
+Zarejestruj się
 {% endblock %}
 
 {% block content %}
-    <section id="register" class="bg-light py-5">
-        <div id="register_panel">
-            <form method="POST">
-            {% csrf_token %}
-                <input type="text" name="first_name" placeholder="imie" onfocus="this.placeholder=''" onblur="this.placeholder='imie'"required>
-                <input type="text" name="last_name" placeholder="nazwisko" onfocus="this.placeholder=''" onblur="this.placeholder='nazwisko'"required>
-                <input type="text" name="username" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'"required>
-                <input type="email" name="email" placeholder="email" onfocus="this.placeholder=''" onblur="this.placeholder='email'"required>
-                <input type="password" name="password" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'"required>
-                <input type="password" name="confirm_password" placeholder="powtórz hasło" onfocus="this.placeholder=''" onblur="this.placeholder='powtórz hasło'" required>
-                <input type="submit" value="Zarejestruj">
-            </form>
+    <form method="POST" class="small-form">
+    {% csrf_token %}
+        <div class="input-field">
+            <input name="first_name" type="text" required>
+            <label for="first_name">Imię</label>
         </div>
-    </section>
+        <div class="input-field">
+            <input name="last_name" type="text" required>
+            <label for="last_name">Nazwisko</label>
+        </div>
+        <div class="input-field">
+            <input name="username" type="text" required>
+            <label for="username">Nazwa użytkownika</label>
+        </div>
+        <div class="input-field">
+            <input name="email" type="email" required>
+            <label for="email">E-mail</label>
+        </div>
+        <div class="input-field">
+            <input name="password" type="password" required>
+            <label for="password">Hasło</label>
+        </div>
+        <div class="input-field">
+            <input name="confirm_password" type="password" required>
+            <label for="last_name">Powtórz hasło</label>
+        </div>
+        <button class="btn-large z-depth-0" type="submit" name="action">Zarejestruj</button>
+    </form>
 {% endblock %}

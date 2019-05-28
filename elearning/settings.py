@@ -33,6 +33,8 @@ SECRET_KEY = 'f=b36dx0(satyx%7^-nuedq5%=7kfcl=y4(@o+q6pj$7bi0qep'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 ALLOWED_HOSTS = [
     'proj-dbio.herokuapp.com',
 ]
@@ -47,9 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'dbhandler',
+    'dbhandler',
     'elearningweb',
     'accounts',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -115,7 +118,7 @@ AUTH_USER_MODEL = 'dbhandler.CustomUser'
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pl-pl'
 
 TIME_ZONE = 'UTC'
 
@@ -125,6 +128,33 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono-lisa',
+        'defaultLanguage': 'pl',
+        'language': 'pl',
+        'width': '100%',
+        'toolbar': '',
+        'mathJaxLib': '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
+        'extraPlugins': ','.join([
+            # your extra plugins here
+            'div',
+            'autolink',
+            'embedbase',
+            'embed',
+            'autoembed',
+            'autogrow',
+            'mathjax',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath'
+        ]),
+    }
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/

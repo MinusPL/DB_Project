@@ -6,13 +6,15 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.template import Context, Template
 from django.http import HttpResponse
+from datetime import datetime
 
 from django.views.generic import ListView, TemplateView, DetailView, FormView, UpdateView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from dbhandler.models import Course, CourseType, Module, Test, Answer, Question, Class, Instructor, Participant, CustomUser
-from .forms import QuestionForm, AnswerForm, AddCourseForm
+from dbhandler.models import *
+
+from .forms import QuestionForm, AnswerForm, AddCourseForm, AddClassForm
 
 # Create your views here.
 
@@ -40,28 +42,66 @@ class CourseDetailView(DetailView):
     #else:
     #    redirect("{% url 'course_detail' course.id %}")
 
-class CourseDetailView(DetailView):
+''' class CourseDetailView(DetailView):
 	model = Course
-	template_name = 'course_detail.html'
+	template_name = 'course_detail.html' '''
+
+class ClassesView(DetailView):
+    model = Class
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        k = Class.objects.get(pk=self.kwargs['pk'])
+        context['content'] = Content.objects.get(class_id=k, valid_until__isnull=True)
+        return context
+    def post(self, request, *args, **kwargs):
+        comment = request.POST['comment']
+        author = int(request.POST['author']) 
+        cid = int(request.POST['id'])
+        c=Comment(text=comment, author_id=request.user, class_id=Class.objects.get(id=cid))
+        c.save()
+        return redirect('class', kwargs['pk'])            
+    template_name = 'class.html'
+
 
 class HomeView(TemplateView):
-    template_name = 'index.html'
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('user_courses')
+        else:
+            return render(request, 'index.html')
 
-class TestsView(TemplateView):
-    model = Test
-    def get_context_data(self, **kwargs):
-        context = super(TestsView, self).get_context_data(**kwargs)
-        context['test'] = Test.objects.get(id=kwargs['testID'])
-        context['questions'] = Question.objects.filter(test_id=kwargs['testID'])
-        answerList = []
-        for q in Question.objects.filter(test_id=kwargs['testID']):
-            answerList.extend(Answer.objects.filter(question_id_id=q.id))
-        context['answers'] = answerList
-        context['qCount'] = Question.objects.filter(test_id=kwargs['testID']).count()
-        return context
-    template_name = 'tests.html'
+def completeTest(request,**kwargs):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    test=Test.objects.get(id=kwargs['testID'])
+    classobj=Class.objects.get(id=test.class_id_id)
+    try:
+        Participant.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
+    except Participant.DoesNotExist:
+        if not request.user.has_perm('dbhandler.edit_course'):
+            return render(request, 'permission_error.html')
+    questionList = Question.objects.filter(test_id=kwargs['testID'])
+    answerList = []
+    for q in questionList:
+        answerList.extend(Answer.objects.filter(question_id_id=q.id))
+    c={
+        'test':test,
+        'questions':questionList,
+        'answers':answerList,
+        'qCount':questionList.count()
+        }
+    return render(request,"completeTest.html",c)
 
-def FinishView(request,**kwargs):
+def finishView(request,**kwargs):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    test=Test.objects.get(id=kwargs['testID'])
+    classobj=Class.objects.get(id=test.class_id_id)
+    try:
+        Participant.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
+    except Participant.DoesNotExist:
+        if not request.user.has_perm('dbhandler.edit_course'):
+            return render(request, 'permission_error.html')
     if request.method == 'POST':
         qCount=int(request.POST['qc'])
         ansList=[]
@@ -72,66 +112,108 @@ def FinishView(request,**kwargs):
         for i in range(1,qCount+1):
             ch=int(request.POST['Question%d' % i])
             ansList.append(ch)
+        score = 0
+        for a in allAnsList:
+            if a.id in ansList:
+                if a.is_good == 1:
+                    score = score + 1
         c={
             'checked':ansList,
-            'test':Test.objects.get(id=kwargs['testID']),
+            'test':test,
             'questions':questionsList,
-            'answers':allAnsList
+            'answers':allAnsList,
+            'score':score,
+            'qCount':qCount
         }
+        try:
+            result = TestResult.objects.get(user=request.user.id,test=test.id)
+            if result.result < score:
+                result.result = score
+            if result.maxScore < qCount:
+                result.maxScore = qCount
+            result.save()
+        except TestResult.DoesNotExist:
+            result = TestResult(user=request.user,test=test,result=score,maxScore=qCount)
+            result.save()
     return render(request,"finishedTest.html",c)
-             
 
-        
-class CreateTestView(TemplateView):
-    template_name = 'createTest.html'
-    def get_context_data(self, **kwargs):
-        context = super(CreateTestView, self).get_context_data(**kwargs)
-        context['classid'] = Class.objects.get(id=kwargs['classID'])
-        return context
-    def post(self, request, *args, **kwargs):
+def testScores(request,**kwargs):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if not request.user.has_perm('dbhandler.edit_course'):
+        return render(request, 'permission_error.html')
+    test=Test.objects.get(id=kwargs['testID'])
+    c={
+        'test':test,
+        'users':CustomUser.objects.all(),
+        'results':TestResult.objects.filter(test=test)
+        }
+    return render(request,"testScores.html",c)
+
+def createTest(request,**kwargs):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if not request.user.has_perm('dbhandler.edit_course'):
+        return render(request, 'permission_error.html')
+    c={
+        'classid':kwargs['classID']
+        }
+    if request.method == 'POST':
         testName = request.POST['testname']
         testDesc = request.POST['testdesc']
         ClassId = int(request.POST['cid'])
         t=Test(name=testName,description=testDesc,class_id_id=ClassId)
         t.save()
-        return redirect('../addquestions/%d' % t.id)
+        return redirect('../../managetest/%d/addquestions' % t.id)
+    return render(request,"createTest.html",c)
 
-class AddQuestionsView(TemplateView):
-    template_name = 'addQuestions.html'
-    def post(self, request, *args, **kwargs):
-        qText = request.POST['content']
-        ans = [
-            request.POST['answer1'],
-            request.POST['answer2'],
-            request.POST['answer3'],
-            request.POST['answer4']
-        ]
-        corAns = request.POST['isCorrect']
-        testID = request.POST['testid']
-        q=Question(question_text=qText,test_id_id=testID)
-        q.save()
-        i = 1
-        for a in ans:
-            if i == int(corAns):
-                a=Answer(answer_text=a,is_good=1,question_id_id=q.id)
-            else:
-                a=Answer(answer_text=a,is_good=0,question_id_id=q.id)
-            a.save()
-            i = i+1
-        return redirect('addquestions',testID=testID)
+def addQuestions(request,**kwargs):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if not request.user.has_perm('dbhandler.edit_course'):
+        return render(request, 'permission_error.html')
+    if request.method == 'POST':
+            qText = request.POST['content']
+            ans = [
+                request.POST['answer1'],
+                request.POST['answer2'],
+                request.POST['answer3'],
+                request.POST['answer4']
+            ]
+            corAns = request.POST['isCorrect']
+            testID = request.POST['testid']
+            q=Question(question_text=qText,test_id_id=testID)
+            q.save()
+            i = 1
+            for a in ans:
+                if i == int(corAns):
+                    a=Answer(answer_text=a,is_good=1,question_id_id=q.id)
+                else:
+                    a=Answer(answer_text=a,is_good=0,question_id_id=q.id)
+                a.save()
+                i = i+1
+            return redirect('addquestions',testID=testID)
+    c = {
+        'testID':kwargs['testID']
+    }
+    return render(request,"addQuestions.html",c)
 
-class ManageTestView(TemplateView):
-    template_name = 'manageTest.html'
-    def get_context_data(self, **kwargs):
-        context = super(ManageTestView, self).get_context_data(**kwargs)
-        context['test'] = Test.objects.get(id=kwargs['testID'])
-        context['questions'] = Question.objects.filter(test_id=kwargs['testID'])
-        return context
-    def post(self, request, *args, **kwargs):
+def manageTest(request,**kwargs):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if not request.user.has_perm('dbhandler.edit_course'):
+        return render(request, 'permission_error.html')
+    c={
+        'test':Test.objects.get(id=kwargs['testID']),
+        'questions':Question.objects.filter(test_id=kwargs['testID'])
+        }
+    if request.method == 'POST':
         tID = int(request.POST['tID'])
         toDelete = int(request.POST['qID'])
         Question.objects.filter(id=toDelete).delete()
-        return redirect('../managetest/%d' % tID)
+        return redirect('../../managetest/%d' % tID)
+    return render(request,"manageTest.html",c)
+
 
 class LoginView(TemplateView):
     template_name = 'login.html'
@@ -208,3 +290,77 @@ def UserCourses(request):
         id_course_list.append(p.course_id.id)
     k=Course.objects.filter(id__in=id_course_list)
     return render(request, 'user_courses.html', {'courses': k})
+  
+#Class
+def AddClass(request):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if not request.user.has_perm('dbhandler.add_class'):
+        return render(request, 'class_error.html')
+    f=AddClassForm(request.POST)
+    if request.method == 'POST':
+        classData=Class()
+        classData.name = request.POST.get('name')
+        classData.description = request.POST.get('description')
+        classData.course_id = Course.objects.get(id=request.POST['course_id'])
+        classData.save()
+        contentData = Content()
+        contentData.text = request.POST.get('content')
+        contentData.class_id = classData
+        contentData.save()
+        return redirect('class', classData.id)
+    return render(request,'addclass.html',{'form': f})
+
+def DeleteClass(request,classId):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if not request.user.has_perm('dbhandler.delete_class'):
+        return render(request, 'class_error.html')
+    k = Class.objects.filter(id=classId)
+    if k.exists():
+        k.delete()
+        return HttpResponse("Usunieto pomyslnie")
+    return redirect('index')
+
+def EditClass(request,classId):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if not request.user.has_perm('dbhandler.edit_class'):
+        return render(request, 'class_error.html')
+    
+    if request.method == 'POST':
+        k = Class.objects.get(pk=classId)
+        if not k:
+            #Change to django messages system
+            return HttpResponse("Wystąpił błąd!")
+
+        k.name=request.POST.get('name')
+        k.description = request.POST.get('description')
+        k.course_id = Course.objects.get(id=request.POST['course_id'])
+        k.save()
+        cont = Content.objects.get(class_id=k, valid_until__isnull=True)
+        cont.valid_until=datetime.now()
+        cont.save()
+        new_cont = Content()
+        new_cont.class_id = k
+        new_cont.text=request.POST.get('content')
+        new_cont.save()
+        return redirect('class', k.id)
+
+    k = Class.objects.get(pk=classId)
+    cont = Content.objects.get(class_id=k, valid_until__isnull=True)
+    if not k:
+        #Change to django messages system
+        return HttpResponse("Wystąpił błąd!") 
+
+    f=AddClassForm(initial = {
+        'content':cont.text
+    },
+    instance=k)
+
+    c = {
+        'form': f
+    }
+
+    return render(request, "class_edit.html", c)
+
