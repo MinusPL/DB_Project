@@ -13,6 +13,7 @@ from django.views.generic import ListView, TemplateView, DetailView, FormView, U
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from dbhandler.models import *
+
 from .forms import QuestionForm, AnswerForm, AddCourseForm, AddClassForm
 
 # Create your views here.
