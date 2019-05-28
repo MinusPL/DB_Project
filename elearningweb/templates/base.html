@@ -5,39 +5,44 @@
   {% block title %}<title>Platforma E-Learningowa</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
-  <div class="contaier-fluid">
-    <div>
-      {% block login %}
+  <nav class="z-depth-0 white">
+    <a href="{% url 'index' %}" class="left brand-logo black-text">E-learning PRz</a>
+    <ul id="nav" class="right">
+
       {% if user.is_authenticated %}
-        User: {{ user.get_username }}
-          <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
-          <i class="fas fa-sign-out-alt"></i> Logout
-          </a>
-            <form action="{% url 'logout' %}" method="POST" id="logout">
-              {% csrf_token %}
-            <input type="hidden">
-            </form> 
+        <li><a href="{% url 'courses' %}" class="black-text">Wszystkie kursy</a></li>
+        <li><a href="{% url 'user_courses' %}" class="black-text">Twoje kursy</a></li>
+        <!-- wylogowanie -->
+        <li>
+          <a href="javascript:{document.getElementById('logout').submit()}" class="btn z-depth-0">Wyloguj się</a>
+          <form action="{% url 'logout' %}" method="POST" id="logout">{% csrf_token %}<input type="hidden"></form>
+        </li>
+      {% else %}
+        <li><a href="{% url 'login' %}" class="btn z-depth-0">Zaloguj się</a></li>
+      {% endif %}
+
+    </ul>
+  </nav>
+  <main class="container center-align">
+    <h4>{% block banner %}{% endblock %}</h4>
+    {% block content %}
+    {% endblock %}
+
+    {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'success' %}
+          <body onload="M.toast({html: '{{message}}', classes: 'success', displayLength: 2000})">
         {% else %}
-          <a class = "login" href="{% url 'login' %}">Zaloguj sie/Zarejestruj</a>
-        {% endif %} 
-         
-      {% endblock %}
-    </div>
-    <div>{% block banner %}{% endblock %}</div>
-      {% block topnav %}
-        <nav id="topnav">
-          <ul class="menu">
-            <li><a href="{% url 'index' %}">Strona Główna</a></li>
-            <li><a href="{% url 'courses' %}">Lista Kursów</a></li>
-            <li><a href="{% url 'user_courses' %}">Twoje Kursy</a></li>
-          </ul>
-        </nav>
-     {% endblock %}
-     <div>{% block content %}{% endblock %}</div>
-  </div>
+          <p class="error">{{message}}</p>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

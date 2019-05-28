@@ -66,3 +66,4 @@ class TestResult(models.Model):
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
     test = models.ForeignKey('Test', on_delete=models.CASCADE)
     result = models.IntegerField()
+    maxScore = models.IntegerField()
