@@ -13,7 +13,8 @@
     <div>
       {% block login %}
       {% if user.is_authenticated %}
-        User: {{ user.get_username }}
+        User:
+      <a href="{% url 'userdetailview' %}"> {{ user.get_username }}</a>
           <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
           <i class="fas fa-sign-out-alt"></i> Logout
           </a>

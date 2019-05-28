@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.template import Context, Template
 from django.http import HttpResponse
-
+from django.contrib import messages
 from django.views.generic import ListView, TemplateView, DetailView, FormView, UpdateView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -139,6 +139,14 @@ class LoginView(TemplateView):
 class RegisterView(TemplateView):
     template_name = 'register.html'
 
+def UserDetailView(request):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    u=request.user
+    groups=u.groups.all()
+    return render(request, 'user_detail.html', {'groups': groups})
+
+
 def AddCourse(request):
     #if not Instructor.objects.filter(user_id=request.user.id):
     if not request.user.is_authenticated:
@@ -195,16 +203,17 @@ def QuitCourse(request,kurs):
     u=request.user
     if Participant.objects.filter(course_id=k,user_id=u).exists():
         Participant.objects.filter(course_id=k, user_id=u).delete()
-        #return HttpResponse("Nie bierzesz juz udzialu w tym kursie")
+        messages.success(request, 'Nie należysz juz do kursu')
     return redirect('courses')
 
 def UserCourses(request):
     if not request.user.is_authenticated:
         return render(request, 'login_error.html')
-    i=0
     k=Course.objects.none()
     id_course_list=[]
     for p in Participant.objects.filter(user_id=request.user):
         id_course_list.append(p.course_id.id)
     k=Course.objects.filter(id__in=id_course_list)
     return render(request, 'user_courses.html', {'courses': k})
+
+

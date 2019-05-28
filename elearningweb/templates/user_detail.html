@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+    <h2>Lista twoich kursów</h2>
+{% block banner %}
+    <h1 class = "banner" >Profil Użytkownika</h1>
+{% endblock %}
+{% block content %}
+    <ul>
+        <li> Email Użytkownika: {{ user.email }} </li>
+        <li> Imie: {{user.first_name}} </li>
+        <li> Nazwisko: {{user.last_name}} </li>
+        <li> Data Dołączenia: {{ user.date_joined }} </li>
+        <li> Grupy Użytkownika: </li>
+        {% for group in groups %}
+            {{ group }}
+
+            {% endfor %}
+        <li> <a href="{% url 'userdatachange' %}">Zmień Dane użytkownika</a></li>
+        <li> <a href="{% url 'changepassword' %}">Zmień Hasło</a></li>
+
+    </ul>
+{% endblock %}
