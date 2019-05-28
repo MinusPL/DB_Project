@@ -19,7 +19,7 @@ class AddCourseForm(forms.ModelForm):
         labels = {
             'name': ('Nazwa Kursu'),
             'course_type' : ('Typ Kursu'),
-            'module_id' : ('Moduł Kursu'),
+            'module_id' : ('Przedmiot'),
             'description': ('Opis Kursu'),
             'password' : ('Hasło do Kursu')
         }

@@ -5,13 +5,13 @@ Dołącz do Kursu
 {% endblock %}
 
 {% block content %}
+<form method="POST" class="small-form">
+    {% csrf_token %}
+    <div class="input-field small-form">
+    	<input id="pass" type="password" name="coursepass" required>
+    	<label for="pass">Hasło</label>
+    </div>
 
-            <form method="POST">
-                {% csrf_token %}
-                <div>
-                    <p align="left">Podaj hasło do kursu: </p>
-                    <input type="password" name="coursepass" placeholder="hasło" required>
-                    <button class="btn" type="submit" name="action">Dołącz</button>
-                </div>   
-            </form>
+    <button class="btn z-depth-0" type="submit" name="action">Zapisz się</button>
+</form>
 {% endblock %}

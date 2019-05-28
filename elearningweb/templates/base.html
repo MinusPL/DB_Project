@@ -31,6 +31,16 @@
     <h4>{% block banner %}{% endblock %}</h4>
     {% block content %}
     {% endblock %}
+
+    {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'success' %}
+          <body onload="M.toast({html: '{{message}}', classes: 'success', displayLength: 2000})">
+        {% else %}
+          <p class="error">{{message}}</p>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

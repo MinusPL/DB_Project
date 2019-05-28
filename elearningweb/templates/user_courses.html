@@ -16,4 +16,9 @@ Twoje kursy
 	{% else %}
 		Brak kursów.
 	{% endif %}
+
+	<div class="break"></div>
+	{% if perms.dbhandler.add_course %}
+		<a href="{% url 'addcourse' %}" class="btn z-depth-0">Dodaj kurs</a>
+	{% endif %}
 {% endblock %}

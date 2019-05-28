@@ -7,7 +7,11 @@
 	<a href="{% url 'courses' %}" class="left"><< Lista kursów</a><br>
 	<div class="left-align">
 		<h4>{{ course.name }}</h4>
-		<a href="{% url 'quit_course' course.id %}" class="btn right">Zrezygnuj z kursu</a>
+		{% if perms.dbhandler.delete_participant %}
+			<a href="{% url 'quit_course' course.id %}" class="btn right">Zrezygnuj z kursu</a>
+		{% elif perms.dbhandler.add_class %}
+			<a href="{% url 'addclass' %}" class="btn right">Dodaj zajęcia</a>
+		{% endif %}
 		<div class="details">
 			Prowadzący: {% for instructor in course.instructor_set.all %}
 				{{ instructor.user_id.username }}
@@ -22,7 +26,7 @@
 			<ul class="collection">
 			{% for class in course.class_set.all %}
 				<li class="collection-item truncate">
-					{{ course.name }}
+					<a href="{% url 'class' class.id %}">{{ course.name }}</a>
 					<span class="grey-text text-lighten-1">&#8195{{ class.description }} </span>
 				</li>
 			{% endfor %}
