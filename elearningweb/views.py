@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from urllib.parse import urlencode
 from django.urls import reverse
 from django.http import HttpResponse
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.template import Context, Template
 from django.http import HttpResponse
@@ -20,29 +21,9 @@ class CoursesView(ListView):
     model = Course
     template_name = 'courses.html'
 
-#class UserCoursesView(ListView):
-#    model = Course
-#    template_name = 'user_courses.html'
-#    for course in Course.objects.all():
-#        if Participant.filter(course=course, user=self.reques.user)
-#    def get_context_data(self, **kwargs):
-#        context = super(UserCoursesView, self).get_context_data(**kwargs)
-#        context['courses']=Course.objects.all()
-#        Participants
-#        return context
-
 class CourseDetailView(DetailView):
     model = Course
     template_name='course_detail.html'
-    #CustomUser=get_user()
-    #if Participant.objects.filter(course_id=Course,user_id=).exists():
-    #    template_name = 'course_detail.html'
-    #else:
-    #    redirect("{% url 'course_detail' course.id %}")
-
-''' class CourseDetailView(DetailView):
-	model = Course
-	template_name = 'course_detail.html' '''
 
 class ClassesView(DetailView):
     model = Class
@@ -274,14 +255,24 @@ def QuitCourse(request,kurs):
 
 def UserCourses(request):
     if not request.user.is_authenticated:
-        return render(request, 'login_error.html')
-    i=0
+        messages.error(request, 'Musisz być zalogowany aby zobaczyć swoje kursy')
+        return redirect('index')
     k=Course.objects.none()
     id_course_list=[]
     for p in Participant.objects.filter(user_id=request.user):
         id_course_list.append(p.course_id.id)
+    for i in Instructor.objects.filter(user_id=request.user):
+        if not i.course_id.id in id_course_list:
+            id_course_list.append(i.course_id.id)
     k=Course.objects.filter(id__in=id_course_list)
     return render(request, 'user_courses.html', {'courses': k})
+
+def UserDetailView(request):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    u=request.user
+    groups=u.groups.all()
+    return render(request, 'user_detail.html', {'groups': groups})
   
 #Class
 def AddClass(request):
