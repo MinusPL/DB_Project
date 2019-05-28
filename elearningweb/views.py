@@ -56,7 +56,11 @@ class ClassesView(DetailView):
     template_name = 'class.html'
 
 class HomeView(TemplateView):
-    template_name = 'index.html'
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('user_courses')
+        else:
+            return render(request, 'index.html')
 
 def completeTest(request,**kwargs):
     if not request.user.is_authenticated:
