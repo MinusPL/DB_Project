@@ -251,11 +251,15 @@ def QuitCourse(request,kurs):
     k = Course.objects.filter(id=kurs).first()
     u=request.user
     if Instructor.objects.filter(course_id=k, user_id=u).exists():
-        messages.error(request, 'Nie możesz zrezygnować z kursu którego jesteś prowadzącym')
+        if len(Instructor.objects.filter(course_id=k))==1:
+            messages.error(request, 'Jesteś jedynym prowadzącym tego kursu')
+        else:
+            Instructor.objects.get(course_id=k, user_id=u).delete()
+
     if Participant.objects.filter(course_id=k,user_id=u).exists():
-        Participant.objects.filter(course_id=k, user_id=u).delete()
+        Participant.objects.get(course_id=k, user_id=u).delete()
         messages.success(request, 'Nie należysz juz do kursu')
-    return redirect('courses')
+    return redirect('user_courses')
 
 def UserCourses(request):
     if not request.user.is_authenticated:
