@@ -26,7 +26,7 @@
 			<ul class="collection">
 			{% for class in course.class_set.all %}
 				<li class="collection-item truncate">
-					<a href="{% url 'class' class.id %}">{{ course.name }}</a>
+					<a href="{% url 'class' class.id %}">{{ class.name }}</a>
 					<span class="grey-text text-lighten-1">&#8195{{ class.description }} </span>
 				</li>
 			{% endfor %}

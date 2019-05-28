@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block banner %}
+Edycja zajęć 
+{% endblock %}
+
+{% block content %}
+<form method="post" class="">
+    {% csrf_token %}
+    {{ form.media }}
+    {% for field in form %}
+        <div class="input-field fieldWrapper">
+            {{ field.label_tag }} {{ field }}
+        </div>
+    {% endfor %}
+    <button class="btn z-depth-0" type="submit" name="action">Zapisz</button>
+</form>
+{% endblock %}

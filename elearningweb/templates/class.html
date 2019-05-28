@@ -8,14 +8,13 @@
     <a href="{% url 'course_detail' class.course_id_id %}" id="link-courses-details"> << Powrót do kursu</a>
     
     <div>
-        <h4>{{ class.name }}</h4>
+        <h4 style="display: inline-block;">{{ class.name }}</h4>
+        {% if perms.dbhandler.change_class %}<a class="btn" style="float: right;" href="{% url 'edit_class' class.id %}">Edytuj zajęcia</a>{% endif %}
         <p> {{class.description}}</p>
     </div>
 
     <div class= "content">
-            {% for content in class.content_set.all %}
-                <p>{{content.text}}</p>
-            {% endfor %}
+            <p>{{content.text|safe|escape}}</p>
     </div>
 
     <br></br>
@@ -52,8 +51,8 @@
             <form method= "POST">
                     {% csrf_token %}
                 <input name="comment" type="text" required>
-                <input name="author" type="hidden"  value="{{ comment.author_id }}"/>
-                <input name="id" type="hidden"  value="{{ comment.course_id_id }}"/>
+                <input name="author" type="hidden"  value="{{ user.id}}"/>
+                <input name="id" type="hidden"  value="{{ class.id }}"/>
                 <button class="btn" type="submit" name="action">Dodaj komentarz</button>
             </form>
 
