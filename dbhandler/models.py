@@ -1,13 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from ckeditor.fields import RichTextField
 
 # Modele
 
 class Module(models.Model):
     name = models.CharField(max_length=64)
+    def __str__(self):
+        return self.name
 
 class CourseType(models.Model):
     name = models.CharField(max_length=64)
+    def __str__(self):
+        return self.name
 
 class InstructorData(models.Model):
     home_page = models.CharField(max_length = 40)
@@ -37,10 +42,12 @@ class Class(models.Model):
     name = models.CharField(max_length = 64)
     description = models.TextField()
     course_id = models.ForeignKey('Course', on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
 
 class Content(models.Model):
-    valid_until = models.DateTimeField()
-    text = models.TextField()
+    valid_until = models.DateTimeField(null=True, blank=True)
+    text = RichTextField()
     class_id = models.ForeignKey('Class', on_delete=models.CASCADE)
 
 class Comment(models.Model):
@@ -52,6 +59,8 @@ class Test(models.Model):
     name = models.CharField(max_length = 64)
     description = models.TextField()
     class_id = models.ForeignKey('Class', on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
 
 class Question(models.Model):
     question_text = models.TextField()

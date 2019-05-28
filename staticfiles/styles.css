@@ -1,0 +1,45 @@
+nav {
+	padding: 0 10px 0 10px;
+}
+
+main {
+	padding-bottom: 100px;
+}
+
+.small-form {
+	width: 500px;
+	margin: 0 auto;
+}
+
+.break {
+	padding: 20px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.error {
+	color:red;
+}
+
+.success {
+	background-color: #4EB375;
+	color: white;
+}
+
+.fieldWrapper > select {
+	display: block;
+}
+
+.fieldWrapper > label[for="id_course_type"],
+.fieldWrapper > label[for="id_module_id"],
+.fieldWrapper > label[for="id_description"]
+{
+	position: relative;
+}
+
+.fieldWrapper > textarea {
+	height: 200px;
+	margin-top: 20px;
+}
