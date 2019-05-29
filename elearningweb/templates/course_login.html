@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 
 {% block banner %}
-    <h1 class = "banner" >Dołącz do Kursu</h1>
+Dołącz do Kursu
 {% endblock %}
 
 {% block content %}
+<form method="POST" class="small-form">
+    {% csrf_token %}
+    <div class="input-field small-form">
+    	<input id="pass" type="password" name="coursepass" required>
+    	<label for="pass">Hasło</label>
+    </div>
 
-            <form method="POST">
-                {% csrf_token %}
-                <li>Podaj hasło do kursu: <input type="password" name="coursepass" placeholder="hasło" required></li>
-
-                <input type="submit" value="Dołącz">
-            </form>
+    <button class="btn z-depth-0" type="submit" name="action">Zapisz się</button>
+</form>
 {% endblock %}

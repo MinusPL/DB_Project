@@ -17,20 +17,20 @@ def register(request):
         if password == password2:
             #check username
             if CustomUser.objects.filter(username=user_name).exists():
-                messages.error(request, 'That username is taken')
+                messages.error(request, 'Nazwa użytkownika zajęta')
                 return redirect('register')
             else:
                 #check email
                 if CustomUser.objects.filter(email=email).exists():
-                    messages.error(request, 'That email is being used')
+                    messages.error(request, 'Email jest już w użyciu')
                     return redirect('register')
                 else:
                     customUser = CustomUser.objects.create_user(username=user_name, password=password, email=email, first_name=first_name, last_name=last_name)
                     customUser.save()
-                    messages.success(request, 'You are now registered')
+                    messages.success(request, 'Rejestracja zakończona pomyślnie')
                     return redirect('login')
         else:
-            messages.success(request, 'Password no not match')
+            messages.error(request, 'Hasła nie są identyczne')
             return redirect('register')
     else:
         return render(request, 'register.html')
@@ -43,10 +43,10 @@ def login(request):
         customUser = auth.authenticate(username=username, password=password)
         if customUser is not None:
             auth.login(request,customUser)
-            messages.success(request, 'You are now logged in')
+            messages.success(request, 'Zalogowano poprawnie')
             return redirect('index')
         else:
-            messages.error(request, 'Invalid credentials')
+            messages.error(request, 'Nieprawidłowa nazwa użytkownika lub hasło')
             return redirect('login')
     else:
         return render(request, 'login.html')
@@ -54,6 +54,6 @@ def login(request):
 def logout(request):
     if request.method == 'POST':
         auth.logout(request)
-        messages.success(request, 'You are now logged out')
+        messages.success(request, 'Wylogowano poprawnie')
         return redirect("login")
     
