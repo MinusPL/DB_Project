@@ -56,4 +56,48 @@ def logout(request):
         auth.logout(request)
         messages.success(request, 'Wylogowano poprawnie')
         return redirect("login")
-    
+
+def changepassword(request):
+    if request.method == 'POST':
+        oldpassword=request.POST['oldpassword']
+        customUser = auth.authenticate(username=request.user.username, password=oldpassword)
+        if customUser is not None:
+            newPassword=request.POST['newpassword']
+            newPassword2=request.POST['newpassword2']
+            if newPassword==newPassword2:
+                customUser.set_password(newPassword)
+                customUser.save()
+                auth.login(request,customUser)
+                messages.success(request, 'Haslo zmienione')
+                return redirect('userdetailview')
+            else:
+                messages.success(request, 'Nie udalo sie zmienic hasla')
+                return redirect('userdetailview')
+        else:
+            messages.error(request, 'Nieprawidłowe stare hasło')
+            auth.logout(request)
+            return redirect('login')
+    else:
+        return render(request,'changePassword.html')
+
+def UserDataChangeView(request):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    if request.method == 'POST':
+        password=request.POST['password']
+        customUser = auth.authenticate(username=request.user.username, password=password)
+        if customUser is not None:
+            firstname=request.POST['first_name']
+            lastname = request.POST['last_name']
+            email=request.POST['email']
+            customUser.first_name=firstname
+            customUser.last_name=lastname
+            customUser.email=email;
+            customUser.save()
+            messages.success(request, 'Dane zmienione')
+            return redirect('userdetailview')
+        else:
+            messages.success(request, 'Nie udalo sie zmienic danych')
+            return redirect('userdetailview')
+    else:
+        return render(request, 'changeUserData.html')

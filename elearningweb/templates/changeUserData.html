@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block banner %}
+    <h1 class = "banner" >Zmiana Danych Użytkownika</h1>
+{% endblock %}
+
+{% block content %}
+
+            <form method="POST">
+                {% csrf_token %}
+                <input type="text" name="first_name" placeholder="nowe imie" onfocus="this.placeholder=''" onblur="this.placeholder='login'" required>
+                <input type="text" name="last_name" placeholder="nowe Nazwisko" onfocus="this.placeholder=''" onblur="this.placeholder='login'" required>
+                 <input type="email" name="email" placeholder="nowy email" onfocus="this.placeholder=''" onblur="this.placeholder='email'"required>
+                <li>
+                    Podaj hasło:
+                <input type="password" name="password" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'"required>
+                </li>
+                <input type="submit" value="Zmień dane">
+            </form>
+
+{% endblock %}
