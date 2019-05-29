@@ -24,5 +24,6 @@ urlpatterns = [
     path('class/delete/<int:classId>',views.DeleteClass,name='delete_class'),
     path('user_courses', views.UserCourses, name ='user_courses'),
     path('courses/addinstr/<int:kurs>', views.AddCourseInstructor, name ='add_instr'),
-    path('userdetailview', views.UserDetailView, name='userdetailview')
+    path('userdetailview', views.UserDetailView, name='userdetailview'),
+    path('class/edit/<int:classId>',views.EditClass,name='edit_class'),
 ]
