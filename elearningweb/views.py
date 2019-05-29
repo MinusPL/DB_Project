@@ -13,7 +13,7 @@ from django.views.generic import ListView, TemplateView, DetailView, FormView, U
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from dbhandler.models import Course, CourseType, Module, Test, Answer, Question, Class, Instructor, Participant, CustomUser, TestResult
-from .forms import QuestionForm, AnswerForm, AddCourseForm, AddClassForm
+from .forms import QuestionForm, AnswerForm, AddCourseForm, AddClassForm, AddInstructorForm
 
 # Create your views here.
 
@@ -261,6 +261,29 @@ def QuitCourse(request,kurs):
         messages.success(request, 'Nie należysz juz do kursu')
     return redirect('user_courses')
 
+def EditCourse(request,kurs):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    course = Course.objects.filter(id=kurs).first()
+    user=request.user
+    if not Instructor.objects.filter(course_id=course, user_id=user).exists():
+        messages.error(request,"Nie jesteś prowadzącym tego kursu")
+        return redirect('course_detail', kurs)
+    f = AddCourseForm(request.POST)
+    if request.method == 'POST':
+        course.name = request.POST['name']
+        if Course.objects.filter(name=course.name).exists():
+            messages.error(request, 'Istnieje już kurs o tej nazwie')
+            return redirect('edit_course',kurs)
+        course.course_type = CourseType.objects.get(id=request.POST['course_type'])
+        course.module_id = Module.objects.get(id=request.POST['module_id'])
+        course.description = request.POST['description']
+        course.password = request.POST['password']
+        course.save()
+        messages.success(request, 'Zmienione dane kursu')
+        return redirect('course_detail', kurs)
+    return render(request, 'changeCourseData.html', {'form': f})
+
 def UserCourses(request):
     if not request.user.is_authenticated:
         messages.error(request, 'Musisz być zalogowany aby zobaczyć swoje kursy')
@@ -274,6 +297,29 @@ def UserCourses(request):
             id_course_list.append(i.course_id.id)
     k=Course.objects.filter(id__in=id_course_list)
     return render(request, 'user_courses.html', {'courses': k})
+
+def AddCourseInstructor(request,kurs):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    course= Course.objects.filter(id=kurs).first()
+    user=request.user
+    if not Instructor.objects.filter(course_id=course, user_id=user).exists():
+        messages.error(request,"Nie jesteś prowadzącym tego kursu")
+        return redirect('course_detail', kurs)
+    f=AddInstructorForm(request.POST)
+    if request.method=='POST':
+        newInstructorUser_id=request.POST['user_id']
+        if Instructor.objects.filter(course_id=course, user_id=newInstructorUser_id).exists():
+            messages.error(request, 'Podany użytkownik jest już instruktorem tego kursu')
+            return redirect('course_detail', kurs)
+        newInstructorUser=CustomUser.objects.get(pk=newInstructorUser_id)
+        newInstructor=Instructor();
+        newInstructor.course_id=course;
+        newInstructor.user_id=newInstructorUser;
+        newInstructor.save()
+        messages.success(request, 'Dodano nowego prowadzącego')
+        return redirect('course_detail', kurs)
+    return render(request,'addCourseInstructor.html',{'form': f})
 
 def UserDetailView(request):
     if not request.user.is_authenticated:
