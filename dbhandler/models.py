@@ -63,7 +63,7 @@ class Test(models.Model):
         return self.name
 
 class Question(models.Model):
-    question_text = models.TextField()
+    question_text = RichTextField()
     test_id = models.ForeignKey('Test', on_delete=models.CASCADE)
 
 class Answer(models.Model):

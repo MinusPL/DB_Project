@@ -14,7 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from dbhandler.models import *
 
-from .forms import QuestionForm, AnswerForm, AddCourseForm, AddClassForm
+from .forms import *
 
 # Create your views here.
 
@@ -80,6 +80,10 @@ def completeTest(request,**kwargs):
     except Participant.DoesNotExist:
         if not request.user.has_perm('dbhandler.edit_course'):
             return render(request, 'permission_error.html')
+    try:
+        Test.objects.get(id=kwargs['testID'])
+    except Test.DoesNotExist:
+        return render(request, 'test_error.html')
     questionList = Question.objects.filter(test_id=kwargs['testID'])
     answerList = []
     for q in questionList:
@@ -102,6 +106,10 @@ def finishView(request,**kwargs):
     except Participant.DoesNotExist:
         if not request.user.has_perm('dbhandler.edit_course'):
             return render(request, 'permission_error.html')
+    try:
+        Test.objects.get(id=kwargs['testID'])
+    except Test.DoesNotExist:
+        return render(request, 'test_error.html')
     if request.method == 'POST':
         qCount=int(request.POST['qc'])
         ansList=[]
@@ -140,9 +148,17 @@ def finishView(request,**kwargs):
 def testScores(request,**kwargs):
     if not request.user.is_authenticated:
         return render(request, 'login_error.html')
-    if not request.user.has_perm('dbhandler.edit_course'):
-        return render(request, 'permission_error.html')
     test=Test.objects.get(id=kwargs['testID'])
+    classobj=Class.objects.get(id=test.class_id_id)    
+    try:
+        Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
+    except Instructor.DoesNotExist:
+        if not request.user.has_perm('dbhandler.edit_course'):
+            return render(request, 'permission_error.html')
+    try:
+        Test.objects.get(id=kwargs['testID'])
+    except Test.DoesNotExist:
+        return render(request, 'test_error.html')
     c={
         'test':test,
         'users':CustomUser.objects.all(),
@@ -153,35 +169,47 @@ def testScores(request,**kwargs):
 def createTest(request,**kwargs):
     if not request.user.is_authenticated:
         return render(request, 'login_error.html')
-    if not request.user.has_perm('dbhandler.edit_course'):
-        return render(request, 'permission_error.html')
-    c={
-        'classid':kwargs['classID']
-        }
+    classobj=Class.objects.get(id=kwargs['classID'])    
+    try:
+        Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
+    except Instructor.DoesNotExist:
+        if not request.user.has_perm('dbhandler.edit_course'):
+            return render(request, 'permission_error.html')
+    f = CreateTestForm()
+
+    c = {
+        'form': f
+    }
     if request.method == 'POST':
-        testName = request.POST['testname']
-        testDesc = request.POST['testdesc']
-        ClassId = int(request.POST['cid'])
+        testName = request.POST['name']
+        testDesc = request.POST['description']
+        ClassId = int(kwargs['classID'])
         t=Test(name=testName,description=testDesc,class_id_id=ClassId)
         t.save()
         return redirect('../../managetest/%d/addquestions' % t.id)
     return render(request,"createTest.html",c)
 
+
 def addQuestions(request,**kwargs):
     if not request.user.is_authenticated:
         return render(request, 'login_error.html')
-    if not request.user.has_perm('dbhandler.edit_course'):
-        return render(request, 'permission_error.html')
+    test=Test.objects.get(id=kwargs['testID'])
+    classobj=Class.objects.get(id=test.class_id_id)    
+    try:
+        Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
+    except Instructor.DoesNotExist:
+        if not request.user.has_perm('dbhandler.edit_course'):
+            return render(request, 'permission_error.html')
     if request.method == 'POST':
-            qText = request.POST['content']
+            qText = request.POST['question_text']
             ans = [
-                request.POST['answer1'],
-                request.POST['answer2'],
-                request.POST['answer3'],
-                request.POST['answer4']
+                request.POST['answer_1'],
+                request.POST['answer_2'],
+                request.POST['answer_3'],
+                request.POST['answer_4']
             ]
-            corAns = request.POST['isCorrect']
-            testID = request.POST['testid']
+            corAns = request.POST['correct']
+            testID = kwargs['testID']
             q=Question(question_text=qText,test_id_id=testID)
             q.save()
             i = 1
@@ -193,18 +221,73 @@ def addQuestions(request,**kwargs):
                 a.save()
                 i = i+1
             return redirect('addquestions',testID=testID)
+
+    f=AddQuestionForm(request.POST)
     c = {
-        'testID':kwargs['testID']
+        'testID':kwargs['testID'],
+        'form': f
     }
     return render(request,"addQuestions.html",c)
+
+def editQuestion(request,**kwargs):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+    test=Test.objects.get(id=kwargs['testID'])
+    classobj=Class.objects.get(id=test.class_id_id)    
+    try:
+        Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
+    except Instructor.DoesNotExist:
+        if not request.user.has_perm('dbhandler.edit_course'):
+            return render(request, 'permission_error.html')
+    try:
+        q=Question.objects.get(id=kwargs['questionID'])
+    except Question.DoesNotExist:
+        return render(request, 'editquestion_error.html')
+    if request.method == 'POST':
+            corAns = request.POST['correct']
+            q=Question.objects.get(id=kwargs['questionID'])
+            q.question_text = request.POST['question_text']
+            ans=Answer.objects.filter(question_id=q)           
+            q.save()
+            i = 1
+            for a in ans:
+                a.answer_text = request.POST['answer_%d' % i]
+                if i == int(corAns):
+                    a.is_good=1
+                else:
+                    a.is_good=0
+                a.save()
+                i = i+1
+            return redirect('editquestion',testID=kwargs['testID'],questionID=kwargs['questionID'])
+    a=Answer.objects.filter(question_id=q)
+    f=AddQuestionForm(initial = {
+        'answer_1':a[0].answer_text,
+        'answer_2':a[1].answer_text,
+        'answer_3':a[2].answer_text,
+        'answer_4':a[3].answer_text
+    },
+    instance=q)
+    c = {
+        'testID':kwargs['testID'],
+        'form': f
+    }
+    return render(request,"editQuestion.html",c)
 
 def manageTest(request,**kwargs):
     if not request.user.is_authenticated:
         return render(request, 'login_error.html')
-    if not request.user.has_perm('dbhandler.edit_course'):
-        return render(request, 'permission_error.html')
+    try:
+        test=Test.objects.get(id=kwargs['testID'])
+    except Test.DoesNotExist:
+        return render(request, 'test_error.html')
+    classobj=Class.objects.get(id=test.class_id_id)    
+    try:
+        Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
+    except Instructor.DoesNotExist:
+        if not request.user.has_perm('dbhandler.edit_course'):
+            return render(request, 'permission_error.html')
     c={
-        'test':Test.objects.get(id=kwargs['testID']),
+        'test':test,
         'questions':Question.objects.filter(test_id=kwargs['testID'])
         }
     if request.method == 'POST':

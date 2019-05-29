@@ -6,7 +6,7 @@
         {% csrf_token %}   
         <table>
             {% for q in questions %}
-                <tr><td>{{ q.question_text }}</td></tr>
+                <tr><td>{{ q.question_text|safe|escape }}</td></tr>
                 {% for a in answers %}
                     {% if a.question_id == q %}
                     <tr><td>{{ a.answer_text }}</td><td><input type="radio" name="Question{{ forloop.parentloop.counter }}" value="{{ a.id }}" required/></td></tr>
