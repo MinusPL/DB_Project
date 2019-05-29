@@ -36,5 +36,10 @@
 		{% else %}
 			Brak zajęć.
 		{% endif %}
+
+		<div class="break"></div>
+		{% if perms.dbhandler.add_class %}
+		<a href="{% url 'addclass' %}" class="btn">Dodaj zajęcia</a>
+		{% endif %}
 	</div>
 {% endblock %}
