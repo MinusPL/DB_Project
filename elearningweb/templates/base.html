@@ -10,7 +10,7 @@
 </head>
 <body>
   <nav class="z-depth-0 white">
-    <a href="{% url 'index' %}" class="left brand-logo black-text">E-learning PRz</a>
+    <a href="{% url 'index' %}" class="left brand-logo black-text"><img src="{% static 'logo.jpg' %}" class="responsive-img" height="100" width="300" alt=""></a>
     <ul id="nav" class="right">
 
       {% if user.is_authenticated %}
