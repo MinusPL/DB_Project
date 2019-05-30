@@ -260,11 +260,17 @@ def editQuestion(request,**kwargs):
                 i = i+1
             return redirect('editquestion',testID=kwargs['testID'],questionID=kwargs['questionID'])
     a=Answer.objects.filter(question_id=q)
+    cor = 1
+    for c in a:
+        if c.is_good==1:
+            break
+        cor = cor+1
     f=AddQuestionForm(initial = {
         'answer_1':a[0].answer_text,
         'answer_2':a[1].answer_text,
         'answer_3':a[2].answer_text,
-        'answer_4':a[3].answer_text
+        'answer_4':a[3].answer_text,
+        'correct':cor
     },
     instance=q)
     c = {
