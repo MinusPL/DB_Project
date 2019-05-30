@@ -1,7 +1,8 @@
 from django import forms
 from django.forms import ModelForm
 from ckeditor.widgets import CKEditorWidget
-from dbhandler.models import Course, Test, Answer, Question, Class
+from dbhandler.models import Course, Test, Answer, Question, Class, Instructor
+
 
 class CreateTestForm(ModelForm):
     class Meta:
@@ -39,6 +40,14 @@ class AddCourseForm(forms.ModelForm):
             'description': ('Opis Kursu'),
             'password' : ('Hasło do Kursu')
         }
+class AddInstructorForm(forms.ModelForm):
+    class Meta:
+        model = Instructor
+        fields = ('user_id',)
+        labels = {
+            'user_id': ('Prowadzący')
+        }
+
 
 class AddClassForm(ModelForm):
     content = forms.CharField(widget=CKEditorWidget())

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block banner %}
+    <h1 class = "banner" >Dodaj prowadzącego do kursu</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post" class="small-form">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="input-field fieldWrapper">
+        {{ field.label_tag }} {{ field }}
+        </div>
+    {% endfor %}
+    <button class="btn-large z-depth-0" type="submit" name="action">Dodaj</button>
+</form>
+{% endblock %}

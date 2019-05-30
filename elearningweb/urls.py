@@ -18,10 +18,13 @@ urlpatterns = [
     path('courses/add/', views.AddCourse, name='addcourse'),
     path('courses/join/<int:kurs>',views.JoinCourse,name='join_course'),
     path('courses/quit/<int:kurs>',views.QuitCourse,name='quit_course'),
+    path('courses/edit/<int:kurs>',views.EditCourse,name='edit_course'),
     path('user_courses', views.UserCourses, name ='user_courses'),
     path('courses/testscores/<int:testID>',views.testScores,name='testscores'),
     path('class/add/', views.AddClass, name='addclass'),
     path('class/delete/<int:classId>',views.DeleteClass,name='delete_class'),
+    path('user_courses', views.UserCourses, name ='user_courses'),
+    path('courses/addinstr/<int:kurs>', views.AddCourseInstructor, name ='add_instr'),
+    path('userdetailview', views.UserDetailView, name='userdetailview'),
     path('class/edit/<int:classId>',views.EditClass,name='edit_class'),
-    path('user_courses', views.UserCourses, name ='user_courses')
 ]

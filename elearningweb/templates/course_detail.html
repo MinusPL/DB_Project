@@ -7,6 +7,8 @@
 	<a href="{% url 'courses' %}" class="left"><< Lista kursów</a><br>
 	<div class="left-align">
 		<h4>{{ course.name }}</h4>
+		<a href="{% url 'add_instr' course.id %}" class="btn right">Dodaj prowadzącego</a>
+		<a href="{% url 'edit_course' course.id %}" class="btn right">Edytuj Kurs</a>
 		{% if perms.dbhandler.delete_participant %}
 			<a href="{% url 'quit_course' course.id %}" class="btn right">Zrezygnuj z kursu</a>
 		{% elif perms.dbhandler.add_class %}
@@ -33,6 +35,11 @@
 			</ul>
 		{% else %}
 			Brak zajęć.
+		{% endif %}
+
+		<div class="break"></div>
+		{% if perms.dbhandler.add_class %}
+		<a href="{% url 'addclass' %}" class="btn">Dodaj zajęcia</a>
 		{% endif %}
 	</div>
 {% endblock %}
