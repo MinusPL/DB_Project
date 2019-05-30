@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block banner %}
-Dodawanie pytania
+Edycja pytania
 {% endblock %}
 
 {% block content %}
@@ -43,7 +43,7 @@ Dodawanie pytania
             </label>
         </div>
         {% endfor %}
-        <button class="btn-large z-depth-0" type="submit" name="action">Dodaj pytanie</button>
+        <button class="btn-large z-depth-0" type="submit" name="action">Zapisz pytanie</button>
         <a href="{% url 'managetest' testID %}" class="btn-large z-depth-0">Wróć do testu</a>
     </form>
 {% endblock %}

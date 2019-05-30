@@ -5,15 +5,14 @@ Tworzenie testu
 {% endblock %}
 
 {% block content %}
-    <form method="POST" class="small-form">
+    <form method="POST" class="form">
         {% csrf_token %}
-        <div class="input-field">
-            <input name="testname" type="text" required>
-            <label for="testname">Nazwa</label>
+        {{ form.media }}
+        {% for field in form %}
+        <div class="input-field fieldWrapper">
+            {{ field.label_tag }} {{ field }}
         </div>
-        <div class="input-field">
-            <input name="testdesc" type="text">
-            <label for="testdesc">Opis</label>
-        </div>
+        {% endfor %}
+        <button class="btn z-depth-0" type="submit" name="action">Utwórz test</button>
     </form>
 {% endblock %}

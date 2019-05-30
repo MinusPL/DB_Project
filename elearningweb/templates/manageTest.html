@@ -12,7 +12,8 @@ Zarządzanie testem
             <div class="row">
                 <input type="hidden" name="tID" value="{{ test.id }}"/><input type="hidden" name="qID" value="{{q.id}}"/>
                 <button class="btn z-depth-0 left" type="submit" name="action">Usuń</button>
-                <span class="right">{{ q.question_text }}</span>
+                <a href="{% url 'editquestion' test.id q.id %}"><button class="btn z-depth-0 left" type="button" >Edytuj</button></a>
+                <span class="right">Pytanie {{ forloop.counter }}</span>
             </div>
         </form>    
     {% endfor %}
