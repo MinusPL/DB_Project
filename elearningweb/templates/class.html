@@ -17,7 +17,7 @@
             <p>{{content.text|safe|escape}}</p>
     </div>
 
-    <br></br>
+    <br/>
 
     <div class= "tests">
         <h5>Testy do zajęć</h5>
@@ -30,8 +30,11 @@
             {% endfor %}
         </ul>
     </div>
+    {% if perms.dbhandler.add_test %}
+		<a href="{% url 'createtest' class.id %}" class="btn">Dodaj test</a>
+	{% endif %}
 
-    <br></br>
+    <div class="break"></div>
     
     <div class= "comments">
         <h5>Komentarze </h5> 
@@ -41,7 +44,7 @@
                         <div class="nav-wrapper blue lighten-5">
                             {{comment.text}} 
                         </div>
-                        <br></br>
+                        <br/>
 
                 {% endfor %}  
                 
