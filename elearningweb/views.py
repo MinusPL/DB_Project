@@ -21,6 +21,15 @@ from .forms import *
 class CoursesView(ListView):
     model = Course
     template_name = 'courses.html'
+    def get_queryset(self):
+        result = super(CoursesView, self).get_queryset()
+        query = self.request.GET.get('search')
+        if query:
+             result = result.filter(
+                    name__icontains=query
+            )
+        return result 
+
 
 class CourseDetailView(DetailView):
     model = Course
