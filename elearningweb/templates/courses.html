@@ -5,7 +5,10 @@ Dostępne kursy
 {% block content %}
 
 <form class="form-inline"  method="GET">
-	<input type="search" placeholder="Wyszukaj kurs"  name='search'>
+	<input type="search" placeholder="Nazwa kursu"  name='course_name'>
+	<input type="search" placeholder="Imie instruktora"  name='instr_name'>
+	<input type="search" placeholder="Nazwisko instruktora"  name='instr_lastname'>
+	<input type="search" placeholder="Nazwa przedmiotu"  name='module_name'>
 	<button class="btn" type="submit">Wyszukaj</button>
 </form>
 
@@ -17,6 +20,13 @@ Dostępne kursy
 				<li class="collection-item">
 					{{ course.name }}
 					<span class="grey-text text-lighten-1">{{ course.module_id.name }} [{{  course.course_type.name }}]</span>
+					{% for i in instructors %}
+						{% for u in users %}%}
+							{% if i.course_id == course and i.user_id == u %}
+								{{ u.first_name}} {{u.last_name}}
+							{% endif %}
+						{% endfor %}
+					{% endfor %}
 					{% if perms.dbhandler.add_participant %}
 						<a href="{% url 'join_course' course.id %}" class="secondary-content">Zapisz się</a>
 					{% endif %}

@@ -22,9 +22,62 @@ from .forms import *
 
 def CoursesView(request,**kwargs):
     if not request.user.is_authenticated:
-        return render(request, 'login_error.html')   
-    
-    course_list = Course.objects.all().order_by('pk')
+        return render(request, 'login_error.html')
+    fname=''
+    lname=''
+    cname=''
+    mname=''
+    c_listf = Course.objects.all().order_by('pk')
+    search_query = ''
+    if request.method == 'POST':
+        try:
+            c_listf = Course.objects.filter(name=request.POST['course_name'])
+            cname = request.POST['course_name']
+        except Course.DoesNotExist:
+            c_id = c_listf
+        i_ex = 0
+        try:
+            i_n = CustomUser.objects.filter(first_name=request.POST['instr_name'])
+            i_ex = 1
+            fname = request.POST['instr_name']
+        except CustomUser.DoesNotExist:
+            i_n = CustomUser.objects.all()
+        try:
+            i_ln = CustomUser.objects.filter(last_name=request.POST['instr_lastname'])
+            i_ex = 1
+            lname = request.POST['instr_lastname']
+        except CustomUser.DoesNotExist:
+            i_ln = CustomUser.objects.all()
+        # if i_ex == 1:
+        #     instr_list=[]
+        #     for name in i_n:
+        #         if name in i_ln:
+        #             instr_list.extend(name.course_id_id)
+        #     instr_courses= []
+        #     for c in c_listf:
+        #         if c.id in instr_list:
+        #             instr_courses = extend(c)
+        # else:
+        #     instr_courses = c_listf
+        # try:
+        #     m_id = Module.objects.get(name=request.POST['module_name']).first
+        #     module_courses = Course.objects.filter(module_id_id=m_id.id).order_by('pk')
+        #     mname = request.POST['module_name']
+        # except Module.DoesNotExist:
+        #     module_courses = c_listf
+        # c_list = []
+        # for c in instr_courses:
+        #     if c in module_courses:
+        #         c_list.extend(c)
+        # c_list2 = []
+        # for c in c_list:
+        #     if c in c_id:
+        #         c_list2.extend(c)
+        c_listf = c_id
+        search_query = '?course_name='+cname+'&instr_name='+fname+'&instr_lastname'+lname+'&module_name='+mname
+
+    course_list = c_listf
+
     page = kwargs['page']
 
     paginator = Paginator(course_list, 10)
@@ -34,9 +87,17 @@ def CoursesView(request,**kwargs):
         courses = paginator.page(1)
     except EmptyPage:
         courses = paginator.page(paginator.num_pages)
-
+    instructors = Instructor.user_id_id.all()
+    users = CustomUser.objects.all()
+    userList = []
+    for u in users:
+        if u.id in instructors:
+            userList.extend(u)
     c = {
-        'courses':courses
+        'courses':courses,
+        'search_query':search_query,
+        'users':userList,
+        'instructors':instructors,
     }
 
     return render(request,"courses.html",c)
