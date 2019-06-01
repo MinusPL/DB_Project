@@ -3,6 +3,14 @@
 Dostępne kursy
 {% endblock %}
 {% block content %}
+
+<form class="form-inline"  method="GET">
+	<input type="search" placeholder="Wyszukaj kurs"  name='search'>
+	<button class="btn" type="submit">Wyszukaj</button>
+</form>
+
+<br></br>
+
 	{% if object_list.all %}
 	    <ul class="collection left-align">
 			{% for course in object_list %}
