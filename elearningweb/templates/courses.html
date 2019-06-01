@@ -11,9 +11,9 @@ Dostępne kursy
 
 <br></br>
 
-	{% if object_list.all %}
+	{% if courses.paginator.count %}
 	    <ul class="collection left-align">
-			{% for course in object_list %}
+			{% for course in courses %}
 				<li class="collection-item">
 					{{ course.name }}
 					<span class="grey-text text-lighten-1">{{ course.module_id.name }} [{{  course.course_type.name }}]</span>
@@ -26,6 +26,28 @@ Dostępne kursy
 	{% else %}
 		Brak kursów.
 	{% endif %}
+
+	{% if courses.has_other_pages %}
+  <ul class="pagination">
+    {% if courses.has_previous %}
+      <li><a class="btn" href="{{ courses.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li><span class="btn" style="color: #444; padding: 0 10px; line-height: 30px; font-size: 1.2rem;">&laquo;</span></li>
+    {% endif %}
+    {% for i in courses.paginator.page_range %}
+      {% if courses.number == i %}
+        <li ><span class="btn" style="padding: 0 10px; line-height: 30px; font-size: 1.2rem;">{{ i }}</span></li>
+      {% else %}
+        <li><a class="btn" href="{{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if courses.has_next %}
+      <li><a class="btn" href="{{ courses.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span class="btn" style="color: #444; padding: 0 10px; line-height: 30px; font-size: 1.2rem;">&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
 
 	<div class="break"></div>
 	{% if perms.dbhandler.add_course %}

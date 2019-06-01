@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-	<a href="{% url 'courses' %}" class="left"><< Lista kursów</a><br>
+	<a href="{% url 'courses' 1 %}" class="left"><< Lista kursów</a><br>
 	<div class="left-align">
 		<h4>{{ course.name }}</h4>
 		<a href="{% url 'add_instr' course.id %}" class="btn right">Dodaj prowadzącego</a>

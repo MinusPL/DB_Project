@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.template import Context, Template
 from django.http import HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime
 
 from django.views.generic import ListView, TemplateView, DetailView, FormView, UpdateView
@@ -18,38 +19,95 @@ from .forms import *
 
 # Create your views here.
 
-class CoursesView(ListView):
-    model = Course
-    template_name = 'courses.html'
-    def get_queryset(self):
-        result = super(CoursesView, self).get_queryset()
-        query = self.request.GET.get('search')
-        if query:
-             result = result.filter(
-                    name__icontains=query
-            )
-        return result 
+
+def CoursesView(request,**kwargs):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')   
+    
+    course_list = Course.objects.all().order_by('pk')
+    page = kwargs['page']
+
+    paginator = Paginator(course_list, 10)
+    try:
+        courses = paginator.page(page)
+    except PageNotAnInteger:
+        courses = paginator.page(1)
+    except EmptyPage:
+        courses = paginator.page(paginator.num_pages)
+
+    c = {
+        'courses':courses
+    }
+
+    return render(request,"courses.html",c)
+
+#TO-DO: NAPRAWIC WYSZUKIWANIE
+# class CoursesView(ListView):
+#     model = Course
+#     template_name = 'courses.html'
+#     def get_queryset(self):
+#         result = super(CoursesView, self).get_queryset()
+#         query = self.request.GET.get('search')
+#         if query:
+#              result = result.filter(
+#                     name__icontains=query
+#             )
+        
 
 
 class CourseDetailView(DetailView):
     model = Course
     template_name='course_detail.html'
 
-class ClassesView(DetailView):
-    model = Class
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        k = Class.objects.get(pk=self.kwargs['pk'])
-        context['content'] = Content.objects.get(class_id=k, valid_until__isnull=True)
-        return context
-    def post(self, request, *args, **kwargs):
+def ClassesView(request,**kwargs):
+    if not request.user.is_authenticated:
+        return render(request, 'login_error.html')
+
+    k = Class.objects.get(pk=kwargs['pk'])
+
+    try:
+        Participant.objects.get(user_id_id=request.user.id,course_id_id=k.course_id_id)
+    except Participant.DoesNotExist:
+        if not request.user.has_perm('dbhandler.view_class'):
+            return render(request, 'permission_error.html')    
+
+    k = Class.objects.get(pk=kwargs['pk'])
+    cont = Content.objects.get(class_id=k, valid_until__isnull=True)
+
+    c = {
+        'class': k,
+        'content':cont
+    }
+
+    return render(request, 'class.html', c)  
+
+
+    #TODO ZABEZPIECZ TO!
+
+    if request.method == 'POST':
         comment = request.POST['comment']
         author = int(request.POST['author']) 
         cid = int(request.POST['id'])
         c=Comment(text=comment, author_id=request.user, class_id=Class.objects.get(id=cid))
         c.save()
-        return redirect('class', kwargs['pk'])            
-    template_name = 'class.html'
+        return redirect('class', kwargs['pk'])         
+
+
+# class ClassesView(DetailView):
+#     model = Class
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         k = Class.objects.get(pk=self.kwargs['pk'])
+#         context['content'] = Content.objects.get(class_id=k, valid_until__isnull=True)
+#         return context
+#     def post(self, request, *args, **kwargs):
+#         comment = request.POST['comment']
+#         author = int(request.POST['author']) 
+#         cid = int(request.POST['id'])
+#         c=Comment(text=comment, author_id=request.user, class_id=Class.objects.get(id=cid))
+#         c.save()
+#         return redirect('class', kwargs['pk'])            
+#     template_name = 'class.html'
 
 
 class HomeView(TemplateView):
@@ -322,7 +380,7 @@ def AddCourse(request):
         instr.course_id = course
         instr.user_id = request.user
         instr.save()
-        return redirect('courses')
+        return redirect('courses', 1)
     return render(request,'addcourse.html',{'form': f})
 
 def JoinCourse(request,kurs):
@@ -332,7 +390,7 @@ def JoinCourse(request,kurs):
         return render(request, 'permission_error.html')
     course=Course.objects.get(id=kurs)
     user=request.user
-    if Participant.objects.filter(course_id=course,user_id=user).exists() or Instructor.objects.filter(course_id=course,user_id=user).exists() :
+    if Participant.objects.filter(course_id=course,user_id=user).exists() or Instructor.objects.filter(course_id=course,user_id=user).exists():
         return redirect('course_detail', course.pk)
     else:
         if request.method=='POST':
@@ -374,18 +432,15 @@ def EditCourse(request,kurs):
     if not Instructor.objects.filter(course_id=course, user_id=user).exists():
         messages.error(request,"Nie jesteś prowadzącym tego kursu")
         return redirect('course_detail', kurs)
-    f = AddCourseForm(request.POST)
+    f = AddCourseForm(instance=course)
     if request.method == 'POST':
         course.name = request.POST['name']
-        if Course.objects.filter(name=course.name).exists():
-            messages.error(request, 'Istnieje już kurs o tej nazwie')
-            return redirect('edit_course',kurs)
         course.course_type = CourseType.objects.get(id=request.POST['course_type'])
         course.module_id = Module.objects.get(id=request.POST['module_id'])
         course.description = request.POST['description']
         course.password = request.POST['password']
         course.save()
-        messages.success(request, 'Zmienione dane kursu')
+        messages.success(request, 'Zaktualizowano dane kursu')
         return redirect('course_detail', kurs)
     return render(request, 'changeCourseData.html', {'form': f})
 
@@ -418,9 +473,9 @@ def AddCourseInstructor(request,kurs):
             messages.error(request, 'Podany użytkownik jest już instruktorem tego kursu')
             return redirect('course_detail', kurs)
         newInstructorUser=CustomUser.objects.get(pk=newInstructorUser_id)
-        newInstructor=Instructor();
-        newInstructor.course_id=course;
-        newInstructor.user_id=newInstructorUser;
+        newInstructor=Instructor()
+        newInstructor.course_id=course
+        newInstructor.user_id=newInstructorUser
         newInstructor.save()
         messages.success(request, 'Dodano nowego prowadzącego')
         return redirect('course_detail', kurs)
