@@ -64,14 +64,12 @@ def ClassesView(request,**kwargs):
         return render(request, 'login_error.html')
 
     k = Class.objects.get(pk=kwargs['pk'])
-
-    try:
-        Participant.objects.get(user_id_id=request.user.id,course_id_id=k.course_id_id)
-    except Participant.DoesNotExist:
+    print(Participant.objects.filter(course_id=k.course_id,user_id=request.user).exists())
+    print(Instructor.objects.filter(course_id=k.course_id,user_id=request.user).exists())
+    if not (Participant.objects.filter(course_id=k.course_id,user_id=request.user).exists() or Instructor.objects.filter(course_id=k.course_id,user_id=request.user).exists()):
         if not request.user.has_perm('dbhandler.view_class'):
-            return render(request, 'permission_error.html')    
+            return render(request, 'permission_error.html')   
 
-    k = Class.objects.get(pk=kwargs['pk'])
     cont = Content.objects.get(class_id=k, valid_until__isnull=True)
 
     c = {
@@ -80,9 +78,6 @@ def ClassesView(request,**kwargs):
     }
 
     return render(request, 'class.html', c)  
-
-
-    #TODO ZABEZPIECZ TO!
 
     if request.method == 'POST':
         comment = request.POST['comment']
