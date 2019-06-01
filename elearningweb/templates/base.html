@@ -15,7 +15,7 @@
     <ul id="nav" class="right">
 
       {% if user.is_authenticated %}
-        <li><a href="{% url 'courses' %}" class="black-text">Wszystkie kursy</a></li>
+        <li><a href="{% url 'courses' 1 %}" class="black-text">Wszystkie kursy</a></li>
         <li><a href="{% url 'user_courses' %}" class="black-text">Twoje kursy</a></li>
         <!-- wylogowanie -->
         <li>
@@ -25,7 +25,6 @@
       {% else %}
         <li><a href="{% url 'login' %}" class="btn z-depth-0">Zaloguj się</a></li>
       {% endif %}
-
     </ul>
   </nav>
   <main class="container center-align">

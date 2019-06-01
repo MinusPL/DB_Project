@@ -92,7 +92,7 @@ def UserDataChangeView(request):
             email=request.POST['email']
             customUser.first_name=firstname
             customUser.last_name=lastname
-            customUser.email=email;
+            customUser.email=email
             customUser.save()
             messages.success(request, 'Dane zmienione')
             return redirect('userdetailview')
