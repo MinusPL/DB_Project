@@ -5,6 +5,7 @@ Dostępne kursy
 {% block content %}
 
 <form class="form-inline"  method="GET">
+	{% csrf_token %}
 	<input type="search" placeholder="Nazwa kursu"  name='course_name'>
 	<input type="search" placeholder="Imie instruktora"  name='instr_name'>
 	<input type="search" placeholder="Nazwisko instruktora"  name='instr_lastname'>
@@ -14,21 +15,14 @@ Dostępne kursy
 
 <br></br>
 
-	{% if courses.paginator.count %}
+	{% if instructors.paginator.count %}
 	    <ul class="collection left-align">
-			{% for course in courses %}
+			{% for i in instructors %}
 				<li class="collection-item">
-					{{ course.name }}
-					<span class="grey-text text-lighten-1">{{ course.module_id.name }} [{{  course.course_type.name }}]</span>
-					{% for i in instructors %}
-						{% for u in users %}%}
-							{% if i.course_id == course and i.user_id == u %}
-								{{ u.first_name}} {{u.last_name}}
-							{% endif %}
-						{% endfor %}
-					{% endfor %}
+					{{ i.course_id.name }}
+					<span class="grey-text text-lighten-1">{{ i.course_id.module_id.name }} [{{  i.course_id.course_type.name }}] {{ i.user_id.first_name }} {{ i.user_id.last_name }}</span>
 					{% if perms.dbhandler.add_participant %}
-						<a href="{% url 'join_course' course.id %}" class="secondary-content">Zapisz się</a>
+						<a href="{% url 'join_course' i.course_id.id %}" class="secondary-content">Zapisz się</a>
 					{% endif %}
 				</li>
 			{% endfor %}
@@ -40,7 +34,7 @@ Dostępne kursy
 	{% if courses.has_other_pages %}
   <ul class="pagination">
     {% if courses.has_previous %}
-      <li><a class="btn" href="{{ courses.previous_page_number }}">&laquo;</a></li>
+      <li><a class="btn" href="{{ courses.previous_page_number }}{{search_query}}">&laquo;</a></li>
     {% else %}
       <li><span class="btn" style="color: #444; padding: 0 10px; line-height: 30px; font-size: 1.2rem;">&laquo;</span></li>
     {% endif %}
@@ -52,7 +46,7 @@ Dostępne kursy
       {% endif %}
     {% endfor %}
     {% if courses.has_next %}
-      <li><a class="btn" href="{{ courses.next_page_number }}">&raquo;</a></li>
+      <li><a class="btn" href="{{ courses.next_page_number }}{{search_query}}">&raquo;</a></li>
     {% else %}
       <li class="disabled"><span class="btn" style="color: #444; padding: 0 10px; line-height: 30px; font-size: 1.2rem;">&raquo;</span></li>
     {% endif %}

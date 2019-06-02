@@ -27,27 +27,30 @@ def CoursesView(request,**kwargs):
     lname=''
     cname=''
     mname=''
-    c_listf = Course.objects.all().order_by('pk')
+    instructors = Instructor.objects.all().order_by('pk')
     search_query = ''
-    if request.method == 'POST':
-        try:
-            c_listf = Course.objects.filter(name=request.POST['course_name'])
-            cname = request.POST['course_name']
-        except Course.DoesNotExist:
-            c_id = c_listf
-        i_ex = 0
-        try:
-            i_n = CustomUser.objects.filter(first_name=request.POST['instr_name'])
-            i_ex = 1
-            fname = request.POST['instr_name']
-        except CustomUser.DoesNotExist:
-            i_n = CustomUser.objects.all()
-        try:
-            i_ln = CustomUser.objects.filter(last_name=request.POST['instr_lastname'])
-            i_ex = 1
-            lname = request.POST['instr_lastname']
-        except CustomUser.DoesNotExist:
-            i_ln = CustomUser.objects.all()
+    if request.method == 'GET':
+
+        if 'course_name' in request.GET:
+            if request.GET['course_name'] is not '':
+                cname=request.GET['course_name']
+                instructors=instructors.filter(course_id__name=cname)
+                print('kurs')
+        if 'instr_name' in request.GET:
+            if request.GET['instr_name'] is not '':
+                fname=request.GET['instr_name']
+                instructors=instructors.filter(user_id__first_name=fname)
+                print('imie')
+        if 'instr_lastname' in request.GET:
+            if request.GET['instr_lastname'] is not '':
+                lname=request.GET['instr_lastname']
+                instructors=instructors.filter(user_id__last_name=lname)
+                print('nazw')
+        if 'module_name' in request.GET:
+            if request.GET['module_name'] is not '':
+                mname=request.GET['module_name']
+                instructors=instructors.filter(course_id__module_id__name=mname)
+                print('modul')
         # if i_ex == 1:
         #     instr_list=[]
         #     for name in i_n:
@@ -73,30 +76,19 @@ def CoursesView(request,**kwargs):
         # for c in c_list:
         #     if c in c_id:
         #         c_list2.extend(c)
-        c_listf = c_id
         search_query = '?course_name='+cname+'&instr_name='+fname+'&instr_lastname'+lname+'&module_name='+mname
-
-    course_list = c_listf
 
     page = kwargs['page']
 
-    paginator = Paginator(course_list, 10)
+    paginator = Paginator(instructors, 10)
     try:
-        courses = paginator.page(page)
+        instructors = paginator.page(page)
     except PageNotAnInteger:
-        courses = paginator.page(1)
+        instructors = paginator.page(1)
     except EmptyPage:
-        courses = paginator.page(paginator.num_pages)
-    instructors = Instructor.user_id_id.all()
-    users = CustomUser.objects.all()
-    userList = []
-    for u in users:
-        if u.id in instructors:
-            userList.extend(u)
+        instructors = paginator.page(paginator.num_pages)
     c = {
-        'courses':courses,
         'search_query':search_query,
-        'users':userList,
         'instructors':instructors,
     }
 
