@@ -146,7 +146,7 @@ def completeTest(request,**kwargs):
     try:
         Participant.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Participant.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     try:
         Test.objects.get(id=kwargs['testID'])
@@ -172,7 +172,7 @@ def finishView(request,**kwargs):
     try:
         Participant.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Participant.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     try:
         Test.objects.get(id=kwargs['testID'])
@@ -221,7 +221,7 @@ def testScores(request,**kwargs):
     try:
         Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Instructor.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     try:
         Test.objects.get(id=kwargs['testID'])
@@ -241,7 +241,7 @@ def createTest(request,**kwargs):
     try:
         Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Instructor.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     f = CreateTestForm()
 
@@ -266,7 +266,7 @@ def addQuestions(request,**kwargs):
     try:
         Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Instructor.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     if request.method == 'POST':
             qText = request.POST['question_text']
@@ -305,7 +305,7 @@ def editQuestion(request,**kwargs):
     try:
         Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Instructor.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     try:
         q=Question.objects.get(id=kwargs['questionID'])
@@ -358,7 +358,7 @@ def manageTest(request,**kwargs):
     try:
         Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Instructor.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     c={
         'test':test,
