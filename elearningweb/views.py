@@ -134,7 +134,7 @@ def ClassesView(request,**kwargs):
 class HomeView(TemplateView):
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect('user_courses')
+            return redirect('user_courses', 1)
         else:
             return render(request, 'index.html')
 
@@ -443,7 +443,7 @@ def QuitCourse(request,kurs):
     if Participant.objects.filter(course_id=k,user_id=u).exists():
         Participant.objects.get(course_id=k, user_id=u).delete()
         messages.success(request, 'Nie należysz juz do kursu')
-    return redirect('user_courses')
+    return redirect('user_courses', 1)
 
 def EditCourse(request,kurs):
     if not request.user.is_authenticated:
