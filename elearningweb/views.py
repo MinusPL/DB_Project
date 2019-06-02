@@ -34,22 +34,22 @@ def CoursesView(request,**kwargs):
         if 'course_name' in request.GET:
             if request.GET['course_name'] is not '':
                 cname=request.GET['course_name']
-                instructors=instructors.filter(course_id__name=cname)
+                instructors=instructors.filter(course_id__name__contains=cname)
                 print('kurs')
         if 'instr_name' in request.GET:
             if request.GET['instr_name'] is not '':
                 fname=request.GET['instr_name']
-                instructors=instructors.filter(user_id__first_name=fname)
+                instructors=instructors.filter(user_id__first_name__contains=fname)
                 print('imie')
         if 'instr_lastname' in request.GET:
             if request.GET['instr_lastname'] is not '':
                 lname=request.GET['instr_lastname']
-                instructors=instructors.filter(user_id__last_name=lname)
+                instructors=instructors.filter(user_id__last_name__contains=lname)
                 print('nazw')
         if 'module_name' in request.GET:
             if request.GET['module_name'] is not '':
                 mname=request.GET['module_name']
-                instructors=instructors.filter(course_id__module_id__name=mname)
+                instructors=instructors.filter(course_id__module_id__name__contains=mname)
                 print('modul')
         # if i_ex == 1:
         #     instr_list=[]
