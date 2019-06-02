@@ -500,7 +500,7 @@ def UserCourses(request,**kwargs):
 
     page = kwargs['page']
 
-    paginator = Paginator(k, 1)
+    paginator = Paginator(k, 10)
     try:
         k = paginator.page(page)
     except PageNotAnInteger:
