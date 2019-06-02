@@ -42,7 +42,7 @@ Dostępne kursy
       {% if instructors.number == i %}
         <li ><span class="btn" style="padding: 0 10px; line-height: 30px; font-size: 1.2rem;">{{ i }}</span></li>
       {% else %}
-        <li><a class="btn" href="{{ i }}">{{ i }}</a></li>
+        <li><a class="btn" href="{{ i }}{{search_query}}">{{ i }}</a></li>
       {% endif %}
     {% endfor %}
     {% if instructors.has_next %}
