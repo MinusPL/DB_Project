@@ -28,55 +28,23 @@ def CoursesView(request,**kwargs):
     cname=''
     mname=''
     instructors = Instructor.objects.all().order_by('pk')
-    search_query = ''
-    if request.method == 'GET':
-
-        if 'course_name' in request.GET:
-            if request.GET['course_name'] is not '':
-                cname=request.GET['course_name']
-                instructors=instructors.filter(course_id__name__contains=cname)
-                print('kurs')
-        if 'instr_name' in request.GET:
-            if request.GET['instr_name'] is not '':
-                fname=request.GET['instr_name']
-                instructors=instructors.filter(user_id__first_name__contains=fname)
-                print('imie')
-        if 'instr_lastname' in request.GET:
-            if request.GET['instr_lastname'] is not '':
-                lname=request.GET['instr_lastname']
-                instructors=instructors.filter(user_id__last_name__contains=lname)
-                print('nazw')
-        if 'module_name' in request.GET:
-            if request.GET['module_name'] is not '':
-                mname=request.GET['module_name']
-                instructors=instructors.filter(course_id__module_id__name__contains=mname)
-                print('modul')
-        # if i_ex == 1:
-        #     instr_list=[]
-        #     for name in i_n:
-        #         if name in i_ln:
-        #             instr_list.extend(name.course_id_id)
-        #     instr_courses= []
-        #     for c in c_listf:
-        #         if c.id in instr_list:
-        #             instr_courses = extend(c)
-        # else:
-        #     instr_courses = c_listf
-        # try:
-        #     m_id = Module.objects.get(name=request.POST['module_name']).first
-        #     module_courses = Course.objects.filter(module_id_id=m_id.id).order_by('pk')
-        #     mname = request.POST['module_name']
-        # except Module.DoesNotExist:
-        #     module_courses = c_listf
-        # c_list = []
-        # for c in instr_courses:
-        #     if c in module_courses:
-        #         c_list.extend(c)
-        # c_list2 = []
-        # for c in c_list:
-        #     if c in c_id:
-        #         c_list2.extend(c)
-        search_query = '?course_name='+cname+'&instr_name='+fname+'&instr_lastname'+lname+'&module_name='+mname
+    if 'course_name' in request.GET:
+        if request.GET['course_name'] is not '':
+            cname=request.GET['course_name']
+            instructors=instructors.filter(course_id__name__contains=cname)
+    if 'instr_name' in request.GET:
+        if request.GET['instr_name'] is not '':
+            fname=request.GET['instr_name']
+            instructors=instructors.filter(user_id__first_name__contains=fname)
+    if 'instr_lastname' in request.GET:
+        if request.GET['instr_lastname'] is not '':
+            lname=request.GET['instr_lastname']
+            instructors=instructors.filter(user_id__last_name__contains=lname)
+    if 'module_name' in request.GET:
+        if request.GET['module_name'] is not '':
+            mname=request.GET['module_name']
+            instructors=instructors.filter(course_id__module_id__name__contains=mname)
+    search_query = '?course_name='+cname+'&instr_name='+fname+'&instr_lastname'+lname+'&module_name='+mname
 
     page = kwargs['page']
 
@@ -497,19 +465,53 @@ def EditCourse(request,kurs):
         return redirect('course_detail', kurs)
     return render(request, 'changeCourseData.html', {'form': f})
 
-def UserCourses(request):
+def UserCourses(request,**kwargs):
     if not request.user.is_authenticated:
         messages.error(request, 'Musisz być zalogowany aby zobaczyć swoje kursy')
         return redirect('index')
-    k=Course.objects.none()
     id_course_list=[]
     for p in Participant.objects.filter(user_id=request.user):
         id_course_list.append(p.course_id.id)
     for i in Instructor.objects.filter(user_id=request.user):
         if not i.course_id.id in id_course_list:
             id_course_list.append(i.course_id.id)
-    k=Course.objects.filter(id__in=id_course_list)
-    return render(request, 'user_courses.html', {'courses': k})
+    k=Instructor.objects.filter(course_id__id__in=id_course_list)
+    fname=''
+    lname=''
+    cname=''
+    mname=''
+    if 'course_name' in request.GET:
+        if request.GET['course_name'] is not '':
+            cname=request.GET['course_name']
+            k=k.filter(course_id__name__contains=cname)
+    if 'instr_name' in request.GET:
+        if request.GET['instr_name'] is not '':
+            fname=request.GET['instr_name']
+            k=k.filter(user_id__first_name__contains=fname)
+    if 'instr_lastname' in request.GET:
+        if request.GET['instr_lastname'] is not '':
+            lname=request.GET['instr_lastname']
+            k=k.filter(user_id__last_name__contains=lname)
+    if 'module_name' in request.GET:
+        if request.GET['module_name'] is not '':
+            mname=request.GET['module_name']
+            k=k.filter(course_id__module_id__name__contains=mname)
+    search_query = '?course_name='+cname+'&instr_name='+fname+'&instr_lastname'+lname+'&module_name='+mname
+
+    page = kwargs['page']
+
+    paginator = Paginator(k, 1)
+    try:
+        k = paginator.page(page)
+    except PageNotAnInteger:
+        k = paginator.page(1)
+    except EmptyPage:
+        k = paginator.page(paginator.num_pages)
+    c = {
+        'search_query':search_query,
+        'courses':k,
+    }
+    return render(request, 'user_courses.html', c)
 
 def AddCourseInstructor(request,kurs):
     if not request.user.is_authenticated:
