@@ -22,21 +22,42 @@ from .forms import *
 
 def CoursesView(request,**kwargs):
     if not request.user.is_authenticated:
-        return render(request, 'login_error.html')   
-    
-    course_list = Course.objects.all().order_by('pk')
+        return render(request, 'login_error.html')
+    fname=''
+    lname=''
+    cname=''
+    mname=''
+    instructors = Instructor.objects.all().order_by('pk')
+    if 'course_name' in request.GET:
+        if request.GET['course_name'] is not '':
+            cname=request.GET['course_name']
+            instructors=instructors.filter(course_id__name__contains=cname)
+    if 'instr_name' in request.GET:
+        if request.GET['instr_name'] is not '':
+            fname=request.GET['instr_name']
+            instructors=instructors.filter(user_id__first_name__contains=fname)
+    if 'instr_lastname' in request.GET:
+        if request.GET['instr_lastname'] is not '':
+            lname=request.GET['instr_lastname']
+            instructors=instructors.filter(user_id__last_name__contains=lname)
+    if 'module_name' in request.GET:
+        if request.GET['module_name'] is not '':
+            mname=request.GET['module_name']
+            instructors=instructors.filter(course_id__module_id__name__contains=mname)
+    search_query = '?course_name='+cname+'&instr_name='+fname+'&instr_lastname'+lname+'&module_name='+mname
+
     page = kwargs['page']
 
-    paginator = Paginator(course_list, 10)
+    paginator = Paginator(instructors, 10)
     try:
-        courses = paginator.page(page)
+        instructors = paginator.page(page)
     except PageNotAnInteger:
-        courses = paginator.page(1)
+        instructors = paginator.page(1)
     except EmptyPage:
-        courses = paginator.page(paginator.num_pages)
-
+        instructors = paginator.page(paginator.num_pages)
     c = {
-        'courses':courses
+        'search_query':search_query,
+        'instructors':instructors,
     }
 
     return render(request,"courses.html",c)
@@ -108,7 +129,7 @@ def ClassesView(request,**kwargs):
 class HomeView(TemplateView):
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect('user_courses')
+            return redirect('user_courses', 1)
         else:
             return render(request, 'index.html')
 
@@ -120,7 +141,7 @@ def completeTest(request,**kwargs):
     try:
         Participant.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Participant.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     try:
         Test.objects.get(id=kwargs['testID'])
@@ -146,7 +167,7 @@ def finishView(request,**kwargs):
     try:
         Participant.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Participant.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     try:
         Test.objects.get(id=kwargs['testID'])
@@ -195,7 +216,7 @@ def testScores(request,**kwargs):
     try:
         Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Instructor.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     try:
         Test.objects.get(id=kwargs['testID'])
@@ -215,7 +236,7 @@ def createTest(request,**kwargs):
     try:
         Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Instructor.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     f = CreateTestForm()
 
@@ -240,7 +261,7 @@ def addQuestions(request,**kwargs):
     try:
         Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Instructor.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     if request.method == 'POST':
             qText = request.POST['question_text']
@@ -279,7 +300,7 @@ def editQuestion(request,**kwargs):
     try:
         Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Instructor.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     try:
         q=Question.objects.get(id=kwargs['questionID'])
@@ -332,7 +353,7 @@ def manageTest(request,**kwargs):
     try:
         Instructor.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
     except Instructor.DoesNotExist:
-        if not request.user.has_perm('dbhandler.edit_course'):
+        if not request.user.is_staff:
             return render(request, 'permission_error.html')
     c={
         'test':test,
@@ -417,7 +438,7 @@ def QuitCourse(request,kurs):
     if Participant.objects.filter(course_id=k,user_id=u).exists():
         Participant.objects.get(course_id=k, user_id=u).delete()
         messages.success(request, 'Nie należysz juz do kursu')
-    return redirect('user_courses')
+    return redirect('user_courses', 1)
 
 def EditCourse(request,kurs):
     if not request.user.is_authenticated:
@@ -439,19 +460,53 @@ def EditCourse(request,kurs):
         return redirect('course_detail', kurs)
     return render(request, 'changeCourseData.html', {'form': f})
 
-def UserCourses(request):
+def UserCourses(request,**kwargs):
     if not request.user.is_authenticated:
         messages.error(request, 'Musisz być zalogowany aby zobaczyć swoje kursy')
         return redirect('index')
-    k=Course.objects.none()
     id_course_list=[]
     for p in Participant.objects.filter(user_id=request.user):
         id_course_list.append(p.course_id.id)
     for i in Instructor.objects.filter(user_id=request.user):
         if not i.course_id.id in id_course_list:
             id_course_list.append(i.course_id.id)
-    k=Course.objects.filter(id__in=id_course_list)
-    return render(request, 'user_courses.html', {'courses': k})
+    k=Instructor.objects.filter(course_id__id__in=id_course_list)
+    fname=''
+    lname=''
+    cname=''
+    mname=''
+    if 'course_name' in request.GET:
+        if request.GET['course_name'] is not '':
+            cname=request.GET['course_name']
+            k=k.filter(course_id__name__contains=cname)
+    if 'instr_name' in request.GET:
+        if request.GET['instr_name'] is not '':
+            fname=request.GET['instr_name']
+            k=k.filter(user_id__first_name__contains=fname)
+    if 'instr_lastname' in request.GET:
+        if request.GET['instr_lastname'] is not '':
+            lname=request.GET['instr_lastname']
+            k=k.filter(user_id__last_name__contains=lname)
+    if 'module_name' in request.GET:
+        if request.GET['module_name'] is not '':
+            mname=request.GET['module_name']
+            k=k.filter(course_id__module_id__name__contains=mname)
+    search_query = '?course_name='+cname+'&instr_name='+fname+'&instr_lastname'+lname+'&module_name='+mname
+
+    page = kwargs['page']
+
+    paginator = Paginator(k, 10)
+    try:
+        k = paginator.page(page)
+    except PageNotAnInteger:
+        k = paginator.page(1)
+    except EmptyPage:
+        k = paginator.page(paginator.num_pages)
+    c = {
+        'search_query':search_query,
+        'courses':k,
+    }
+    return render(request, 'user_courses.html', c)
 
 def AddCourseInstructor(request,kurs):
     if not request.user.is_authenticated:

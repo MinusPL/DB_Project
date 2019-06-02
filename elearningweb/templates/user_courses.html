@@ -4,17 +4,50 @@
 Twoje kursy
 {% endblock %}
 {% block content %}
+<form class="form-inline"  method="GET">
+	{% csrf_token %}
+	<input type="search" placeholder="Nazwa kursu"  name='course_name'>
+	<input type="search" placeholder="Imie instruktora"  name='instr_name'>
+	<input type="search" placeholder="Nazwisko instruktora"  name='instr_lastname'>
+	<input type="search" placeholder="Nazwa przedmiotu"  name='module_name'>
+	<button class="btn" type="submit">Wyszukaj</button>
+</form>
+
+<br></br>
+
 	{% if courses %}
 	    <ul class="collection left-align">
 			{% for course in courses %}
 				<li class="collection-item">
-					<a href="{% url 'course_detail' course.id %}">{{ course.name }}</a>
-					<span class="grey-text text-lighten-1">&#8195{{ course.module_id.name }} [{{  course.course_type.name }}]</span>
+					<a href="{% url 'course_detail' course.course_id.id %}">{{ course.course_id.name }}</a>
+					<span class="grey-text text-lighten-1">&#8195{{ course.course_id.module_id.name }} [{{  course.course_id.course_type.name }}] {{ course.user_id.first_name }} {{ course.user_id.last_name }}</span>
 				</li>
 			{% endfor %}
 		</ul>
 	{% else %}
 		Brak kursów.
+	{% endif %}
+
+	{% if courses.has_other_pages %}
+  <ul class="pagination">
+    {% if courses.has_previous %}
+      <li><a class="btn" href="{{ courses.previous_page_number }}{{search_query}}">&laquo;</a></li>
+    {% else %}
+      <li><span class="btn" style="color: #444; padding: 0 10px; line-height: 30px; font-size: 1.2rem;">&laquo;</span></li>
+    {% endif %}
+    {% for i in courses.paginator.page_range %}
+      {% if courses.number == i %}
+        <li ><span class="btn" style="padding: 0 10px; line-height: 30px; font-size: 1.2rem;">{{ i }}</span></li>
+      {% else %}
+        <li><a class="btn" href="{{ i }}{{search_query}}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if courses.has_next %}
+      <li><a class="btn" href="{{ courses.next_page_number }}{{search_query}}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span class="btn" style="color: #444; padding: 0 10px; line-height: 30px; font-size: 1.2rem;">&raquo;</span></li>
+    {% endif %}
+  </ul>
 	{% endif %}
 
 	<div class="break"></div>

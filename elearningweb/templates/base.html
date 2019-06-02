@@ -16,7 +16,7 @@
 
       {% if user.is_authenticated %}
         <li><a href="{% url 'courses' 1 %}" class="black-text">Wszystkie kursy</a></li>
-        <li><a href="{% url 'user_courses' %}" class="black-text">Twoje kursy</a></li>
+        <li><a href="{% url 'user_courses' 1 %}" class="black-text">Twoje kursy</a></li>
         <!-- wylogowanie -->
         <li>
           <a href="javascript:{document.getElementById('logout').submit()}" class="btn z-depth-0">Wyloguj się</a>
