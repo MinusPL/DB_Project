@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from dbhandler.models import CustomUser
+from django.contrib.auth.models import Group
 
 # Create your views here.
 
@@ -27,6 +28,8 @@ def register(request):
                 else:
                     customUser = CustomUser.objects.create_user(username=user_name, password=password, email=email, first_name=first_name, last_name=last_name)
                     customUser.save()
+                    my_group = Group.objects.get(name='Użytkownik') 
+                    my_group.user_set.add(customUser)
                     messages.success(request, 'Rejestracja zakończona pomyślnie')
                     return redirect('login')
         else:

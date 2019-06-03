@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load auth_extras %}
 
 {% block banner %}
 {{class.name}}
@@ -22,8 +23,12 @@
         <h5>Testy do zajęć</h5>
         <ul  class="collection left-align">
             {% for test in class.test_set.all %}
-                <li class="collection-item">
+                <li class="collection-item" style="line-height: 38px;">
                     <a href="{% url 'completetest' test.id %}">{{test.name}}</a>
+                    {% if user|has_group:'Prowadzący' %}
+                    <a href="{% url 'testscores' test.id %}" class="btn" style="float: right;">Zobacz wyniki</a>
+                    <a href="{% url 'managetest' test.id %}" class="btn" style="float: right;">Edytuj Test</a>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>

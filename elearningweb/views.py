@@ -85,20 +85,9 @@ def ClassesView(request,**kwargs):
         return render(request, 'login_error.html')
 
     k = Class.objects.get(pk=kwargs['pk'])
-    print(Participant.objects.filter(course_id=k.course_id,user_id=request.user).exists())
-    print(Instructor.objects.filter(course_id=k.course_id,user_id=request.user).exists())
     if not (Participant.objects.filter(course_id=k.course_id,user_id=request.user).exists() or Instructor.objects.filter(course_id=k.course_id,user_id=request.user).exists()):
         if not request.user.has_perm('dbhandler.view_class'):
             return render(request, 'permission_error.html')   
-
-    cont = Content.objects.get(class_id=k, valid_until__isnull=True)
-
-    c = {
-        'class': k,
-        'content':cont
-    }
-
-    return render(request, 'class.html', c)  
 
     if request.method == 'POST':
         comment = request.POST['comment']
@@ -106,7 +95,16 @@ def ClassesView(request,**kwargs):
         cid = int(request.POST['id'])
         c=Comment(text=comment, author_id=request.user, class_id=Class.objects.get(id=cid))
         c.save()
-        return redirect('class', kwargs['pk'])         
+        return redirect('class', kwargs['pk']) 
+
+    cont = Content.objects.get(class_id=k, valid_until__isnull=True)
+
+    c = {
+        'class': k,
+        'content':cont
+    }
+    
+    return render(request, 'class.html', c)          
 
 
 # class ClassesView(DetailView):
@@ -138,9 +136,7 @@ def completeTest(request,**kwargs):
         return render(request, 'login_error.html')
     test=Test.objects.get(id=kwargs['testID'])
     classobj=Class.objects.get(id=test.class_id_id)
-    try:
-        Participant.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
-    except Participant.DoesNotExist:
+    if not (Participant.objects.filter(course_id=classobj.course_id,user_id=request.user).exists() or Instructor.objects.filter(course_id=classobj.course_id,user_id=request.user).exists()):
         if not request.user.is_staff:
             return render(request, 'permission_error.html')
     try:
@@ -164,9 +160,7 @@ def finishView(request,**kwargs):
         return render(request, 'login_error.html')
     test=Test.objects.get(id=kwargs['testID'])
     classobj=Class.objects.get(id=test.class_id_id)
-    try:
-        Participant.objects.get(user_id_id=request.user.id,course_id_id=classobj.course_id_id)
-    except Participant.DoesNotExist:
+    if not (Participant.objects.filter(course_id=classobj.course_id,user_id=request.user).exists() or Instructor.objects.filter(course_id=classobj.course_id,user_id=request.user).exists()):
         if not request.user.is_staff:
             return render(request, 'permission_error.html')
     try:
@@ -572,7 +566,7 @@ def DeleteClass(request,classId):
 def EditClass(request,classId):
     if not request.user.is_authenticated:
         return render(request, 'login_error.html')
-    if not request.user.has_perm('dbhandler.edit_class'):
+    if not request.user.has_perm('dbhandler.change_class'):
         return render(request, 'class_error.html')
     
     if request.method == 'POST':
