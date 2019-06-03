@@ -1,4 +1,5 @@
 {% load static from staticfiles %}
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -17,6 +18,10 @@
       {% if user.is_authenticated %}
         <li><a href="{% url 'courses' 1 %}" class="black-text">Wszystkie kursy</a></li>
         <li><a href="{% url 'user_courses' 1 %}" class="black-text">Twoje kursy</a></li>
+        {% if user.is_staff %}
+        <li><a href="/admin" class="black-text">Panel administratora</a></li>
+        {% endif %}
+        <li><a href="{% url 'userdetailview' %}" class="black-text">{{ user.get_username}}</a></li>
         <!-- wylogowanie -->
         <li>
           <a href="javascript:{document.getElementById('logout').submit()}" class="btn z-depth-0">Wyloguj się</a>
