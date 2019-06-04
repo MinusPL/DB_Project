@@ -4,14 +4,28 @@ Dostępne kursy
 {% endblock %}
 {% block content %}
 
-<form class="form-inline"  method="GET">
-	{% csrf_token %}
-	<input type="search" placeholder="Nazwa kursu"  name='course_name'>
-	<input type="search" placeholder="Imie instruktora"  name='instr_name'>
-	<input type="search" placeholder="Nazwisko instruktora"  name='instr_lastname'>
-	<input type="search" placeholder="Nazwa przedmiotu"  name='module_name'>
-	<button class="btn" type="submit">Wyszukaj</button>
-</form>
+	<form class="col s12"  method="GET">
+		{% csrf_token %}
+		<div class="row">
+		<div class="input-field col s3">
+			<input type="search" name='course_name'>
+			<label for="course_name">Nazwa kursu</label>
+		</div>
+		<div class="input-field col s3">
+			<input type="search" name='module_name'>
+			<label for="module_name">Nazwa przedmiotu</label>
+		</div>
+		<div class="input-field col s3">
+			<input type="search" name='instr_name'>
+			<label for="instr_name">Imię prowadzącego</label>
+		</div>
+		<div class="input-field col s3">
+			<input type="search" name='instr_lastname'>
+			<label for="instr_lastname">Nazwisko prowadzącego</label>
+		</div>
+	</div>
+		<button class="btn z-depth-0" type="submit">Wyszukaj</button>
+	</form>
 
 <br></br>
 

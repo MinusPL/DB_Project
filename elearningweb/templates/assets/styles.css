@@ -3,6 +3,7 @@
 }
 nav {
 	padding: 0 10px 0 10px;
+	height: 150px;
 }
 
 main {
@@ -45,4 +46,18 @@ main {
 .fieldWrapper > textarea {
 	height: 200px;
 	margin-top: 20px;
+}
+
+.brand-logo > img {
+	width: 300px;
+}
+
+.options {
+	display: flex;
+	flex-direction: column;
+	margin-left: 50px;
+}
+
+.options > a {
+	margin-bottom: 5px;
 }
