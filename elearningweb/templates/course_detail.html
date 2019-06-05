@@ -8,19 +8,21 @@
 	<a href="{% url 'courses' 1 %}" class="left"><< Lista kursów</a><br>
 	<div class="left-align">
 		<h4>{{ course.name }}</h4>
-		{% if user|has_group:'Prowadzący' %}
-		<a href="{% url 'add_instr' course.id %}" class="btn right">Dodaj prowadzącego</a>
-		<a href="{% url 'edit_course' course.id %}" class="btn right">Edytuj Kurs</a>
-		{% endif %}
-		{% if perms.dbhandler.delete_participant %}
-			<a href="{% url 'quit_course' course.id %}" class="btn right">Zrezygnuj z kursu</a>
-		{% elif perms.dbhandler.add_class %}
-			<a href="{% url 'addclass' %}" class="btn right">Dodaj zajęcia</a>
-		{% endif %}
+		<div class="options right">
+			{% if user|has_group:'Prowadzący' %}
+			<a href="{% url 'add_instr' course.id %}" class="btn z-depth-0">Dodaj prowadzącego</a>
+			<a href="{% url 'edit_course' course.id %}" class="btn z-depth-0">Edytuj Kurs</a>
+			{% endif %}
+			{% if perms.dbhandler.delete_participant %}
+				<a href="{% url 'quit_course' course.id %}" class="btn z-depth-0">Zrezygnuj z kursu</a>
+			{% elif perms.dbhandler.add_class %}
+				<a href="{% url 'addclass' %}" class="btn z-depth-0">Dodaj zajęcia</a>
+			{% endif %}
+		</div>
 		<div class="details">
 			Prowadzący: {% for instructor in course.instructor_set.all %}
-				{{ instructor.user_id.username }}
-				<!-- dodać resztę danych -->
+				{{ instructor.user_id.first_name }}
+				{{ instructor.user_id.last_name }}
 			{% endfor %}<br>
 			{{ course.description }}
 		</div>

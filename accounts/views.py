@@ -74,7 +74,7 @@ def changepassword(request):
                 messages.success(request, 'Haslo zmienione')
                 return redirect('userdetailview')
             else:
-                messages.success(request, 'Nie udalo sie zmienic hasla')
+                messages.error(request, 'Nie udalo sie zmienic hasla')
                 return redirect('userdetailview')
         else:
             messages.error(request, 'Nieprawidłowe stare hasło')
@@ -100,7 +100,7 @@ def UserDataChangeView(request):
             messages.success(request, 'Dane zmienione')
             return redirect('userdetailview')
         else:
-            messages.success(request, 'Nie udalo sie zmienic danych')
+            messages.error(request, 'Nie udalo sie zmienic danych')
             return redirect('userdetailview')
     else:
         return render(request, 'changeUserData.html')
