@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from dbhandler.models import CustomUser
 from django.contrib.auth.models import Group
+from django.http import HttpResponse
+import base64
 
 # Create your views here.
 
@@ -104,3 +106,25 @@ def UserDataChangeView(request):
             return redirect('userdetailview')
     else:
         return render(request, 'changeUserData.html')
+
+def loginCas(request):
+    textUrl = request.build_absolute_uri() 	#get URL
+    urlArray = textUrl.split('response=')	#split after 'response='
+    result = base64.b64decode(urlArray[1].encode("utf-8")) 	#decode URL
+    #return HttpResponse(result)
+    params=result.split()
+    #return HttpResponse(params[8])
+    if CustomUser.objects.filter(username=params[5]).exists():
+        customUser = CustomUser.objects.create_user(username=params[5])
+        auth.login(request,customUser)
+        messages.success(request, 'Zalogowano poprawnie')
+        return redirect('index')
+    else:
+        customUser = CustomUser.objects.create_user(username=params[5])
+        customUser.save()
+        if params[8]=='student':
+            my_group = Group.objects.get(name='Użytkownik') 
+            my_group.user_set.add(customUser)
+        auth.login(request,customUser)
+        messages.success(request, 'Zalogowano poprawnie')
+        return redirect('index')
