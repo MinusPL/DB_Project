@@ -4,6 +4,7 @@ from dbhandler.models import CustomUser
 from django.contrib.auth.models import Group
 from django.http import HttpResponse
 import base64
+import re
 
 # Create your views here.
 
@@ -111,22 +112,22 @@ def loginCas(request):
     textUrl = request.build_absolute_uri() 	#get URL
     urlArray = textUrl.split('response=')	#split after 'response='
     result = base64.b64decode(urlArray[1].encode("utf-8")) 	#decode URL
-    #return HttpResponse(result)
     params=result.split()
-    username=params[5]
-    req=params[8]
-    #return HttpResponse(req)
-    #customUser = CustomUser.objects.filter(username=params[5]).exists()
-    #return HttpResponse(customUser)
+    username=params[5].decode('utf-8')
+    username=re.findall(r'<cas:uid>(.*?)</cas:uid>', username)[0]
+    req=params[8].decode('utf-8')
+    req=re.findall(r'<cas:employeetype>(.*?)</cas:employeetype>', req)[0]
+    email=params[3].decode('utf-8')
+    email=re.findall(r'<cas:user>(.*?)</cas:user>', email)[0]
     if CustomUser.objects.filter(username=username).exists():
         customUser = CustomUser.objects.get(username=username)
         auth.login(request, customUser)
         messages.success(request, 'Zalogowano poprawnie')
         return redirect('index')
     else:
-        customUser = CustomUser.objects.create_user(username=username)
+        customUser = CustomUser.objects.create_user(username=username, email=email)
         customUser.save()
-        if req.filter('student').exists():
+        if 'student' in req:
             my_group = Group.objects.get(name='Użytkownik') 
             my_group.user_set.add(customUser)
         auth.login(request,customUser)
