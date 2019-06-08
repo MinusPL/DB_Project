@@ -113,16 +113,20 @@ def loginCas(request):
     result = base64.b64decode(urlArray[1].encode("utf-8")) 	#decode URL
     #return HttpResponse(result)
     params=result.split()
-    #return HttpResponse(params[8])
-    if CustomUser.objects.filter(username=params[5]).exists():
-        customUser = CustomUser.objects.create_user(username=params[5])
-        auth.login(request,customUser)
+    username=params[5]
+    req=params[8]
+    #return HttpResponse(req)
+    #customUser = CustomUser.objects.filter(username=params[5]).exists()
+    #return HttpResponse(customUser)
+    if CustomUser.objects.filter(username=username).exists():
+        customUser = CustomUser.objects.get(username=username)
+        auth.login(request, customUser)
         messages.success(request, 'Zalogowano poprawnie')
         return redirect('index')
     else:
-        customUser = CustomUser.objects.create_user(username=params[5])
+        customUser = CustomUser.objects.create_user(username=username)
         customUser.save()
-        if params[8]=='student':
+        if req.filter('student').exists():
             my_group = Group.objects.get(name='Użytkownik') 
             my_group.user_set.add(customUser)
         auth.login(request,customUser)
