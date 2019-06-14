@@ -15,4 +15,4 @@ W pliku MEMBERS.md znajdować się będzie lista członków grupy.
 Każdy nowy członek proszony jest o utworzenie commita na branch master z modyfikacją pliku zgodnie z szablonem, czyli wpisem pierwszej osoby.
 
 ### Link do wersji live projektu
-http://proj-dbio.herokuapp.com/elearning/
+http://projdbio.pythonanywhere.com/elearning/
